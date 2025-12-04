@@ -1,0 +1,37 @@
+ideal_bond_lengths:
+  'N-CA': 1.47
+  'CA-C': 1.52
+  'C-N': 1.33
+  'C-O': 1.23
+  'CA-CB': 1.54
+  'CB-CG': 1.53
+  'CG-CD': 1.53
+  'CD-CE': 1.53
+  'CE-CZ': 1.39
+  'CZ-OH': 1.37
+  'N-H': 1.01
+  'CA-HA': 1.09
+  'CB-HB': 1.09
+  'CG-HG': 1.09
+  'CD-HD': 1.09
+  'CE-HE': 1.09
+  'CZ-HZ': 1.08
+
+ideal_bond_angles:
+  'C-N-CA': 122.0
+  'N-CA-C': 111.0
+  'CA-C-N': 117.0
+  'CA-C-O': 120.0
+  'O-C-N': 123.0
+  'N-CA-CB': 110.0
+  'C-CA-CB': 110.0
+  'CA-CB-CG': 114.0
+  'CB-CG-CD': 114.0
+
+vdw_radii:
+  'C': 1.70
+  'N': 1.55
+  'O': 1.52
+  'S': 1.80
+  'H': 1.20
+  'P': 1.80

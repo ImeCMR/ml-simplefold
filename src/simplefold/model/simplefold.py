@@ -31,6 +31,7 @@ from utils.boltz_utils import (
     process_structure, 
     save_structure
 )
+from .torch.bayesian_steering import BayesianSteering
 
 
 def logit_normal_sample(n=1, m=0.0, s=1.0):
@@ -87,9 +88,17 @@ class SimpleFold(pl.LightningModule):
         lddt_weight_schedule=False,
         plddt_training=False,
         sample_dir='artifacts/',
+        use_bayesian_steering_loss=False,
+        bayesian_loss_weight=0.01,
+        bayesian_steering_params=None,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
+
+        self.use_bayesian_steering_loss = use_bayesian_steering_loss
+        if self.use_bayesian_steering_loss:
+            self.bayesian_steering = bayesian_steering_params
+            self.bayesian_loss_weight = bayesian_loss_weight
 
         self.model = architecture
         self.model_ema = AveragedModel(
@@ -493,6 +502,20 @@ class SimpleFold(pl.LightningModule):
         self.global_training_step = self.trainer.global_step
         self.epoch = self.trainer.current_epoch
         self.world_size = self.trainer.world_size
+
+        if self.use_bayesian_steering_loss:
+            denoised_coords = y_t + out_dict['predict_velocity'] * (1.0 - t[:, None, None])
+            bayesian_loss = self.bayesian_steering(denoised_coords, batch, t)
+            loss += bayesian_loss * self.bayesian_loss_weight
+            self.log(
+                "loss/bayesian",
+                bayesian_loss.item(),
+                on_epoch=True,
+                logger=True,
+                prog_bar=True,
+                rank_zero_only=True,
+            )
+
         return loss
 
     def training_step(self, batch, batch_idx):

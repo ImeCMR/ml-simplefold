@@ -4,3 +4,9 @@ t_start: 1e-4
 tau: 0.3
 log_timesteps: True
 w_cutoff: 0.99
+use_bayesian_steering: False
+gamma_t_schedule: [0.1, 1.0]
+bayesian_steering_params:
+  _target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
+  defaults:
+    - bayesian_steering_params: default

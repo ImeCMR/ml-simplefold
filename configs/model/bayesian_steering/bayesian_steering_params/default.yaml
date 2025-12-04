@@ -1,0 +1,7 @@
+_target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
+enoe_params:
+  sigma_t_schedule: [0.1, 1.0]
+egeom_params:
+  ideal_bond_lengths: ${oc.load:configs/model/bayesian_steering/geometric_priors.yaml:ideal_bond_lengths}
+  ideal_bond_angles: ${oc.load:configs/model/bayesian_steering/geometric_priors.yaml:ideal_bond_angles}
+  vdw_radii: ${oc.load:configs/model/bayesian_steering/geometric_priors.yaml:vdw_radii}

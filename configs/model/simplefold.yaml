@@ -8,6 +8,13 @@ esm_model: "esm2_3B"
 lddt_weight_schedule: False
 sample_dir: ${paths.sample_dir}
 
+use_bayesian_steering_loss: False
+bayesian_loss_weight: 0.01
+bayesian_steering_params:
+  _target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
+  defaults:
+    - bayesian_steering_params: default
+
 architecture:
   esm_model: ${model.esm_model}
 
