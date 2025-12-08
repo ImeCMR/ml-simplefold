@@ -1,0 +1,28 @@
+# @package _group_
+# @package _group_
+_target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
+enoe_weight: 1.0
+egeom_weight: 1.0
+time_dependent_variance: True
+bayesian_loss_weight: 0.1
+
+# Geometric priors
+ideal_bond_lengths:
+  C-N: 1.33
+  N-CA: 1.46
+  CA-C: 1.52
+  C-O: 1.23
+  CA-CB: 1.52
+
+ideal_bond_angles:
+  C-N-CA: 121.7
+  N-CA-C: 111.2
+  CA-C-O: 120.8
+  N-C-O: 118.4
+  CA-C-N: 116.6
+
+vdw_radii:
+  C: 1.7
+  N: 1.55
+  O: 1.52
+  S: 1.8

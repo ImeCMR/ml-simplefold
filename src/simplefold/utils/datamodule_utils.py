@@ -141,6 +141,10 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
             "ligand_symmetries",
             "record",
             "aa_seq",
+            "noesy_restraints",
+            "atom_to_idx",
+            "bonds",
+            "atom_names",
         ]:
             # Check if all have the same shape
             shape = values[0].shape

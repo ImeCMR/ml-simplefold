@@ -87,11 +87,13 @@ class SimpleFold(pl.LightningModule):
         lddt_weight_schedule=False,
         plddt_training=False,
         sample_dir='artifacts/',
+        bayesian_steering=None,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
 
         self.model = architecture
+        self.bayesian_steering = bayesian_steering
         self.model_ema = AveragedModel(
             self.model,
             multi_avg_fn=torch.optim.swa_utils.get_ema_multi_avg_fn(
@@ -493,6 +495,25 @@ class SimpleFold(pl.LightningModule):
         self.global_training_step = self.trainer.global_step
         self.epoch = self.trainer.current_epoch
         self.world_size = self.trainer.world_size
+
+        # Bayesian steering loss for fine-tuning
+        if self.bayesian_steering is not None and 'noesy_restraints' in batch and batch['noesy_restraints']:
+            atom_to_idx = batch.get('atom_to_idx', {})
+            bonds = batch.get('bonds', [])
+            atom_names = batch.get('atom_names', [])
+            _, e_bayesian = self.bayesian_steering(
+                denoised_coords, batch['noesy_restraints'], t, bonds, atom_to_idx, atom_names
+            )
+            loss += e_bayesian * self.bayesian_steering.bayesian_loss_weight
+            self.log(
+                "loss/bayesian",
+                e_bayesian.item() * self.bayesian_steering.bayesian_loss_weight,
+                on_epoch=True,
+                logger=True,
+                prog_bar=True,
+                rank_zero_only=True,
+            )
+
         return loss
 
     def training_step(self, batch, batch_idx):
