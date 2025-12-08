@@ -61,6 +61,7 @@ class Dataset:
     tokenizer: BoltzTokenizer
     featurizer: BoltzFeaturizer
     cluster: Optional[str] = None
+    nef_dir: Optional[str] = None
 
 
 @dataclass
@@ -78,6 +79,7 @@ class DatasetConfig:
     cheap_dir: Optional[str] = None
     record_list: Optional[str] = None
     cluster: Optional[str] = None
+    nef_dir: Optional[str] = None
 
 
 def load_input(record: Record, target_dir: Path) -> Input:
@@ -141,6 +143,9 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
             "ligand_symmetries",
             "record",
             "aa_seq",
+            "noe_restraints",
+            "covalent_bonds",
+            "bond_angles",
         ]:
             # Check if all have the same shape
             shape = values[0].shape

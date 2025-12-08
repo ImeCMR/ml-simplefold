@@ -1,0 +1,18 @@
+_target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
+noe_weight: 1.0
+geom_weight: 1.0
+time_dependent_variance: True
+ideal_lengths:
+  ('N', 'CA'): 1.46
+  ('CA', 'C'): 1.52
+  ('C', 'O'): 1.23
+  ('C', 'N'): 1.33
+ideal_angles:
+  ('N', 'CA', 'C'): 1.94
+  ('CA', 'C', 'O'): 2.11
+  ('CA', 'C', 'N'): 2.03
+vdw_radii:
+  'C': 1.7
+  'N': 1.55
+  'O': 1.52
+  'S': 1.8

@@ -31,6 +31,7 @@ from utils.boltz_utils import (
     process_structure, 
     save_structure
 )
+from .torch.bayesian_steering import BayesianSteering
 
 
 def logit_normal_sample(n=1, m=0.0, s=1.0):
@@ -85,6 +86,8 @@ class SimpleFold(pl.LightningModule):
         lddt_cutoff=15.0,
         clip_grad_norm_val=None,
         lddt_weight_schedule=False,
+        bayesian_steering=None,
+        bayesian_loss_weight=0.0,
         plddt_training=False,
         sample_dir='artifacts/',
     ):
@@ -111,6 +114,8 @@ class SimpleFold(pl.LightningModule):
         self.use_smooth_lddt_loss = smooth_lddt_loss_weight > 0.0
         self.lddt_weight_schedule = lddt_weight_schedule
         self.plddt_training = plddt_training
+        self.bayesian_steering = bayesian_steering
+        self.bayesian_loss_weight = bayesian_loss_weight
         self.sample_dir = sample_dir
 
         self.aa_bolt_link = aa_bolt_link
@@ -472,6 +477,29 @@ class SimpleFold(pl.LightningModule):
                 rank_zero_only=True,
             )
 
+        if self.bayesian_steering is not None and self.bayesian_loss_weight > 0.0:
+            if 'noe_restraints' in batch and any(batch['noe_restraints']):
+                denoised_coords = y_t + out_dict['predict_velocity'] * (1.0 - t[:, None, None])
+
+                covalent_info = {
+                    'bonds': batch.get('covalent_bonds'),
+                    'angles': batch.get('bond_angles'),
+                    'ideal_lengths': self.bayesian_steering.ideal_lengths,
+                    'ideal_angles': self.bayesian_steering.ideal_angles,
+                    'vdw_radii': self.bayesian_steering.vdw_radii,
+                    'atom_types': batch.get('atom_types'),
+                }
+
+                bayesian_energy = self.bayesian_steering.compute_energy(
+                    denoised_coords,
+                    batch.get('noe_restraints'),
+                    covalent_info,
+                    t
+                )
+                bayesian_loss = self.bayesian_loss_weight * bayesian_energy.mean()
+                loss += bayesian_loss
+                self.log("loss/bayesian", bayesian_loss.item(), on_epoch=True, logger=True, prog_bar=True, rank_zero_only=True)
+
         self.log(
             "loss/loss",
             loss.item(),
@@ -533,9 +561,23 @@ class SimpleFold(pl.LightningModule):
                 batch_in = copy.deepcopy(batch)
                 noise = torch.randn_like(batch_in['coords']).to(self.device)
 
+                if 'noe_restraints' in batch_in and any(batch_in['noe_restraints']):
+                    batch_in['covalent_info'] = {
+                        'bonds': batch_in.get('covalent_bonds'),
+                        'angles': batch_in.get('bond_angles'),
+                        'ideal_lengths': self.bayesian_steering.ideal_lengths,
+                        'ideal_angles': self.bayesian_steering.ideal_angles,
+                        'vdw_radii': self.bayesian_steering.vdw_radii,
+                        'atom_types': batch_in.get('atom_types'),
+                    }
+                    steering_fn = self.bayesian_steering
+                else:
+                    steering_fn = None
+
                 out_dict = self.sampler.sample(
                     self.model_ema.module.forward, self.path,
-                    noise, batch_in
+                    noise, batch_in,
+                    steering_fn=steering_fn
                 )
 
                 if self.plddt_module is not None:

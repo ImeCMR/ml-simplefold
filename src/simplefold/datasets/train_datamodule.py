@@ -22,6 +22,8 @@ from boltz_data_pipeline.tokenize.tokenizer import Tokenizer
 from boltz_data_pipeline.feature.featurizer import BoltzFeaturizer
 from boltz_data_pipeline.filter.dynamic.filter import DynamicFilter
 from boltz_data_pipeline.types import Manifest, Record
+from .nef_parser import parse_nef
+from .geometry import get_covalent_bonds, get_bond_angles
 from utils.datamodule_utils import (
     Dataset,
     DatasetConfig,
@@ -87,6 +89,8 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
         self.rotation_augment_coords = rotation_augment_coords
         self.samples = []
         self.num_samples = 0
+        self.nef_data_dir = {ds.target_dir.name: ds.nef_dir for ds in datasets if ds.nef_dir}
+
         for dataset_idx, dataset in enumerate(datasets):
             if dataset.cluster is None:
                 records = dataset.manifest.records
@@ -195,6 +199,19 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
 
             features["aa_seq"] = sequence
             features['record'] = asdict(record)
+            features['atom_types'] = [atom_name for _, _, _, atom_name, _, _, _, _ in tokenized.tokens]
+
+            atom_to_idx = {(res_idx, atom_name): i for i, (res_idx, _, _, atom_name, _, _, _, _) in enumerate(tokenized.tokens)}
+
+            # Load NEF data if available
+            dataset_name = dataset.target_dir.name
+            if self.nef_data_dir and dataset_name in self.nef_data_dir:
+                nef_file = Path(self.nef_data_dir[dataset_name]) / f"{record.id}.nef"
+                if nef_file.exists():
+                    features['noe_restraints'] = parse_nef(nef_file, atom_to_idx)
+
+            features['covalent_bonds'] = get_covalent_bonds(tokenized.tokens, atom_to_idx)
+            features['bond_angles'] = get_bond_angles(tokenized.tokens, atom_to_idx)
             features['max_num_tokens'] = torch.tensor(max_num_tokens, dtype=torch.long)
             features['cropped_num_tokens'] = torch.tensor(len(tokenized.tokens), dtype=torch.long)
 
@@ -294,6 +311,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
                     tokenizer,
                     featurizer,
                     cluster=data_config.cluster,
+                    nef_dir=data_config.nef_dir,
                 )
             )
 
@@ -310,6 +328,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
                     data_config.cropper,
                     tokenizer,
                     featurizer,
+                    nef_dir=data_config.nef_dir,
                 )
             )
 
