@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - simplefold
+  - override /model/bayesian_steering: default
+
+model:
+  bayesian_loss_weight: 1.0
