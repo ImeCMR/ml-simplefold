@@ -2,3 +2,9 @@
 *.DS_Store
 *.egg-info
 artifacts/
+simplefold/
+installation.md
+inference.sh
+data/
+inf.err
+inf.out
