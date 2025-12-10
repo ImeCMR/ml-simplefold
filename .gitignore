@@ -2,9 +2,4 @@
 *.DS_Store
 *.egg-info
 artifacts/
-data/
-simplefold/
-inf.err
-inf.out
-inference.sh
-installation.md
+
