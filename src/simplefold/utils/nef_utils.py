@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright 2025 by Imesh Ranaweera, Alberto Perez
+# All rights reserved
+
 import json
 import gzip
 import time

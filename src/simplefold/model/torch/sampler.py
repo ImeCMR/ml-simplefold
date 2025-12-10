@@ -8,6 +8,8 @@ from tqdm import tqdm
 from einops import repeat
 from utils.boltz_utils import center_random_augmentation
 
+from .bayesian_steering import BayesianSteering
+
 
 class EMSampler():
     """
@@ -20,12 +22,16 @@ class EMSampler():
         tau=0.3,
         log_timesteps=False,
         w_cutoff=0.99,
+        bayesian_steering: BayesianSteering = None, # modifications related to bayesian steering
+        steering_schedule_gamma: float = 1.0, # modifications related to bayesian steering
     ):
         self.num_timesteps = num_timesteps
         self.log_timesteps = log_timesteps
         self.t_start = t_start
         self.tau = tau
         self.w_cutoff = w_cutoff
+        self.bayesian_steering = bayesian_steering # modifications related to bayesian steering
+        self.steering_schedule_gamma = steering_schedule_gamma # modifications related to bayesian steering
 
         if self.log_timesteps:
             t = 1.0 - torch.logspace(-2, 0, self.num_timesteps + 1).flip(0)
@@ -72,12 +78,34 @@ class EMSampler():
         )['predict_velocity']
         score = flow.compute_score_from_velocity(velocity, y, t)
 
+        ###################################################
+        # Modifications related to Bayesian Steering
+        f_steering = torch.zeros_like(y)
+        if self.bayesian_steering is not None and 'noesy_restraints' in batch and batch['noesy_restraints']:
+            # This requires atom_to_idx mapping and bond information to be in the batch
+            atom_to_idx = batch.get('atom_to_idx', {})
+            bonds = batch.get('bonds', [])
+            atom_names = batch.get('atom_names', [])
+            f_steering, _ = self.bayesian_steering(
+                y, batch['noesy_restraints'], t, bonds, atom_to_idx, atom_names
+            )
+
+        gamma_t = self.steering_schedule(t)
+        ###################################################
+
         diff_coeff = self.diffusion_coefficient(t)
-        drift = velocity + diff_coeff * score
+        #drift = velocity + diff_coeff * score
+        drift = velocity + diff_coeff * score + gamma_t * f_steering # modified drift term with f_steering
         mean_y = y + drift * dt
         y_sample = mean_y + torch.sqrt(2.0 * dt * diff_coeff * self.tau) * eps
 
         return y_sample
+    
+    #############################################
+    # Time-dependent scaling for the steering force
+    def steering_schedule(self, t):
+        return self.steering_schedule_gamma * t
+    #############################################
 
     @torch.no_grad()
     def sample(self, model_fn, flow, noise, batch):
