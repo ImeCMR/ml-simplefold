@@ -1,0 +1,26 @@
+# configs/experiment/debug_finetune.yaml
+
+# 1. Inherit everything from your main fine-tuning configuration.
+defaults:
+  - finetune_noesy
+
+  # 2. Override the trainer to use the 'default' (single-GPU) config
+  #    instead of the 'fsdp' (multi-GPU) one.
+  - override /trainer: default
+
+# 3. Apply specific value changes for a fast debug run.
+data:
+  batch_size: 1
+  num_workers: 0
+  # IMPORTANT: This assumes you will create a 'debug_ids.txt' file with 2-3 PDB IDs.
+  datasets:
+    - record_list: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/debug_ids.txt
+
+trainer:
+  # Run for only a few steps to see if the pipeline works.
+  max_steps: 10
+  # Use one GPU. Change 'gpu' to 'cpu' if you are not using a GPU.
+  devices: 1
+  accelerator: gpu
+
+task_name: "debug_run"
