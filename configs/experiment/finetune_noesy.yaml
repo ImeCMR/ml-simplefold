@@ -1,0 +1,36 @@
+# configs/experiment/finetune_noesy.yaml
+
+# 1. Inherit from the base configurations.
+# This syntax is correct.
+defaults:
+  - data: pdb
+  - model: simplefold
+  - trainer: fsdp
+  - paths: default
+  - extras: default
+  - hydra: default
+  - _self_
+
+# 2. Top-level settings.
+task_name: "SimpleNOEFold_Finetune_3429"
+seed: 42
+
+# 3. --- THIS IS THE CORRECTED OVERRIDE SYNTAX ---
+# Instead of nesting under 'data:', 'trainer:', etc., we use
+# dot notation from the top level to change specific values.
+
+# --- Overrides for the 'data' configuration ---
+data.nef_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef
+data.datasets:
+  - name: "nmr_finetune_set"
+    target_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/structures
+    tokenized_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/tokenized
+    record_list: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef_train_pdb_ids.txt
+
+# --- Overrides for the 'trainer' configuration ---
+trainer.ckpt_path: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt
+trainer.max_epochs: 50
+
+# --- Overrides for the 'model' configuration ---
+model.bayesian_steering.bayesian_loss_weight: 0.1
+model.optimizer.lr: 1e-5
