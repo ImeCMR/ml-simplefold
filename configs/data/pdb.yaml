@@ -1,8 +1,15 @@
 _target_: datasets.train_datamodule.SimpleFoldTrainingDataModule
 
+# The new NEF directory parameter.
+# It is set to null here so it can be safely overridden from the command line
+# for NOE fine-tuning jobs, without affecting standard training runs.
+nef_dir: null
+
 datasets:
   - _target_: datasets.train_datamodule.DatasetConfig
     data_name: rcsb_protein
+    # Add record_list here to make it an overridable parameter for a dataset.
+    record_list: null
     tokenized_dir: /mnt/task_runtime/data/rcsb_protein_tokenized
     target_dir: /mnt/task_runtime/data/rcsb_processed_targets
     manifest_path: /mnt/task_runtime/data/rcsb_protein_tokenized/manifest.json

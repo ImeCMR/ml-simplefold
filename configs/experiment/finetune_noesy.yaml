@@ -1,15 +1,15 @@
 # configs/experiment/finetune_noesy.yaml
 
-# Inherit from the base configurations for training, model, and trainer.
-# This is the corrected 'defaults' list syntax.
+# Inherit from the base configurations.
+# ALL paths now have a leading '/' to make them absolute to the configs/ root.
 defaults:
-  - data: pdb
-  - model: simplefold
-  - trainer: fsdp # Recommended for multi-GPU training
-  - paths: default
-  - extras: default
-  - /hydra: default # <<< THIS IS THE FIX. The leading '/' makes the path absolute to the config root.
-  - _self_ # Tells Hydra to merge the keys below with the loaded defaults.
+  - /data: pdb
+  - /model: simplefold
+  - /trainer: fsdp
+  - /paths: default
+  - /extras: default
+  - /hydra: default
+  - _self_
 
 # This name will be used for output directory naming.
 task_name: "SimpleNOEFold_Finetune_3429"
@@ -17,45 +17,22 @@ task_name: "SimpleNOEFold_Finetune_3429"
 seed: 42
 
 # --- SECTION 1: DATA CONFIGURATION ---
-# The keys defined here will correctly override the defaults loaded from 'data/pdb.yaml'.
 data:
-  # This is the new parameter I added. Point it to your directory of .nef files.
   nef_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef
-
-  # The 'datasets' list specifies where to find the structural/tokenized data.
   datasets:
     - name: "nmr_finetune_set"
-
-      # Path to the directory containing the 'structures' folder with .npz files
-      # and the manifest.json.
       target_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/structures
-
-      # Path to the directory containing 'records' and 'tokens' folders.
       tokenized_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/tokenized
-
-      # This file tells the data loader to ONLY use the 3429 training IDs.
       record_list: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef_train_pdb_ids.txt
 
 # --- SECTION 2: TRAINER CONFIGURATION ---
-# These keys override defaults from 'trainer/fsdp.yaml'.
 trainer:
-  # This is the MOST IMPORTANT setting for fine-tuning.
-  # It loads the weights from your pre-trained SimpleFold model.
   ckpt_path: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt
-
-  # You can adjust the number of epochs for the fine-tuning run.
   max_epochs: 50
 
 # --- SECTION 3: MODEL CONFIGURATION ---
-# These keys override defaults from 'model/simplefold.yaml'.
 model:
-  # This configures the Bayesian steering module that I built.
   bayesian_steering:
-    # This is the 'β(t)' from your design doc. It controls the
-    # overall strength of the new loss term. It's a key hyperparameter to tune.
     bayesian_loss_weight: 0.1
-
-  # It is standard practice to use a smaller learning rate for fine-tuning.
-  # This overrides the default lr in the 'optimizer' section of simplefold.yaml.
   optimizer:
     lr: 1e-5

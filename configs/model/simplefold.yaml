@@ -1,4 +1,4 @@
-_target_: src.simplefold.model.simplefold.SimpleFold
+_target_: model.simplefold.SimpleFold
 ema_decay: 0.999
 clip_grad_norm_val: 2.0
 use_rigid_align: True
@@ -8,17 +8,11 @@ esm_model: "esm2_3B"
 lddt_weight_schedule: False
 sample_dir: ${paths.sample_dir}
 
-bayesian_steering:
-  _target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
-  enoe_weight: 1.0
-  egeom_weight: 1.0
-  time_dependent_variance: True
-
 architecture:
   esm_model: ${model.esm_model}
 
 path:
-  _target_: src.simplefold.model.flow.LinearPath
+  _target_: model.flow.LinearPath
 
 loss:
   _target_: torch.nn.MSELoss
@@ -33,7 +27,7 @@ optimizer:
   max_steps: ???
 
 scheduler:
-  _target_: src.simplefold.utils.lr_scheduler.LinearWarmup
+  _target_: utils.lr_scheduler.LinearWarmup
   _partial_: true
   min_lr: 1e-6
   max_lr: ${model.optimizer.lr}
