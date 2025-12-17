@@ -2,6 +2,10 @@ _target_: lightning.pytorch.trainer.Trainer
 
 default_root_dir: ${paths.output_dir}
 
+# The path to a checkpoint file to resume training from.
+# Set to null by default, it will be overridden from the command line for fine-tuning.
+ckpt_path: null
+
 # set True to to ensure deterministic results
 # makes training slower but gives more reproducibility than just setting seeds
 deterministic: False
