@@ -1,4 +1,4 @@
-# configs/experiment/debug_finetune.yaml
+# This file should be named: configs/experiment/debug_finetune.yaml
 
 # 1. Inherit all settings from your main 'finetune_noesy' configuration.
 defaults:
