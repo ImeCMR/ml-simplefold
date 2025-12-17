@@ -1,6 +1,6 @@
 # @package _global_
 defaults:
-  - data: test
+  - data: pdb
   - model/architecture: foldingdit_100M
   - model/sampler: euler_maruyama
   - model: simplefold
