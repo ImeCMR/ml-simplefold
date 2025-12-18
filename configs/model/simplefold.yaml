@@ -37,3 +37,5 @@ processor:
   scale: 16.0
   ref_scale: 5.0
   multiplicity: 16
+
+bayesian_steering: null
