@@ -16,8 +16,4 @@ defaults:
 # A generic task name that will be overridden from the command line.
 task_name: "finetuning_run"
 
-# Top-level parameter for loading a checkpoint, following project convention.
-# Set to null here so it can be overridden by the Slurm command.
-load_ckpt_path: null
-
 seed: 42
