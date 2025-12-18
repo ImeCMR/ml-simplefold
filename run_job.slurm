@@ -25,7 +25,6 @@ echo "Running on nodes: $SLURM_JOB_NODELIST"
 echo "Number of tasks: $SLURM_NTASKS"
 
 # --- This is the Final, Definitive srun Command ---
-# It uses the correct 'trainer.ckpt_path' parameter.
 srun python src/simplefold/train_fsdp.py --config-name finetune \
     task_name=SimpleNOEFold_Finetune_3429 \
     trainer.ckpt_path=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt \

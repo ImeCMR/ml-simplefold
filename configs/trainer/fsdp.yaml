@@ -6,6 +6,8 @@ default_root_dir: ${paths.output_dir}
 # Set to null by default, it will be overridden from the command line for fine-tuning.
 ckpt_path: null
 
+max_epochs: null
+
 # set True to to ensure deterministic results
 # makes training slower but gives more reproducibility than just setting seeds
 deterministic: False
