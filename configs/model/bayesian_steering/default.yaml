@@ -4,7 +4,6 @@ _target_: src.simplefold.model.torch.bayesian_steering.BayesianSteering
 enoe_weight: 1.0
 egeom_weight: 1.0
 time_dependent_variance: True
-bayesian_loss_weight: 0.1
 
 # Geometric priors
 ideal_bond_lengths:

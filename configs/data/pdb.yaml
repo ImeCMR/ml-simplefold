@@ -1,8 +1,6 @@
 _target_: datasets.train_datamodule.SimpleFoldTrainingDataModule
 
 # The new NEF directory parameter.
-# It is set to null here so it can be safely overridden from the command line
-# for NOE fine-tuning jobs, without affecting standard training runs.
 nef_dir: null
 
 datasets:

@@ -1,8 +1,6 @@
 # configs/finetune.yaml
 
 # This is a top-level configuration for fine-tuning jobs.
-# It sets the basic defaults, and all experiment-specific details
-# will be provided via command-line overrides.
 
 defaults:
   - /data: pdb

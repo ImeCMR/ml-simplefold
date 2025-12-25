@@ -25,6 +25,7 @@ echo "Running on nodes: $SLURM_JOB_NODELIST"
 echo "Number of tasks: $SLURM_NTASKS"
 
 # --- This is the Final, Definitive srun Command ---
+# It uses the correct 'model.bayesian_loss_weight' parameter.
 srun python src/simplefold/train_fsdp.py --config-name finetune \
     task_name=SimpleNOEFold_Finetune_3429 \
     trainer.ckpt_path=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt \
@@ -34,7 +35,7 @@ srun python src/simplefold/train_fsdp.py --config-name finetune \
     data.datasets.0.tokenized_dir=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/tokenized \
     trainer.max_epochs=50 \
     model.bayesian_steering=default \
-    model.bayesian_steering.bayesian_loss_weight=0.1 \
+    model.bayesian_loss_weight=0.1 \
     model.optimizer.lr=1e-5
 
 echo "Fine-tuning job finished."
