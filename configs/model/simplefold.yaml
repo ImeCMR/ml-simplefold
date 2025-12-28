@@ -21,7 +21,7 @@ path:
   _target_: model.flow.LinearPath
 
 sampler:
-  _target_: model.torch.sampler.EulerMaruyamaSampler
+  _target_: model.torch.sampler.EMSampler
 
 loss:
   _target_: torch.nn.MSELoss
