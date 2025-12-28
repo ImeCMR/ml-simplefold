@@ -9,6 +9,7 @@ defaults:
   - /paths: default
   - /extras: default
   - /hydra: default
+  - /logger: tensorboard
   - _self_
 
 # A generic task name that will be overridden from the command line.
