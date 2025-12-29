@@ -38,11 +38,13 @@ def train(cfg):
 
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
-    load_ckpt_path = cfg.get("load_ckpt_path", None)
 
-    if load_ckpt_path is not None:
+    # Handle checkpoint path from both root and trainer configs for robustness
+    ckpt_path = cfg.trainer.pop("ckpt_path", None) or cfg.get("load_ckpt_path", None)
+
+    if ckpt_path:
         # load existing ckpt
-        log.info(f"Resuming from checkpoint <{cfg.load_ckpt_path}>...")
+        log.info(f"Resuming from checkpoint <{ckpt_path}>...")
         model.strict_loading = False
 
         # manually reset these variables in case of fine-tuning
@@ -105,7 +107,7 @@ def train(cfg):
     trainer.fit(
         model=model,
         datamodule=datamodule,
-        ckpt_path=load_ckpt_path,
+        ckpt_path=ckpt_path,
     )
 
 
