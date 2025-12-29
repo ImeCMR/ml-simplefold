@@ -40,7 +40,10 @@ def train(cfg):
     model: LightningModule = hydra.utils.instantiate(cfg.model)
 
     # Handle checkpoint path from both root and trainer configs for robustness
+    # We temporarily set struct to False to allow popping the ckpt_path key
+    OmegaConf.set_struct(cfg.trainer, False)
     ckpt_path = cfg.trainer.pop("ckpt_path", None) or cfg.get("load_ckpt_path", None)
+    OmegaConf.set_struct(cfg.trainer, True)
 
     if ckpt_path:
         # load existing ckpt
