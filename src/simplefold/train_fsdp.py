@@ -6,6 +6,7 @@
 import os
 import hydra
 import torch
+import time
 import functools
 from omegaconf import OmegaConf
 
@@ -36,8 +37,39 @@ def train(cfg):
     seed = cfg.get("seed", 42)
     pl.seed_everything(seed, workers=True)
 
-    log.info(f"Instantiating model <{cfg.model._target_}>")
-    model: LightningModule = hydra.utils.instantiate(cfg.model)
+    # Use a file-based lock to prevent race conditions during model download
+    # Get rank from Slurm environment variable, default to 0 if not set
+    try:
+        rank = int(os.environ.get("SLURM_PROCID", 0))
+    except ValueError:
+        rank = 0
+
+    lock_file = os.path.join(cfg.paths.output_dir, "model_init.lock")
+
+    if rank == 0:
+        # Rank 0 creates the lock, instantiates the model (triggering download), and removes the lock
+        log.info("Rank 0: Creating model initialization lock.")
+        # Ensure the directory exists before creating the lock file
+        os.makedirs(os.path.dirname(lock_file), exist_ok=True)
+        with open(lock_file, "w") as f:
+            f.write("locked")
+
+        log.info(f"Instantiating model <{cfg.model._target_}>")
+        model: LightningModule = hydra.utils.instantiate(cfg.model)
+
+        log.info("Rank 0: Removing model initialization lock.")
+        os.remove(lock_file)
+    else:
+        # Other ranks wait for the lock file to be removed
+        log.info(f"Rank {rank}: Waiting for model initialization lock to be released by rank 0.")
+        wait_time = 0
+        while os.path.exists(lock_file):
+            time.sleep(5)
+            wait_time += 5
+            if wait_time > 600: # Add a timeout to prevent hanging forever
+                raise TimeoutError("Waited too long for the model initialization lock file.")
+        log.info(f"Rank {rank}: Lock released. Instantiating model from cache.")
+        model: LightningModule = hydra.utils.instantiate(cfg.model)
 
     # Handle checkpoint path from both root and trainer configs for robustness
     # We temporarily set struct to False to allow popping the ckpt_path key
