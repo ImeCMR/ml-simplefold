@@ -47,29 +47,28 @@ def train(cfg):
     lock_file = os.path.join(cfg.paths.output_dir, "model_init.lock")
 
     if rank == 0:
-        # Rank 0 creates the lock, instantiates the model (triggering download), and removes the lock
-        log.info("Rank 0: Creating model initialization lock.")
-        # Ensure the directory exists before creating the lock file
+        # Rank 0 is responsible for creating and removing the lock.
+        # It creates the lock, triggers the download by instantiating the model, and then removes the lock.
         os.makedirs(os.path.dirname(lock_file), exist_ok=True)
         with open(lock_file, "w") as f:
             f.write("locked")
-
-        log.info(f"Instantiating model <{cfg.model._target_}>")
-        model: LightningModule = hydra.utils.instantiate(cfg.model)
-
-        log.info("Rank 0: Removing model initialization lock.")
+        log.info("Rank 0: Initializing model to trigger download.")
+        hydra.utils.instantiate(cfg.model)  # This is just to trigger the download
+        log.info("Rank 0: Download complete, removing lock.")
         os.remove(lock_file)
     else:
-        # Other ranks wait for the lock file to be removed
-        log.info(f"Rank {rank}: Waiting for model initialization lock to be released by rank 0.")
+        # Other ranks wait for the lock file to disappear.
+        log.info(f"Rank {rank}: Waiting for model download to complete.")
         wait_time = 0
         while os.path.exists(lock_file):
             time.sleep(5)
             wait_time += 5
-            if wait_time > 600: # Add a timeout to prevent hanging forever
+            if wait_time > 600: # 10-minute timeout
                 raise TimeoutError("Waited too long for the model initialization lock file.")
-        log.info(f"Rank {rank}: Lock released. Instantiating model from cache.")
-        model: LightningModule = hydra.utils.instantiate(cfg.model)
+
+    # Now that the lock is gone, all processes can safely instantiate the model from the cache.
+    log.info(f"Rank {rank}: Lock released. Instantiating model from cache.")
+    model: LightningModule = hydra.utils.instantiate(cfg.model)
 
     # Handle checkpoint path from both root and trainer configs for robustness
     # We temporarily set struct to False to allow popping the ckpt_path key
