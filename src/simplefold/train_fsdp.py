@@ -76,12 +76,17 @@ def train(cfg):
 
     log.info(f"Instantiating trainer <{cfg.trainer._target_}>")
 
+    # This is needed to correctly wrap the ESM model layers for FSDP
+    tmp_esm_model, _ = torch.hub.load("facebookresearch/esm:main", "esm2_t6_8M_UR50D")
+    esm_layer_class = tmp_esm_model.layers[0].__class__
+    del tmp_esm_model
+
     strategy = FSDPStrategy(
         auto_wrap_policy=functools.partial(
             transformer_auto_wrap_policy,
-            transformer_layer_cls={DiTBlock},
+            transformer_layer_cls={DiTBlock, esm_layer_class},
         ),
-        activation_checkpointing_policy={DiTBlock},
+        activation_checkpointing_policy={DiTBlock, esm_layer_class},
         use_orig_params=True,
         state_dict_type="sharded",
         limit_all_gathers=True,
