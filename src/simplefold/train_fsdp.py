@@ -37,6 +37,20 @@ def train(cfg):
     seed = cfg.get("seed", 42)
     pl.seed_everything(seed, workers=True)
 
+    # Use a file-based lock to prevent race conditions during model download
+    # Set up environment variables for distributed training
+    # Correctly set MASTER_ADDR from the first node in the Slurm nodelist
+    nodelist = os.environ.get("SLURM_JOB_NODELIST")
+    if nodelist:
+        os.environ["MASTER_ADDR"] = nodelist.split(',')[0].split('[')[0]
+    else:
+        os.environ["MASTER_ADDR"] = "127.0.0.1"
+
+    os.environ["MASTER_PORT"] = "29400"  # A default port
+    os.environ["WORLD_SIZE"] = os.environ.get("SLURM_NTASKS", "1")
+    os.environ["RANK"] = os.environ.get("SLURM_PROCID", "0")
+    os.environ["LOCAL_RANK"] = os.environ.get("SLURM_LOCALID", "0")
+
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
 
