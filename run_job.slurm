@@ -24,8 +24,19 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Running on nodes: $SLURM_JOB_NODELIST"
 echo "Number of tasks: $SLURM_NTASKS"
 
+# Set up environment variables for torch.distributed
+export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+export MASTER_PORT=29500 # A high port that is likely free
+export WORLD_SIZE=$SLURM_NTASKS
+echo "MASTER_ADDR: $MASTER_ADDR"
+echo "MASTER_PORT: $MASTER_PORT"
+echo "WORLD_SIZE: $WORLD_SIZE"
+
+
 # --- This is the Final, Definitive srun Command ---
 # It uses the correct 'model.bayesian_loss_weight' parameter.
+# Each task launched by srun will have SLURM_PROCID set, which PyTorch Lightning
+# will automatically use to set the RANK.
 srun --export=ALL --gpu-bind=single:1 python src/simplefold/train_fsdp.py --config-name finetune \
     task_name=SimpleNOEFold_Finetune_3429 \
     trainer.ckpt_path=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt \
