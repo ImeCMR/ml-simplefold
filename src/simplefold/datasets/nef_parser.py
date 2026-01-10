@@ -31,12 +31,20 @@ class NEFParser:
                     if restraint_data_key in saveframe_content:
                         df = saveframe_content[restraint_data_key]
 
+                        # Filter out rows with invalid data before iterating
+                        df_filtered = df[
+                            (df['sequence_code_1'] != '.') &
+                            (df['sequence_code_2'] != '.') &
+                            (df['upper_limit'] != '.')
+                        ]
+
                         # Convert DataFrame to a list of dictionaries
-                        for _, row in df.iterrows():
+                        #for _, row in df.iterrows():
+                        for _, row in df_filtered.iterrows():
                             try:
                                 # Skip restraints with '.' for values that should be numbers
-                                if row['sequence_code_1'] == '.' or row['sequence_code_2'] == '.' or row['upper_limit'] == '.':
-                                    continue
+                                #if row['sequence_code_1'] == '.' or row['sequence_code_2'] == '.' or row['upper_limit'] == '.':
+                                #    continue
                                 restraint = {
                                     'id': row['restraint_id'],
                                     'atom1_residue_number': int(row['sequence_code_1']),

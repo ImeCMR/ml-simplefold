@@ -13,6 +13,7 @@ deterministic: False
 
 accelerator: gpu
 devices: auto
+#devices: 1
 num_nodes: 1
 min_epochs: 1 # prevents early stopping
 max_steps: 100000

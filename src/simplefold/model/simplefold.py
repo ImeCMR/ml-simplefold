@@ -88,12 +88,14 @@ class SimpleFold(pl.LightningModule):
         plddt_training=False,
         sample_dir='artifacts/',
         bayesian_steering=None,
+        bayesian_loss_weight=0.0,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
 
         self.model = architecture
         self.bayesian_steering = bayesian_steering
+        self.bayesian_loss_weight = bayesian_loss_weight
         self.model_ema = AveragedModel(
             self.model,
             multi_avg_fn=torch.optim.swa_utils.get_ema_multi_avg_fn(
@@ -504,10 +506,12 @@ class SimpleFold(pl.LightningModule):
             _, e_bayesian = self.bayesian_steering(
                 denoised_coords, batch['noesy_restraints'], t, bonds, atom_to_idx, atom_names
             )
-            loss += e_bayesian * self.bayesian_steering.bayesian_loss_weight
+            #loss += e_bayesian * self.bayesian_steering.bayesian_loss_weight
+            loss += e_bayesian * self.bayesian_loss_weight
             self.log(
                 "loss/bayesian",
-                e_bayesian.item() * self.bayesian_steering.bayesian_loss_weight,
+                #e_bayesian.item() * self.bayesian_steering.bayesian_loss_weight,
+                e_bayesian.item() * self.bayesian_loss_weight,
                 on_epoch=True,
                 logger=True,
                 prog_bar=True,

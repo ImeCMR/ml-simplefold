@@ -6,6 +6,7 @@
 import os
 import hydra
 import torch
+import time
 import functools
 from omegaconf import OmegaConf
 
@@ -36,16 +37,31 @@ def train(cfg):
     seed = cfg.get("seed", 42)
     pl.seed_everything(seed, workers=True)
 
+    # Use a file-based lock to prevent race conditions during model download
+    # Set up environment variables for distributed training
+    # Correctly set MASTER_ADDR from the first node in the Slurm nodelist
+    nodelist = os.environ.get("SLURM_JOB_NODELIST")
+    if nodelist:
+        os.environ["MASTER_ADDR"] = nodelist.split(',')[0].split('[')[0]
+    else:
+        os.environ["MASTER_ADDR"] = "127.0.0.1"
+
+    os.environ["MASTER_PORT"] = "29400"  # A default port
+    os.environ["WORLD_SIZE"] = os.environ.get("SLURM_NTASKS", "1")
+    os.environ["RANK"] = os.environ.get("SLURM_PROCID", "0")
+    os.environ["LOCAL_RANK"] = os.environ.get("SLURM_LOCALID", "0")
+
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
-    load_ckpt_path = cfg.get("load_ckpt_path", None)
 
-    if load_ckpt_path is not None:
-        # load existing ckpt
-        log.info(f"Resuming from checkpoint <{cfg.load_ckpt_path}>...")
+    # Handle checkpoint path from both root and trainer configs for robustness
+    OmegaConf.set_struct(cfg.trainer, False)
+    ckpt_path = cfg.trainer.pop("ckpt_path", None) or cfg.get("load_ckpt_path", None)
+    OmegaConf.set_struct(cfg.trainer, True)
+
+    if ckpt_path:
+        log.info(f"Resuming from checkpoint <{ckpt_path}>...")
         model.strict_loading = False
-
-        # manually reset these variables in case of fine-tuning
         model.lddt_weight_schedule = cfg.model.get("lddt_weight_schedule", False)
         model.plddt_training = cfg.model.get("plddt_training", False)
 
@@ -56,36 +72,31 @@ def train(cfg):
     callbacks = instantiate_callbacks(cfg.get("callbacks"))
 
     log.info("Instantiating loggers...")
-    OmegaConf.set_struct(cfg.logger, True)
     loggers = instantiate_loggers(cfg.get("logger"))
-
-    # When using FSDP, we need to manually specify the wrap policy
-    # and activation checkpointing policy for transformer layers.
 
     log.info(f"Instantiating trainer <{cfg.trainer._target_}>")
 
+    # This is needed to correctly wrap the ESM model layers for FSDP
     tmp_esm_model, _ = torch.hub.load("facebookresearch/esm:main", "esm2_t6_8M_UR50D")
     esm_layer_class = tmp_esm_model.layers[0].__class__
     del tmp_esm_model
 
-    transformer_auto_wrapper_policy = functools.partial(
-        transformer_auto_wrap_policy,
-        transformer_layer_cls={DiTBlock, esm_layer_class},
-    )
     strategy = FSDPStrategy(
-        auto_wrap_policy=transformer_auto_wrapper_policy,
+        auto_wrap_policy=functools.partial(
+            transformer_auto_wrap_policy,
+            transformer_layer_cls={DiTBlock, esm_layer_class},
+        ),
         activation_checkpointing_policy={DiTBlock, esm_layer_class},
         use_orig_params=True,
         state_dict_type="sharded",
         limit_all_gathers=True,
-        cpu_offload=False
+        cpu_offload=False,
     )
     trainer = hydra.utils.instantiate(
-        cfg.trainer, 
+        cfg.trainer,
         strategy=strategy,
-        callbacks=callbacks, 
-        logger=loggers, 
-        plugins=None
+        callbacks=callbacks,
+        logger=loggers,
     )
 
     object_dict = {
@@ -105,7 +116,7 @@ def train(cfg):
     trainer.fit(
         model=model,
         datamodule=datamodule,
-        ckpt_path=load_ckpt_path,
+        ckpt_path=ckpt_path,
     )
 
 
