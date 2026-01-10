@@ -25,6 +25,14 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Running on nodes: $SLURM_JOB_NODELIST"
 echo "Number of tasks: $SLURM_NTASKS"
 
+# Set environment variables for distributed training
+export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+export MASTER_PORT=$(expr 10000 + $(echo -n $SLURM_JOBID | tail -c 4))
+export WORLD_SIZE=$SLURM_NTASKS
+echo "MASTER_ADDR: $MASTER_ADDR"
+echo "MASTER_PORT: $MASTER_PORT"
+echo "WORLD_SIZE: $WORLD_SIZE"
+
 # Execute the fine-tuning command
 srun --export=ALL --gpu-bind=single:1 python src/simplefold/train_fsdp.py --config-name finetune \
     task_name="SimpleNOEFold_Finetune_3429" \
