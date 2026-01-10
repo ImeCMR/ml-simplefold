@@ -26,7 +26,7 @@ echo "Number of tasks: $SLURM_NTASKS"
 
 # --- This is the Final, Definitive srun Command ---
 # It uses the correct 'model.bayesian_loss_weight' parameter.
-srun python src/simplefold/train_fsdp.py --config-name finetune \
+srun --export=ALL --gpu-bind=single:1 python src/simplefold/train_fsdp.py --config-name finetune \
     task_name=SimpleNOEFold_Finetune_3429 \
     trainer.ckpt_path=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt \
     data.nef_dir=/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef \
