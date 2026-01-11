@@ -18,6 +18,7 @@
 mkdir -p logs
 
 module load conda
+module load cuda
 conda activate /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/simplefold
 
 echo "Starting SimpleNOEFold fine-tuning job..."
