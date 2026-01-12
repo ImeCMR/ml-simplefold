@@ -124,6 +124,11 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
         The collated data.
 
     """
+    # Filter out None values
+    data = [d for d in data if d is not None]
+    if not data:
+        return {}
+
     # Get the keys
     keys = data[0].keys()
 

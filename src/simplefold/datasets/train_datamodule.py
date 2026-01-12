@@ -222,7 +222,7 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
 
         except Exception as e:
             print(f"Featurizer failed on {record.id} with error {e}. Skipping.")
-            return None
+            return self.__getitem__(random.randint(0, self.num_samples - 1))
 
         return features
 
