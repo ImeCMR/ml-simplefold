@@ -5,6 +5,7 @@
 defaults:
   - /data: pdb
   - /model: simplefold
+  - /model/processor: protein_processor
   - /trainer: fsdp
   - /paths: default
   - /extras: default
