@@ -142,14 +142,12 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
         try:
             with open(tokenized_path, "rb") as f:
                 tokenized = pickle.load(f)
-        except:
-            # print(f"Failed to load tokenized data for {record.id}. Skipping.")
-            # return self.__getitem__(random.randint(0, self.num_samples - 1))
+        except Exception:
             try:
                 input_data = load_input(record, dataset.target_dir)
                 tokenized = dataset.tokenizer.tokenize(input_data)
-            except:
-                print(f"Failed tokenize {record.id}")
+            except Exception:
+                print(f"Failed to load or tokenize {record.id}. Skipping.")
                 return None
 
         max_num_tokens = len(tokenized.tokens)
@@ -222,7 +220,7 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
 
         except Exception as e:
             print(f"Featurizer failed on {record.id} with error {e}. Skipping.")
-            return self.__getitem__(random.randint(0, self.num_samples - 1))
+            return None
 
         return features
 

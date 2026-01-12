@@ -176,7 +176,7 @@ def extract_sequence_from_tokens(tokenized):
             current_entity = entity
 
         res_type = t[4]
-        res_name = restype_3to1[const.tokens[res_type]]
+        res_name = restype_3to1.get(const.tokens[res_type], "X")
         seq.append(res_name)
         if i == len(tokenized.tokens) - 1:
             sequence.append("".join(seq))
