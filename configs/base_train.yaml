@@ -6,16 +6,18 @@ defaults:
   - data: pdb
   - model/architecture: foldingdit_100M
   - model/sampler: euler_maruyama
-  - model/processor: default
-  - model: default
+  - model/bayesian_steering: default # Instantiate Bayesian Steering
+  - model: simplefold
+  - model/processor: protein_processor
+  #- compute: local
   - callbacks: default
-  - logger: null # set logger here or use command line (e.g. `python train.py logger=tensorboard`)
+  - logger: null
   - trainer: default
   - paths: default
   - extras: default
   - hydra: default
   - _self_
-
+  
   # experiment configs allow for version control of specific hyperparameters
   # e.g. best hyperparameters for given model and datamodule
   - experiment: null

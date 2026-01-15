@@ -15,23 +15,26 @@ class EMSampler():
     """
     A Euler-Maruyama solver for SDEs.
     """
+
     def __init__(
         self,
         num_timesteps=500,
         t_start=1e-4,
         tau=0.3,
-        log_timesteps=False,
+        log_timestep=False,
         w_cutoff=0.99,
         bayesian_steering: BayesianSteering = None,
         steering_schedule_gamma: float = 1.0,
+        steering_schedule_type: str = 'linear',
     ):
         self.num_timesteps = num_timesteps
-        self.log_timesteps = log_timesteps
+        self.log_timesteps = log_timestep
         self.t_start = t_start
         self.tau = tau
         self.w_cutoff = w_cutoff
         self.bayesian_steering = bayesian_steering
         self.steering_schedule_gamma = steering_schedule_gamma
+        self.steering_schedule_type = steering_schedule_type
 
         if self.log_timesteps:
             t = 1.0 - torch.logspace(-2, 0, self.num_timesteps + 1).flip(0)
@@ -80,13 +83,38 @@ class EMSampler():
 
         f_steering = torch.zeros_like(y)
         if self.bayesian_steering is not None and 'noesy_restraints' in batch and batch['noesy_restraints']:
-            # This requires atom_to_idx mapping and bond information to be in the batch
-            atom_to_idx = batch.get('atom_to_idx', {})
-            bonds = batch.get('bonds', [])
-            atom_names = batch.get('atom_names', [])
-            f_steering, _ = self.bayesian_steering(
-                y, batch['noesy_restraints'], t, bonds, atom_to_idx, atom_names
-            )
+            # Use per-item metadata from batch
+            atom_to_idx_list = batch.get('atom_to_idx_list', [])
+            bonds_list = batch.get('bonds_list', [])
+            atom_names_list = batch.get('atom_names_list', [])
+
+            f_steering_list = []
+            for batch_idx in range(y.shape[0]):
+                restraints_item = batch['noesy_restraints'][batch_idx]
+
+                if not restraints_item or not atom_to_idx_list:
+                    f_steering_list.append(torch.zeros_like(y[batch_idx]))
+                    continue
+
+                # Get per item data
+                atom_to_idx_item = atom_to_idx_list[batch_idx]
+                bonds_item = bonds_list[batch_idx] if bonds_list else []
+                atom_names_item = atom_names_list[batch_idx] if atom_names_list else []
+
+                # Compute steering force for this item
+                f_steering_item, _ = self.bayesian_steering(
+                    y[batch_idx:batch_idx+1],
+                    [restraints_item], # Wrap in list
+                    t,
+                    bonds_item,
+                    atom_to_idx_item,
+                    atom_names_item
+                )
+
+                f_steering_list.append(f_steering_item.squeeze(0))
+
+            if f_steering_list:
+                f_steering = torch.stack(f_steering_list, dim=0)
 
         gamma_t = self.steering_schedule(t)
 
@@ -98,8 +126,29 @@ class EMSampler():
         return y_sample
 
     def steering_schedule(self, t):
-        # Time-dependent scaling for the steering force
-        return self.steering_schedule_gamma * t
+        # Implement multiple schedule types
+        if self.steering_schedule_type == 'linear':
+            # Linear ramp: starts at 0, increases to gamma at t=1
+            return t * self.steering_schedule_gamma
+        
+        elif self.steering_schedule_type == 'sigmoid':
+            # Sigmoid: smooth ramp centered at t=0.5
+            return torch.sigmoid(5 * (t - 0.5)) * self.steering_schedule_gamma
+        
+        elif self.steering_schedule_type == 'exponential':
+            # Exponential: slowly increases early, faster later
+            return (torch.exp(t) - 1) / (torch.e - 1) * self.steering_schedule_gamma
+        
+        elif self.steering_schedule_type == 'constant':
+            # Constatnt: always gamma
+            return torch.ones_like(t) * self.steering_schedule_gamma
+        
+        elif self.steering_schedule_type == 'square':
+            # Quadratic: t^2 schedule
+            return (t ** 2) * self.steering_schedule_gamma
+        
+        else:
+            raise ValueError(f"Unknown steering schedule type: {self.steering_schedule_type}")
 
     @torch.no_grad()
     def sample(self, model_fn, flow, noise, batch):

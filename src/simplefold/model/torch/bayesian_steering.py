@@ -7,6 +7,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from utils.nef_utils import parse_restraint_assignments
+
 class BayesianSteering(nn.Module):
     def __init__(self, enoe_weight=1.0, egeom_weight=1.0, time_dependent_variance=True,
                  ideal_bond_lengths=None, ideal_bond_angles=None, vdw_radii=None):
@@ -38,28 +40,44 @@ class BayesianSteering(nn.Module):
         device = xt.device
 
         # Unpack restraints into tensors for vectorized processing
-        atom1_indices, atom2_indices, upper_bounds, batch_indices = [], [], [], []
-        for i in range(batch_size):
-            if not restraints[i]:
+        atom1_indices = []
+        atom2_indices = []
+        upper_bounds = []
+        batch_indices = []
+        restraint_ids = []
+
+        for batch_idx in range(batch_size):
+            if not restraints[batch_idx]: # Propper check for None/Empty
                 continue
 
-            atom_to_idx_batch = atom_to_idx[i]
-            for r in restraints[i]:
-                res1, atom1 = r['atom1_residue_number'] - 1, r['atom1_atom_name']
-                res2, atom2 = r['atom2_residue_number'] - 1, r['atom2_atom_name']
+            atom_to_idx_batch = atom_to_idx[batch_idx]
+            for restraint in restraints[batch_idx]:
+                # Handle both single and multi-assignment restraints
+                assignments = parse_restraint_assignments(restraint)
 
-                if atom1 in atom_to_idx_batch and atom2 in atom_to_idx_batch:
+                for assignment in assignments:
+                    res1 = assignment['atom1_residue_number']
+                    res2 = assignment['atom2_residue_number']
+                    atom1 = assignment['atom1_atom_name']
+                    atom2 = assignment['atom2_atom_name']
+
+                    # Validate indices exist
+                    if atom1 not in atom_to_idx_batch or atom2 not in atom_to_idx_batch:
+                        continue
+
                     atom1_indices.append(atom_to_idx_batch[atom1])
                     atom2_indices.append(atom_to_idx_batch[atom2])
-                    upper_bounds.append(r['upper_bound'])
-                    batch_indices.append(i)
+                    upper_bounds.append(assignment['upper_bound'])
+                    batch_indices.append(batch_idx)
+                    # Use unique ID combining batch and restraint ID
+                    restraint_ids.append(f"batch_{batch_idx}_id_{restraint['id']}")
 
         if not atom1_indices:
             return torch.tensor(0.0, device=device, requires_grad=True)
-
+        
         atom1_indices = torch.tensor(atom1_indices, device=device, dtype=torch.long)
         atom2_indices = torch.tensor(atom2_indices, device=device, dtype=torch.long)
-        upper_bounds = torch.tensor(upper_bounds, device=device, dtype=torch.float32)
+        upper_bounds = torch.tensor(upper_bounds, device=device, dtype=torch.float3)
         batch_indices = torch.tensor(batch_indices, device=device, dtype=torch.long)
 
         atom1_coords = xt[batch_indices, atom1_indices, :]
@@ -68,27 +86,48 @@ class BayesianSteering(nn.Module):
         dist_sq = ((atom1_coords - atom2_coords) ** 2).sum(dim=-1)
         dist_minus_6 = dist_sq.pow(-3)
 
-        # Group restraints by their ID to perform the r-6 sum
-        restraint_ids = [f"{i}_{r['id']}" for i, batch_restraints in enumerate(restraints) for r in batch_restraints]
-
-        # Map string IDs to integers to use with torch.unique
+        # Create proper ID mapping
         unique_str_ids = sorted(list(set(restraint_ids)))
-        id_map = {str_id: i for i, str_id in enumerate(unique_str_ids)}
-        int_restraint_ids = torch.tensor([id_map[rid] for rid in restraint_ids], device=device)
+        id_map = {str_id: idx for idx, str_id in enumerate(unique_str_ids)}
+        int_restraint_ids = torch.tensor(
+            [id_map[rid] for rid in restraint_ids],
+            device=device,
+            dtype=torch.long
+        )
 
-        unique_int_ids, inverse_indices = torch.unique(int_restraint_ids, return_inverse=True)
-
-        # Sum distances for each unique restraint ID
+        # Handle case where no unique restraints 
         num_unique_restraints = len(unique_str_ids)
-        summed_dist_minus_6 = torch.zeros(num_unique_restraints, device=device).scatter_add_(0, inverse_indices, dist_minus_6)
+        if num_unique_restraints == 0:
+            return torch.tensor(0.0, device=device, requires_grad=True)
+        
+        # Sum r^-6 distances for each restraint
+        summed_dist_minus_6 = torch.zeros(num_unique_restraints, device=device)
+        summed_dist_minus_6.scatter_add_(0, int_restraint_ids, dist_minus_6)
 
-        effective_dist = summed_dist_minus_6.pow(-1/6)
+        # Compute effective distance
+        effective_dist = summed_dist_minus_6.pow(-1.0/6.0)
 
-        # Create a mapping from restraint ID to upper bound
-        id_to_upper_bound = {f"{i}_{r['id']}": r['upper_bound'] for i, batch_restraints in enumerate(restraints) for r in batch_restraints}
-        # Look up the upper bound for each unique restraint using the original string ID
-        unique_upper_bounds = torch.tensor([id_to_upper_bound[str_id] for str_id in unique_str_ids], device=device)
+        # Create propper upper bound mapping
+        id_to_upper_bound = {}
+        restraint_idx = 0
+        for batch_idx in range(batch_size):
+            if not restraints[batch_idx]:
+                continue
+            for restraint in restraints[batch_idx]:
+                key = f"batch_{batch_idx}_id_{restraint['id']}"
+                # Use mean of all assignments' upper bounds
+                assignments = parse_restraint_assignments(restraint)
+                if assignments:
+                    ub = sum(a['upper_bound'] for a in assignments) / len(assignments)
+                    id_to_upper_bound[key] = ub
 
+        unique_upper_bounds = torch.tensor(
+            [id_to_upper_bound[str_id] for str_id in unique_str_ids],
+            device=device,
+            dtype=torch.float32
+        )
+
+        # Compute violations with time-dependent variance
         violations = F.relu(effective_dist - unique_upper_bounds)
         variance = self.get_variance(t)
         enoe = 0.5 * (violations ** 2) / variance
