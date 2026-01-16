@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 from textwrap import dedent
 
-from simplefold.nef.parse_nef import NEFParser, ResidueAtom, DistanceRestraint
+from simplefold.nef.parser import NEFParser, ResidueAtom, DistanceRestraint
 
 
 class TestResidueAtom(unittest.TestCase):

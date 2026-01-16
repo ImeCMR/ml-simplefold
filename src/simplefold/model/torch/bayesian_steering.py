@@ -15,8 +15,8 @@ import torch.nn as nn
 from typing import Dict, List, Optional, Tuple, Any
 from einops import repeat
 
-from energy.noe_energy import NOEEnergy, NOEDistance
-from energy.geometric_prior import GeometricPrior
+from simplefold.energy.noe_energy import NOEEnergy, NOEDistance
+from simplefold.energy.geometric_prior import GeometricPrior
 
 
 class BayesianSteering(nn.Module):
@@ -114,7 +114,7 @@ class BayesianSteering(nn.Module):
             stats["energy/geom"] = geom_energy.mean()
 
         # 2. NOE Energy
-        if self.use_noe and "noe_restraints_indices" in batch:
+        if self.use_noe and ("noe_restraints_indices" in batch or "noe_at1_idx" in batch):
             # We assume batch["noe_restraints_indices"] is a tensor of shape [B, K, 2, assignment_K]
             # or similar that allows vectorized computation.
             # For simplicity, let's assume we use a specialized vectorized NOE energy.
@@ -177,7 +177,7 @@ class BayesianSteering(nn.Module):
 
         sigma = self.noe_config["base_sigma"]
         if self.noe_config["time_dependent"]:
-            sigma = sigma * (1.0 + 5.0 * t) # [B]
+            sigma = sigma * (1.0 + 5.0 * (1.0 - t)) # [B]
 
         sigma = sigma.view(B, 1)
 

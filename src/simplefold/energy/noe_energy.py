@@ -134,10 +134,10 @@ class NOEEnergy(nn.Module):
         if not self.time_dependent:
             return torch.full_like(t, self.base_sigma)
         
-        # Linear schedule: sigma(t) = base_sigma * (1 + 5*t)
-        # At t=0: sigma = base_sigma
-        # At t=1: sigma = 6 * base_sigma
-        sigma = self.base_sigma * (1.0 + 5.0 * t)
+        # Linear schedule: sigma(t) = base_sigma * (1.0 + 5.0 * (1.0 - t))
+        # At t=1 (clean): sigma = base_sigma
+        # At t=0 (noisy): sigma = 6 * base_sigma
+        sigma = self.base_sigma * (1.0 + 5.0 * (1.0 - t))
         return sigma
     
     def gaussian_potential(

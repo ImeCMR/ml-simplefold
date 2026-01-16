@@ -226,7 +226,7 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
             return features
 
         try:
-            from nef.parser import NEFParser
+            from simplefold.nef.parser import NEFParser
             parser = NEFParser(nef_path)
             restraints = parser.get_restraints()
             if not restraints:

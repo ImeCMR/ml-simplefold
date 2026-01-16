@@ -149,7 +149,7 @@ class SimpleFold(pl.LightningModule):
             self.model.eval()
 
         if self.hparams.use_bayesian_loss:
-            from model.torch.bayesian_steering import BayesianSteering
+            from simplefold.model.torch.bayesian_steering import BayesianSteering
             self.bayesian_steering = BayesianSteering(
                 use_noe="noe" in self.hparams.bayesian_loss_type,
                 use_geom="geom" in self.hparams.bayesian_loss_type,

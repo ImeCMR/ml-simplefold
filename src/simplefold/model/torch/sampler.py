@@ -53,6 +53,8 @@ class EMSampler():
         t, 
         t_next, 
         batch, 
+        steering_fn=None,
+        steering_weight=1.0,
     ):
         dt = t_next - t
         eps = torch.randn_like(y).to(y)
@@ -74,13 +76,18 @@ class EMSampler():
 
         diff_coeff = self.diffusion_coefficient(t)
         drift = velocity + diff_coeff * score
+
+        if steering_fn is not None:
+            steering_force = steering_fn(y, t)
+            drift = drift + steering_weight * steering_force
+
         mean_y = y + drift * dt
         y_sample = mean_y + torch.sqrt(2.0 * dt * diff_coeff * self.tau) * eps
 
         return y_sample
 
     @torch.no_grad()
-    def sample(self, model_fn, flow, noise, batch):
+    def sample(self, model_fn, flow, noise, batch, steering_fn=None, steering_weight=1.0):
         sampling_timesteps = self.num_timesteps
         steps = self.steps.to(noise.device)
         y_sampled = noise
@@ -101,6 +108,8 @@ class EMSampler():
                 t,
                 t_next,
                 feats,
+                steering_fn=steering_fn,
+                steering_weight=steering_weight,
             )
 
         return {
