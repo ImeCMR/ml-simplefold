@@ -1,0 +1,2014 @@
+data_nef_1e9t
+
+save_entry_information
+   _nef_nmr_meta_data.sf_category     nef_nmr_meta_data
+   _nef_nmr_meta_data.sf_framecode    entry_information
+   _nef_nmr_meta_data.format_name     nmr_exchange_format
+   _nef_nmr_meta_data.format_version  1.1
+
+save_
+
+save_assembly
+   _nef_molecular_system.sf_category   nef_molecular_system
+   _nef_molecular_system.sf_framecode  assembly
+
+   loop_
+      _nef_sequence.index
+      _nef_sequence.chain_code
+      _nef_sequence.sequence_code
+      _nef_sequence.residue_name
+      _nef_sequence.linking
+      _nef_sequence.residue_variant
+      _nef_sequence.cis_peptide
+
+     1    A   1    GLU   start    .     .        
+     2    A   2    GLU   middle   .     .        
+     3    A   3    TYR   middle   .     .        
+     4    A   4    VAL   middle   .     .        
+     5    A   5    GLY   middle   .     false    
+     6    A   6    LEU   middle   .     .        
+     7    A   7    SER   middle   .     .        
+     8    A   8    ALA   middle   .     .        
+     9    A   9    ASN   middle   .     .        
+     10   A   10   GLN   middle   .     .        
+     11   A   11   CYS   middle   -HG   .        
+     12   A   12   ALA   middle   .     .        
+     13   A   13   VAL   middle   .     .        
+     14   A   14   PRO   middle   .     false    
+     15   A   15   ALA   middle   .     .        
+     16   A   16   LYS   middle   .     .        
+     17   A   17   ASP   middle   .     .        
+     18   A   18   ARG   middle   .     .        
+     19   A   19   VAL   middle   .     .        
+     20   A   20   ASP   middle   .     .        
+     21   A   21   CYS   middle   -HG   .        
+     22   A   22   GLY   middle   .     false    
+     23   A   23   TYR   middle   .     .        
+     24   A   24   PRO   middle   .     false    
+     25   A   25   HIS   middle   .     .        
+     26   A   26   VAL   middle   .     .        
+     27   A   27   THR   middle   .     .        
+     28   A   28   PRO   middle   .     false    
+     29   A   29   LYS   middle   .     .        
+     30   A   30   GLU   middle   .     .        
+     31   A   31   CYS   middle   -HG   .        
+     32   A   32   ASN   middle   .     .        
+     33   A   33   ASN   middle   .     .        
+     34   A   34   ARG   middle   .     .        
+     35   A   35   GLY   middle   .     false    
+     36   A   36   CYS   middle   -HG   .        
+     37   A   37   CYS   middle   -HG   .        
+     38   A   38   PHE   middle   .     .        
+     39   A   39   ASP   middle   .     .        
+     40   A   40   SER   middle   .     .        
+     41   A   41   ARG   middle   .     .        
+     42   A   42   ILE   middle   .     .        
+     43   A   43   PRO   middle   .     false    
+     44   A   44   GLY   middle   .     false    
+     45   A   45   VAL   middle   .     .        
+     46   A   46   PRO   middle   .     false    
+     47   A   47   TRP   middle   .     .        
+     48   A   48   CYS   middle   -HG   .        
+     49   A   49   PHE   middle   .     .        
+     50   A   50   LYS   middle   .     .        
+     51   A   51   PRO   middle   .     false    
+     52   A   52   LEU   middle   .     .        
+     53   A   53   GLN   middle   .     .        
+     54   A   54   GLU   middle   .     .        
+     55   A   55   ALA   middle   .     .        
+     56   A   56   GLU   middle   .     .        
+     57   A   57   CYS   middle   .     .        
+     58   A   58   THR   middle   .     .        
+     59   A   59   PHE   end      .     .        
+
+   stop_
+
+   loop_
+      _nef_covalent_links.chain_code_1
+      _nef_covalent_links.sequence_code_1
+      _nef_covalent_links.residue_name_1
+      _nef_covalent_links.atom_name_1
+      _nef_covalent_links.chain_code_2
+      _nef_covalent_links.sequence_code_2
+      _nef_covalent_links.residue_name_2
+      _nef_covalent_links.atom_name_2
+
+     A   11   CYS   SG   A   37   CYS   SG    
+     A   21   CYS   SG   A   36   CYS   SG    
+     A   31   CYS   SG   A   48   CYS   SG    
+
+   stop_
+
+save_
+
+save_assigned_chem_shift_list_1
+   _nef_chemical_shift_list.sf_category   nef_chemical_shift_list
+   _nef_chemical_shift_list.sf_framecode  assigned_chem_shift_list_1
+
+   loop_
+      _nef_chemical_shift.chain_code
+      _nef_chemical_shift.sequence_code
+      _nef_chemical_shift.residue_name
+      _nef_chemical_shift.atom_name
+      _nef_chemical_shift.element
+      _nef_chemical_shift.isotope_number
+      _nef_chemical_shift.value
+      _nef_chemical_shift.value_uncertainty
+
+     A   2    GLU   N      N   15   122.3   .    
+     A   2    GLU   H      H   1    8.31    .    
+     A   2    GLU   HA     H   1    4.66    .    
+     A   2    GLU   HB2    H   1    2.95    .    
+     A   2    GLU   HB3    H   1    2.95    .    
+     A   3    TYR   N      N   15   123.6   .    
+     A   3    TYR   H      H   1    8.06    .    
+     A   3    TYR   HA     H   1    4.04    .    
+     A   3    TYR   HBy    H   1    2.95    .    
+     A   3    TYR   HBx    H   1    1.98    .    
+     A   3    TYR   HD1    H   1    7.07    .    
+     A   3    TYR   HD2    H   1    7.07    .    
+     A   4    VAL   N      N   15   112.3   .    
+     A   4    VAL   H      H   1    7.93    .    
+     A   4    VAL   HA     H   1    3.90    .    
+     A   4    VAL   HB     H   1    2.00    .    
+     A   4    VAL   HG1%   H   1    0.88    .    
+     A   4    VAL   HG2%   H   1    0.88    .    
+     A   6    LEU   N      N   15   121.8   .    
+     A   6    LEU   H      H   1    7.87    .    
+     A   6    LEU   HA     H   1    4.45    .    
+     A   6    LEU   HB2    H   1    1.53    .    
+     A   6    LEU   HB3    H   1    1.53    .    
+     A   6    LEU   HD1%   H   1    0.74    .    
+     A   6    LEU   HD2%   H   1    0.74    .    
+     A   7    SER   N      N   15   117.5   .    
+     A   7    SER   H      H   1    8.41    .    
+     A   7    SER   HA     H   1    4.47    .    
+     A   8    ALA   N      N   15   124.9   .    
+     A   8    ALA   H      H   1    8.51    .    
+     A   8    ALA   HA     H   1    4.09    .    
+     A   8    ALA   HB%    H   1    1.39    .    
+     A   9    ASN   N      N   15   116.1   .    
+     A   9    ASN   H      H   1    8.34    .    
+     A   9    ASN   HA     H   1    4.50    .    
+     A   9    ASN   HB2    H   1    2.77    .    
+     A   9    ASN   HB3    H   1    2.77    .    
+     A   9    ASN   ND2    N   15   113.1   .    
+     A   9    ASN   HD2y   H   1    7.62    .    
+     A   9    ASN   HD2x   H   1    6.92    .    
+     A   10   GLN   N      N   15   118.7   .    
+     A   10   GLN   H      H   1    8.01    .    
+     A   10   GLN   HA     H   1    4.22    .    
+     A   10   GLN   HBy    H   1    2.40    .    
+     A   10   GLN   HBx    H   1    2.19    .    
+     A   10   GLN   HG2    H   1    2.78    .    
+     A   10   GLN   HG3    H   1    2.78    .    
+     A   10   GLN   NE2    N   15   111.6   .    
+     A   10   GLN   HE2y   H   1    7.50    .    
+     A   10   GLN   HE2x   H   1    6.81    .    
+     A   11   CYS   N      N   15   113.3   .    
+     A   11   CYS   H      H   1    7.58    .    
+     A   11   CYS   HA     H   1    5.33    .    
+     A   11   CYS   HBy    H   1    3.52    .    
+     A   11   CYS   HBx    H   1    2.70    .    
+     A   12   ALA   N      N   15   129.1   .    
+     A   12   ALA   H      H   1    7.32    .    
+     A   12   ALA   HA     H   1    4.57    .    
+     A   12   ALA   HB%    H   1    1.38    .    
+     A   13   VAL   N      N   15   123.7   .    
+     A   13   VAL   H      H   1    7.56    .    
+     A   13   VAL   HA     H   1    4.23    .    
+     A   13   VAL   HB     H   1    1.79    .    
+     A   13   VAL   HGx%   H   1    1.22    .    
+     A   13   VAL   HGy%   H   1    0.94    .    
+     A   14   PRO   HDy    H   1    4.05    .    
+     A   14   PRO   HDx    H   1    3.73    .    
+     A   15   ALA   N      N   15   125.9   .    
+     A   15   ALA   H      H   1    8.52    .    
+     A   15   ALA   HA     H   1    4.22    .    
+     A   15   ALA   HB%    H   1    1.34    .    
+     A   16   LYS   N      N   15   112.8   .    
+     A   16   LYS   H      H   1    8.30    .    
+     A   16   LYS   HA     H   1    4.06    .    
+     A   16   LYS   HB2    H   1    1.74    .    
+     A   16   LYS   HB3    H   1    1.74    .    
+     A   16   LYS   HG2    H   1    1.35    .    
+     A   16   LYS   HG3    H   1    1.35    .    
+     A   17   ASP   N      N   15   118.2   .    
+     A   17   ASP   H      H   1    7.74    .    
+     A   17   ASP   HA     H   1    4.75    .    
+     A   17   ASP   HBy    H   1    2.79    .    
+     A   17   ASP   HBx    H   1    2.33    .    
+     A   18   ARG   N      N   15   119.7   .    
+     A   18   ARG   H      H   1    6.90    .    
+     A   18   ARG   HA     H   1    4.18    .    
+     A   18   ARG   HBy    H   1    1.50    .    
+     A   18   ARG   HBx    H   1    1.15    .    
+     A   18   ARG   HGy    H   1    1.60    .    
+     A   18   ARG   HGx    H   1    0.42    .    
+     A   18   ARG   HDy    H   1    2.33    .    
+     A   18   ARG   HDx    H   1    1.82    .    
+     A   18   ARG   NE     N   15   107.7   .    
+     A   18   ARG   HE     H   1    5.49    .    
+     A   19   VAL   N      N   15   126.4   .    
+     A   19   VAL   H      H   1    9.65    .    
+     A   19   VAL   HA     H   1    4.17    .    
+     A   19   VAL   HB     H   1    1.99    .    
+     A   19   VAL   HG1%   H   1    0.99    .    
+     A   19   VAL   HG2%   H   1    0.99    .    
+     A   20   ASP   N      N   15   126.6   .    
+     A   20   ASP   H      H   1    8.67    .    
+     A   20   ASP   HA     H   1    4.48    .    
+     A   20   ASP   HBy    H   1    2.69    .    
+     A   20   ASP   HBx    H   1    2.54    .    
+     A   21   CYS   N      N   15   125.5   .    
+     A   21   CYS   H      H   1    8.99    .    
+     A   21   CYS   HA     H   1    4.36    .    
+     A   21   CYS   HBy    H   1    3.32    .    
+     A   21   CYS   HBx    H   1    2.91    .    
+     A   22   GLY   N      N   15   107.0   .    
+     A   22   GLY   H      H   1    8.94    .    
+     A   22   GLY   HA2    H   1    3.68    .    
+     A   22   GLY   HA3    H   1    3.68    .    
+     A   23   TYR   N      N   15   120.0   .    
+     A   23   TYR   H      H   1    7.56    .    
+     A   23   TYR   HA     H   1    4.95    .    
+     A   23   TYR   HD1    H   1    6.95    .    
+     A   23   TYR   HD2    H   1    6.95    .    
+     A   24   PRO   HDx    H   1    3.70    .    
+     A   25   HIS   N      N   15   115.7   .    
+     A   25   HIS   H      H   1    8.41    .    
+     A   25   HIS   HA     H   1    4.49    .    
+     A   25   HIS   HB2    H   1    3.31    .    
+     A   25   HIS   HB3    H   1    3.31    .    
+     A   26   VAL   N      N   15   117.8   .    
+     A   26   VAL   H      H   1    7.41    .    
+     A   26   VAL   HA     H   1    4.28    .    
+     A   26   VAL   HB     H   1    1.89    .    
+     A   26   VAL   HG1%   H   1    1.04    .    
+     A   26   VAL   HG2%   H   1    1.04    .    
+     A   27   THR   N      N   15   114.5   .    
+     A   27   THR   H      H   1    7.67    .    
+     A   27   THR   HA     H   1    4.66    .    
+     A   27   THR   HB     H   1    4.30    .    
+     A   27   THR   HG2%   H   1    1.06    .    
+     A   28   PRO   HA     H   1    3.25    .    
+     A   28   PRO   HDx    H   1    3.60    .    
+     A   29   LYS   N      N   15   115.7   .    
+     A   29   LYS   H      H   1    7.67    .    
+     A   29   LYS   HA     H   1    3.90    .    
+     A   29   LYS   HBy    H   1    1.75    .    
+     A   29   LYS   HBx    H   1    1.61    .    
+     A   29   LYS   HG2    H   1    1.35    .    
+     A   29   LYS   HG3    H   1    1.35    .    
+     A   30   GLU   N      N   15   119.5   .    
+     A   30   GLU   H      H   1    7.47    .    
+     A   30   GLU   HA     H   1    3.98    .    
+     A   30   GLU   HBy    H   1    2.08    .    
+     A   30   GLU   HBx    H   1    1.88    .    
+     A   30   GLU   HG2    H   1    2.23    .    
+     A   30   GLU   HG3    H   1    2.23    .    
+     A   31   CYS   N      N   15   118.0   .    
+     A   31   CYS   H      H   1    8.38    .    
+     A   31   CYS   HA     H   1    3.89    .    
+     A   31   CYS   HBy    H   1    3.36    .    
+     A   31   CYS   HBx    H   1    3.10    .    
+     A   32   ASN   N      N   15   117.4   .    
+     A   32   ASN   H      H   1    8.21    .    
+     A   32   ASN   HA     H   1    4.87    .    
+     A   32   ASN   HBy    H   1    3.89    .    
+     A   32   ASN   HBx    H   1    2.78    .    
+     A   32   ASN   ND2    N   15   109.7   .    
+     A   32   ASN   HD2y   H   1    7.75    .    
+     A   32   ASN   HD2x   H   1    7.12    .    
+     A   33   ASN   N      N   15   121.3   .    
+     A   33   ASN   H      H   1    8.55    .    
+     A   33   ASN   HA     H   1    4.49    .    
+     A   33   ASN   HBy    H   1    2.95    .    
+     A   33   ASN   HBx    H   1    2.83    .    
+     A   33   ASN   ND2    N   15   110.6   .    
+     A   33   ASN   HD2y   H   1    7.49    .    
+     A   33   ASN   HD2x   H   1    6.70    .    
+     A   34   ARG   N      N   15   117.5   .    
+     A   34   ARG   H      H   1    7.44    .    
+     A   34   ARG   HA     H   1    4.32    .    
+     A   34   ARG   HBy    H   1    2.06    .    
+     A   34   ARG   HBx    H   1    1.80    .    
+     A   34   ARG   HGy    H   1    1.65    .    
+     A   34   ARG   HGx    H   1    1.51    .    
+     A   34   ARG   HD2    H   1    2.72    .    
+     A   34   ARG   HD3    H   1    2.72    .    
+     A   35   GLY   N      N   15   107.2   .    
+     A   35   GLY   H      H   1    8.05    .    
+     A   35   GLY   HAy    H   1    4.12    .    
+     A   35   GLY   HAx    H   1    3.71    .    
+     A   36   CYS   N      N   15   117.0   .    
+     A   36   CYS   H      H   1    7.59    .    
+     A   36   CYS   HA     H   1    4.64    .    
+     A   37   CYS   N      N   15   120.3   .    
+     A   37   CYS   H      H   1    8.55    .    
+     A   37   CYS   HA     H   1    4.12    .    
+     A   37   CYS   HBy    H   1    2.17    .    
+     A   37   CYS   HBx    H   1    1.03    .    
+     A   38   PHE   N      N   15   121.8   .    
+     A   38   PHE   H      H   1    8.50    .    
+     A   38   PHE   HA     H   1    5.99    .    
+     A   38   PHE   HBy    H   1    3.08    .    
+     A   38   PHE   HBx    H   1    2.64    .    
+     A   38   PHE   HD1    H   1    7.12    .    
+     A   38   PHE   HD2    H   1    7.12    .    
+     A   38   PHE   HE1    H   1    7.38    .    
+     A   38   PHE   HE2    H   1    7.38    .    
+     A   39   ASP   N      N   15   128.3   .    
+     A   39   ASP   H      H   1    9.08    .    
+     A   39   ASP   HA     H   1    4.54    .    
+     A   39   ASP   HBy    H   1    3.04    .    
+     A   39   ASP   HBx    H   1    2.85    .    
+     A   41   ARG   N      N   15   120.2   .    
+     A   41   ARG   H      H   1    7.76    .    
+     A   41   ARG   HA     H   1    3.84    .    
+     A   41   ARG   HB2    H   1    1.92    .    
+     A   41   ARG   HB3    H   1    1.92    .    
+     A   41   ARG   HGy    H   1    1.80    .    
+     A   41   ARG   HGx    H   1    1.72    .    
+     A   41   ARG   HD2    H   1    3.16    .    
+     A   41   ARG   HD3    H   1    3.16    .    
+     A   42   ILE   N      N   15   119.5   .    
+     A   42   ILE   H      H   1    8.09    .    
+     A   42   ILE   HA     H   1    4.63    .    
+     A   42   ILE   HB     H   1    1.67    .    
+     A   42   ILE   HG2%   H   1    0.86    .    
+     A   42   ILE   HG1y   H   1    1.37    .    
+     A   42   ILE   HG1x   H   1    0.97    .    
+     A   42   ILE   HD1%   H   1    0.70    .    
+     A   43   PRO   HA     H   1    4.77    .    
+     A   43   PRO   HBy    H   1    2.41    .    
+     A   43   PRO   HBx    H   1    2.01    .    
+     A   43   PRO   HGx    H   1    2.10    .    
+     A   44   GLY   N      N   15   107.7   .    
+     A   44   GLY   H      H   1    8.71    .    
+     A   44   GLY   HAy    H   1    3.99    .    
+     A   44   GLY   HAx    H   1    3.64    .    
+     A   45   VAL   N      N   15   113.7   .    
+     A   45   VAL   H      H   1    7.12    .    
+     A   45   VAL   HA     H   1    4.68    .    
+     A   45   VAL   HGx%   H   1    0.81    .    
+     A   45   VAL   HGy%   H   1    0.67    .    
+     A   46   PRO   HA     H   1    4.17    .    
+     A   46   PRO   HBy    H   1    2.34    .    
+     A   46   PRO   HBx    H   1    1.63    .    
+     A   46   PRO   HGy    H   1    1.92    .    
+     A   46   PRO   HGx    H   1    1.85    .    
+     A   46   PRO   HDy    H   1    3.75    .    
+     A   46   PRO   HDx    H   1    3.38    .    
+     A   47   TRP   N      N   15   124.1   .    
+     A   47   TRP   H      H   1    8.16    .    
+     A   47   TRP   HA     H   1    5.06    .    
+     A   47   TRP   NE1    N   15   126.9   .    
+     A   47   TRP   HD1    H   1    7.12    .    
+     A   47   TRP   HE3    H   1    7.73    .    
+     A   47   TRP   HE1    H   1    9.72    .    
+     A   47   TRP   HZ3    H   1    7.31    .    
+     A   47   TRP   HZ2    H   1    7.44    .    
+     A   48   CYS   N      N   15   118.3   .    
+     A   48   CYS   H      H   1    8.47    .    
+     A   48   CYS   HA     H   1    6.04    .    
+     A   48   CYS   HBy    H   1    3.55    .    
+     A   48   CYS   HBx    H   1    2.75    .    
+     A   49   PHE   N      N   15   124.7   .    
+     A   49   PHE   H      H   1    9.15    .    
+     A   49   PHE   HA     H   1    5.84    .    
+     A   49   PHE   HBy    H   1    3.11    .    
+     A   49   PHE   HBx    H   1    2.54    .    
+     A   49   PHE   HD1    H   1    7.30    .    
+     A   49   PHE   HD2    H   1    6.86    .    
+     A   50   LYS   N      N   15   121.6   .    
+     A   50   LYS   H      H   1    8.42    .    
+     A   50   LYS   HA     H   1    4.53    .    
+     A   50   LYS   HB2    H   1    2.00    .    
+     A   50   LYS   HB3    H   1    2.00    .    
+     A   50   LYS   HG2    H   1    1.59    .    
+     A   50   LYS   HG3    H   1    1.59    .    
+     A   50   LYS   HD2    H   1    1.78    .    
+     A   50   LYS   HD3    H   1    1.78    .    
+     A   50   LYS   HE2    H   1    3.11    .    
+     A   50   LYS   HE3    H   1    3.11    .    
+     A   51   PRO   HA     H   1    4.76    .    
+     A   51   PRO   HDy    H   1    3.84    .    
+     A   51   PRO   HDx    H   1    3.73    .    
+     A   52   LEU   N      N   15   120.0   .    
+     A   52   LEU   H      H   1    8.61    .    
+     A   52   LEU   HA     H   1    4.21    .    
+     A   52   LEU   HB2    H   1    1.77    .    
+     A   52   LEU   HB3    H   1    1.77    .    
+     A   52   LEU   HD1%   H   1    0.95    .    
+     A   52   LEU   HD2%   H   1    0.95    .    
+     A   53   GLN   N      N   15   122.5   .    
+     A   53   GLN   H      H   1    8.38    .    
+     A   53   GLN   HA     H   1    4.27    .    
+     A   53   GLN   HBy    H   1    2.03    .    
+     A   53   GLN   HBx    H   1    1.89    .    
+     A   53   GLN   HGy    H   1    2.38    .    
+     A   53   GLN   HGx    H   1    2.23    .    
+     A   53   GLN   NE2    N   15   112.6   .    
+     A   53   GLN   HE2y   H   1    7.52    .    
+     A   53   GLN   HE2x   H   1    6.83    .    
+     A   54   GLU   N      N   15   120.9   .    
+     A   54   GLU   H      H   1    8.34    .    
+     A   54   GLU   HA     H   1    4.29    .    
+     A   54   GLU   HBy    H   1    2.09    .    
+     A   54   GLU   HBx    H   1    1.97    .    
+     A   55   ALA   N      N   15   125.3   .    
+     A   55   ALA   H      H   1    8.27    .    
+     A   55   ALA   HA     H   1    4.28    .    
+     A   55   ALA   HB%    H   1    1.33    .    
+     A   56   GLU   N      N   15   121.2   .    
+     A   56   GLU   H      H   1    8.48    .    
+     A   57   CYS   N      N   15   120.1   .    
+     A   57   CYS   H      H   1    8.38    .    
+     A   57   CYS   HA     H   1    4.67    .    
+     A   57   CYS   HBy    H   1    3.06    .    
+     A   57   CYS   HBx    H   1    2.94    .    
+     A   58   THR   N      N   15   116.5   .    
+     A   58   THR   H      H   1    8.11    .    
+     A   58   THR   HA     H   1    4.34    .    
+     A   58   THR   HB     H   1    4.13    .    
+     A   58   THR   HG2%   H   1    1.13    .    
+     A   59   PHE   N      N   15   127.6   .    
+     A   59   PHE   H      H   1    7.75    .    
+     A   59   PHE   HA     H   1    4.44    .    
+     A   59   PHE   HBy    H   1    3.13    .    
+     A   59   PHE   HBx    H   1    2.91    .    
+
+   stop_
+
+save_
+
+save_CYANA_distance_restraints_1
+   _nef_distance_restraint_list.sf_category       nef_distance_restraint_list
+   _nef_distance_restraint_list.sf_framecode      CYANA_distance_restraints_1
+   _nef_distance_restraint_list.restraint_origin  noe
+   _nef_distance_restraint_list.potential_type    upper-bound-parabolic
+
+   loop_
+      _nef_distance_restraint.index
+      _nef_distance_restraint.restraint_id
+      _nef_distance_restraint.restraint_combination_id
+      _nef_distance_restraint.chain_code_1
+      _nef_distance_restraint.sequence_code_1
+      _nef_distance_restraint.residue_name_1
+      _nef_distance_restraint.atom_name_1
+      _nef_distance_restraint.chain_code_2
+      _nef_distance_restraint.sequence_code_2
+      _nef_distance_restraint.residue_name_2
+      _nef_distance_restraint.atom_name_2
+      _nef_distance_restraint.weight
+      _nef_distance_restraint.target_value
+      _nef_distance_restraint.target_value_uncertainty
+      _nef_distance_restraint.lower_linear_limit
+      _nef_distance_restraint.lower_limit
+      _nef_distance_restraint.upper_limit
+      _nef_distance_restraint.upper_linear_limit
+
+     1     1     .   A   3    TYR   H      A   3    TYR   HA     1.0   .   .   .   .   5.01    .    
+     2     2     .   A   3    TYR   H      A   3    TYR   HBy    1.0   .   .   .   .   4.86    .    
+     3     2     .   A   3    TYR   H      A   3    TYR   HBx    1.0   .   .   .   .   4.86    .    
+     4     3     .   A   3    TYR   H      A   3    TYR   HD1    1.0   .   .   .   .   8.14    .    
+     5     3     .   A   3    TYR   H      A   3    TYR   HD2    1.0   .   .   .   .   8.14    .    
+     6     4     .   A   3    TYR   HA     A   3    TYR   HBy    1.0   .   .   .   .   3.84    .    
+     7     4     .   A   3    TYR   HA     A   3    TYR   HBx    1.0   .   .   .   .   3.84    .    
+     8     5     .   A   3    TYR   HA     A   3    TYR   HD1    1.0   .   .   .   .   8.14    .    
+     9     5     .   A   3    TYR   HA     A   3    TYR   HD2    1.0   .   .   .   .   8.14    .    
+     10    6     .   A   3    TYR   HA     A   4    VAL   H      1.0   .   .   .   .   4.14    .    
+     11    7     .   A   3    TYR   HBy    A   3    TYR   HD1    1.0   .   .   .   .   9.02    .    
+     12    7     .   A   3    TYR   HBy    A   3    TYR   HD2    1.0   .   .   .   .   9.02    .    
+     13    7     .   A   3    TYR   HBx    A   3    TYR   HD1    1.0   .   .   .   .   9.02    .    
+     14    7     .   A   3    TYR   HBx    A   3    TYR   HD2    1.0   .   .   .   .   9.02    .    
+     15    8     .   A   3    TYR   HBy    A   3    TYR   HEx    1.0   .   .   .   .   9.01    .    
+     16    8     .   A   3    TYR   HBy    A   3    TYR   HEy    1.0   .   .   .   .   9.01    .    
+     17    8     .   A   3    TYR   HBx    A   3    TYR   HEx    1.0   .   .   .   .   9.01    .    
+     18    8     .   A   3    TYR   HBx    A   3    TYR   HEy    1.0   .   .   .   .   9.01    .    
+     19    9     .   A   3    TYR   HBy    A   4    VAL   H      1.0   .   .   .   .   5.51    .    
+     20    9     .   A   3    TYR   HBx    A   4    VAL   H      1.0   .   .   .   .   5.51    .    
+     21    10    .   A   3    TYR   HD1    A   3    TYR   HEx    1.0   .   .   .   .   10.27   .    
+     22    10    .   A   3    TYR   HD1    A   3    TYR   HEy    1.0   .   .   .   .   10.27   .    
+     23    10    .   A   3    TYR   HD2    A   3    TYR   HEx    1.0   .   .   .   .   10.27   .    
+     24    10    .   A   3    TYR   HD2    A   3    TYR   HEy    1.0   .   .   .   .   10.27   .    
+     25    11    .   A   4    VAL   H      A   4    VAL   HA     1.0   .   .   .   .   4.18    .    
+     26    12    .   A   4    VAL   H      A   4    VAL   HB     1.0   .   .   .   .   3.68    .    
+     27    13    .   A   4    VAL   H      A   4    VAL   HG1%   1.0   .   .   .   .   6.65    .    
+     28    13    .   A   4    VAL   H      A   4    VAL   HG2%   1.0   .   .   .   .   6.65    .    
+     29    14    .   A   4    VAL   H      A   5    GLY   H      1.0   .   .   .   .   4.86    .    
+     30    15    .   A   4    VAL   H      A   5    GLY   HAy    1.0   .   .   .   .   5.09    .    
+     31    15    .   A   4    VAL   H      A   5    GLY   HAx    1.0   .   .   .   .   5.09    .    
+     32    16    .   A   4    VAL   HA     A   4    VAL   HB     1.0   .   .   .   .   3.64    .    
+     33    17    .   A   4    VAL   HA     A   4    VAL   HG1%   1.0   .   .   .   .   5.13    .    
+     34    17    .   A   4    VAL   HA     A   4    VAL   HG2%   1.0   .   .   .   .   4.1     .    
+     35    18    .   A   4    VAL   HA     A   5    GLY   H      1.0   .   .   .   .   3.11    .    
+     36    19    .   A   4    VAL   HA     A   6    LEU   H      1.0   .   .   .   .   5.43    .    
+     37    20    .   A   4    VAL   HB     A   4    VAL   HG1%   1.0   .   .   .   .   4.41    .    
+     38    20    .   A   4    VAL   HB     A   4    VAL   HG2%   1.0   .   .   .   .   5.32    .    
+     39    21    .   A   4    VAL   HB     A   5    GLY   H      1.0   .   .   .   .   4.82    .    
+     40    22    .   A   5    GLY   H      A   5    GLY   HAy    1.0   .   .   .   .   3.53    .    
+     41    22    .   A   5    GLY   H      A   5    GLY   HAx    1.0   .   .   .   .   3.45    .    
+     42    23    .   A   5    GLY   HAy    A   6    LEU   H      1.0   .   .   .   .   3.15    .    
+     43    24    .   A   5    GLY   HAy    A   6    LEU   HA     1.0   .   .   .   .   5.0     .    
+     44    25    .   A   5    GLY   HAy    A   6    LEU   HB3    1.0   .   .   .   .   5.0     .    
+     45    26    .   A   5    GLY   HAx    A   6    LEU   H      1.0   .   .   .   .   3.38    .    
+     46    27    .   A   5    GLY   HAx    A   6    LEU   HA     1.0   .   .   .   .   5.0     .    
+     47    28    .   A   5    GLY   HAx    A   6    LEU   HB3    1.0   .   .   .   .   5.0     .    
+     48    29    .   A   6    LEU   H      A   6    LEU   HA     1.0   .   .   .   .   3.91    .    
+     49    30    .   A   6    LEU   H      A   6    LEU   HB2    1.0   .   .   .   .   3.26    .    
+     50    30    .   A   6    LEU   H      A   6    LEU   HB3    1.0   .   .   .   .   3.72    .    
+     51    31    .   A   6    LEU   H      A   6    LEU   HG     1.0   .   .   .   .   3.76    .    
+     52    32    .   A   6    LEU   H      A   6    LEU   HD1%   1.0   .   .   .   .   8.13    .    
+     53    32    .   A   6    LEU   H      A   6    LEU   HD2%   1.0   .   .   .   .   8.13    .    
+     54    33    .   A   6    LEU   HA     A   6    LEU   HB2    1.0   .   .   .   .   2.66    .    
+     55    33    .   A   6    LEU   HA     A   6    LEU   HB3    1.0   .   .   .   .   3.0     .    
+     56    34    .   A   6    LEU   HA     A   6    LEU   HD1%   1.0   .   .   .   .   5.47    .    
+     57    34    .   A   6    LEU   HA     A   6    LEU   HD2%   1.0   .   .   .   .   5.47    .    
+     58    35    .   A   6    LEU   HB2    A   6    LEU   HD1%   1.0   .   .   .   .   5.36    .    
+     59    35    .   A   6    LEU   HB2    A   6    LEU   HD2%   1.0   .   .   .   .   5.36    .    
+     60    35    .   A   6    LEU   HB3    A   6    LEU   HD1%   1.0   .   .   .   .   6.12    .    
+     61    35    .   A   6    LEU   HB3    A   6    LEU   HD2%   1.0   .   .   .   .   6.12    .    
+     62    36    .   A   6    LEU   HG     A   6    LEU   HD1%   1.0   .   .   .   .   4.48    .    
+     63    36    .   A   6    LEU   HG     A   6    LEU   HD2%   1.0   .   .   .   .   4.48    .    
+     64    37    .   A   7    SER   H      A   7    SER   HA     1.0   .   .   .   .   3.3     .    
+     65    38    .   A   7    SER   H      A   7    SER   HBx    1.0   .   .   .   .   4.1     .    
+     66    38    .   A   7    SER   H      A   7    SER   HBy    1.0   .   .   .   .   4.44    .    
+     67    39    .   A   7    SER   HA     A   7    SER   HBx    1.0   .   .   .   .   2.43    .    
+     68    39    .   A   7    SER   HA     A   7    SER   HBy    1.0   .   .   .   .   2.66    .    
+     69    40    .   A   7    SER   HA     A   8    ALA   H      1.0   .   .   .   .   3.57    .    
+     70    41    .   A   7    SER   HA     A   8    ALA   HB%    1.0   .   .   .   .   5.58    .    
+     71    42    .   A   7    SER   HBx    A   7    SER   HBy    1.0   .   .   .   .   2.58    .    
+     72    43    .   A   8    ALA   H      A   8    ALA   HA     1.0   .   .   .   .   4.1     .    
+     73    44    .   A   8    ALA   H      A   8    ALA   HB%    1.0   .   .   .   .   6.08    .    
+     74    45    .   A   8    ALA   HA     A   8    ALA   HB%    1.0   .   .   .   .   3.76    .    
+     75    46    .   A   8    ALA   HA     A   9    ASN   H      1.0   .   .   .   .   4.86    .    
+     76    47    .   A   8    ALA   HA     A   11   CYS   HBy    1.0   .   .   .   .   4.78    .    
+     77    47    .   A   8    ALA   HA     A   11   CYS   HBx    1.0   .   .   .   .   5.01    .    
+     78    48    .   A   9    ASN   H      A   9    ASN   HA     1.0   .   .   .   .   4.71    .    
+     79    49    .   A   9    ASN   H      A   9    ASN   HB2    1.0   .   .   .   .   5.28    .    
+     80    49    .   A   9    ASN   H      A   9    ASN   HB3    1.0   .   .   .   .   5.28    .    
+     81    50    .   A   9    ASN   HA     A   10   GLN   H      1.0   .   .   .   .   3.49    .    
+     82    51    .   A   9    ASN   HA     A   12   ALA   H      1.0   .   .   .   .   4.1     .    
+     83    52    .   A   9    ASN   HB2    A   10   GLN   H      1.0   .   .   .   .   4.9     .    
+     84    52    .   A   9    ASN   HB3    A   10   GLN   H      1.0   .   .   .   .   4.9     .    
+     85    53    .   A   10   GLN   H      A   10   GLN   HA     1.0   .   .   .   .   3.45    .    
+     86    54    .   A   10   GLN   H      A   10   GLN   HBy    1.0   .   .   .   .   3.34    .    
+     87    54    .   A   10   GLN   H      A   10   GLN   HBx    1.0   .   .   .   .   3.38    .    
+     88    55    .   A   10   GLN   H      A   10   GLN   HG2    1.0   .   .   .   .   5.66    .    
+     89    55    .   A   10   GLN   H      A   10   GLN   HG3    1.0   .   .   .   .   5.66    .    
+     90    56    .   A   10   GLN   H      A   11   CYS   H      1.0   .   .   .   .   3.34    .    
+     91    57    .   A   10   GLN   H      A   12   ALA   H      1.0   .   .   .   .   5.32    .    
+     92    58    .   A   10   GLN   HA     A   10   GLN   HBy    1.0   .   .   .   .   2.62    .    
+     93    59    .   A   10   GLN   HA     A   10   GLN   HG2    1.0   .   .   .   .   4.94    .    
+     94    59    .   A   10   GLN   HA     A   10   GLN   HG3    1.0   .   .   .   .   4.94    .    
+     95    60    .   A   10   GLN   HA     A   10   GLN   HE2y   1.0   .   .   .   .   6.0     .    
+     96    60    .   A   10   GLN   HA     A   10   GLN   HE2x   1.0   .   .   .   .   6.0     .    
+     97    61    .   A   10   GLN   HA     A   11   CYS   H      1.0   .   .   .   .   3.83    .    
+     98    62    .   A   10   GLN   HA     A   12   ALA   H      1.0   .   .   .   .   3.95    .    
+     99    63    .   A   10   GLN   HA     A   51   PRO   HA     1.0   .   .   .   .   4.48    .    
+     100   64    .   A   10   GLN   HA     A   52   LEU   HD1%   1.0   .   .   .   .   3.72    .    
+     101   65    .   A   10   GLN   HBy    A   10   GLN   HG2    1.0   .   .   .   .   4.9     .    
+     102   65    .   A   10   GLN   HBy    A   10   GLN   HG3    1.0   .   .   .   .   4.9     .    
+     103   66    .   A   10   GLN   HBy    A   10   GLN   HE2y   1.0   .   .   .   .   6.0     .    
+     104   66    .   A   10   GLN   HBy    A   10   GLN   HE2x   1.0   .   .   .   .   6.0     .    
+     105   66    .   A   10   GLN   HBx    A   10   GLN   HE2y   1.0   .   .   .   .   6.0     .    
+     106   66    .   A   10   GLN   HBx    A   10   GLN   HE2x   1.0   .   .   .   .   6.0     .    
+     107   67    .   A   10   GLN   HBx    A   11   CYS   H      1.0   .   .   .   .   4.06    .    
+     108   68    .   A   10   GLN   HBx    A   52   LEU   H      1.0   .   .   .   .   4.75    .    
+     109   69    .   A   10   GLN   HG2    A   10   GLN   HE2y   1.0   .   .   .   .   5.74    .    
+     110   69    .   A   10   GLN   HG3    A   10   GLN   HE2y   1.0   .   .   .   .   5.74    .    
+     111   69    .   A   10   GLN   HG2    A   10   GLN   HE2x   1.0   .   .   .   .   6.15    .    
+     112   69    .   A   10   GLN   HG3    A   10   GLN   HE2x   1.0   .   .   .   .   6.15    .    
+     113   70    .   A   10   GLN   HE2y   A   10   GLN   HE2x   1.0   .   .   .   .   2.24    .    
+     114   71    .   A   11   CYS   H      A   11   CYS   HA     1.0   .   .   .   .   3.64    .    
+     115   72    .   A   11   CYS   H      A   11   CYS   HBy    1.0   .   .   .   .   3.23    .    
+     116   72    .   A   11   CYS   H      A   11   CYS   HBx    1.0   .   .   .   .   3.57    .    
+     117   73    .   A   11   CYS   H      A   12   ALA   H      1.0   .   .   .   .   2.88    .    
+     118   74    .   A   11   CYS   HA     A   11   CYS   HBy    1.0   .   .   .   .   3.53    .    
+     119   74    .   A   11   CYS   HA     A   11   CYS   HBx    1.0   .   .   .   .   2.88    .    
+     120   75    .   A   11   CYS   HA     A   12   ALA   H      1.0   .   .   .   .   3.61    .    
+     121   76    .   A   11   CYS   HA     A   13   VAL   HB     1.0   .   .   .   .   5.7     .    
+     122   77    .   A   11   CYS   HA     A   13   VAL   HGy%   1.0   .   .   .   .   5.24    .    
+     123   78    .   A   11   CYS   HA     A   37   CYS   HBx    1.0   .   .   .   .   5.28    .    
+     124   79    .   A   11   CYS   HA     A   49   PHE   HZ     1.0   .   .   .   .   4.67    .    
+     125   80    .   A   11   CYS   HA     A   51   PRO   HA     1.0   .   .   .   .   3.49    .    
+     126   81    .   A   11   CYS   HA     A   52   LEU   H      1.0   .   .   .   .   4.02    .    
+     127   82    .   A   11   CYS   HBy    A   11   CYS   HBx    1.0   .   .   .   .   2.58    .    
+     128   83    .   A   11   CYS   HBy    A   37   CYS   HBx    1.0   .   .   .   .   3.83    .    
+     129   84    .   A   11   CYS   HBy    A   49   PHE   HZ     1.0   .   .   .   .   3.83    .    
+     130   85    .   A   11   CYS   HBx    A   37   CYS   HBy    1.0   .   .   .   .   4.25    .    
+     131   85    .   A   11   CYS   HBx    A   37   CYS   HBx    1.0   .   .   .   .   4.67    .    
+     132   86    .   A   11   CYS   HBx    A   49   PHE   HEx    1.0   .   .   .   .   4.97    .    
+     133   87    .   A   12   ALA   H      A   12   ALA   HA     1.0   .   .   .   .   3.3     .    
+     134   88    .   A   12   ALA   H      A   12   ALA   HB%    1.0   .   .   .   .   4.22    .    
+     135   89    .   A   12   ALA   H      A   13   VAL   HGx%   1.0   .   .   .   .   5.77    .    
+     136   90    .   A   12   ALA   H      A   51   PRO   HA     1.0   .   .   .   .   5.2     .    
+     137   91    .   A   12   ALA   HA     A   12   ALA   HB%    1.0   .   .   .   .   3.27    .    
+     138   92    .   A   12   ALA   HA     A   13   VAL   H      1.0   .   .   .   .   3.0     .    
+     139   93    .   A   12   ALA   HB%    A   13   VAL   H      1.0   .   .   .   .   5.01    .    
+     140   94    .   A   13   VAL   H      A   13   VAL   HA     1.0   .   .   .   .   3.45    .    
+     141   95    .   A   13   VAL   H      A   13   VAL   HB     1.0   .   .   .   .   3.26    .    
+     142   96    .   A   13   VAL   H      A   13   VAL   HGx%   1.0   .   .   .   .   5.43    .    
+     143   96    .   A   13   VAL   H      A   13   VAL   HGy%   1.0   .   .   .   .   4.79    .    
+     144   97    .   A   13   VAL   HA     A   13   VAL   HB     1.0   .   .   .   .   3.57    .    
+     145   98    .   A   13   VAL   HA     A   13   VAL   HGx%   1.0   .   .   .   .   3.65    .    
+     146   98    .   A   13   VAL   HA     A   13   VAL   HGy%   1.0   .   .   .   .   3.95    .    
+     147   99    .   A   13   VAL   HA     A   14   PRO   HDy    1.0   .   .   .   .   4.29    .    
+     148   99    .   A   13   VAL   HA     A   14   PRO   HDx    1.0   .   .   .   .   3.38    .    
+     149   100   .   A   13   VAL   HA     A   52   LEU   HB2    1.0   .   .   .   .   3.42    .    
+     150   101   .   A   13   VAL   HB     A   13   VAL   HGx%   1.0   .   .   .   .   3.34    .    
+     151   101   .   A   13   VAL   HB     A   13   VAL   HGy%   1.0   .   .   .   .   3.34    .    
+     152   102   .   A   13   VAL   HB     A   49   PHE   HZ     1.0   .   .   .   .   5.0     .    
+     153   103   .   A   13   VAL   HB     A   49   PHE   HD2    1.0   .   .   .   .   4.82    .    
+     154   104   .   A   13   VAL   HGx%   A   13   VAL   HGy%   1.0   .   .   .   .   5.05    .    
+     155   105   .   A   13   VAL   HGx%   A   14   PRO   HDy    1.0   .   .   .   .   3.91    .    
+     156   105   .   A   13   VAL   HGx%   A   14   PRO   HDx    1.0   .   .   .   .   4.06    .    
+     157   106   .   A   13   VAL   HGx%   A   17   ASP   HBy    1.0   .   .   .   .   4.03    .    
+     158   107   .   A   13   VAL   HGx%   A   18   ARG   H      1.0   .   .   .   .   5.39    .    
+     159   108   .   A   13   VAL   HGx%   A   53   GLN   H      1.0   .   .   .   .   5.55    .    
+     160   109   .   A   13   VAL   HGy%   A   14   PRO   HDy    1.0   .   .   .   .   5.13    .    
+     161   109   .   A   13   VAL   HGy%   A   14   PRO   HDx    1.0   .   .   .   .   5.62    .    
+     162   110   .   A   13   VAL   HGy%   A   49   PHE   HZ     1.0   .   .   .   .   4.94    .    
+     163   111   .   A   13   VAL   HGy%   A   49   PHE   HD2    1.0   .   .   .   .   5.09    .    
+     164   112   .   A   13   VAL   HGy%   A   51   PRO   HA     1.0   .   .   .   .   4.67    .    
+     165   113   .   A   13   VAL   HGy%   A   52   LEU   H      1.0   .   .   .   .   5.13    .    
+     166   114   .   A   13   VAL   HGy%   A   52   LEU   HA     1.0   .   .   .   .   3.95    .    
+     167   115   .   A   13   VAL   HGy%   A   52   LEU   HB2    1.0   .   .   .   .   4.6     .    
+     168   115   .   A   13   VAL   HGy%   A   52   LEU   HB3    1.0   .   .   .   .   4.37    .    
+     169   116   .   A   14   PRO   HA     A   14   PRO   HBx    1.0   .   .   .   .   3.53    .    
+     170   116   .   A   14   PRO   HA     A   14   PRO   HBy    1.0   .   .   .   .   3.53    .    
+     171   117   .   A   14   PRO   HA     A   14   PRO   HGy    1.0   .   .   .   .   3.04    .    
+     172   117   .   A   14   PRO   HA     A   14   PRO   HGx    1.0   .   .   .   .   2.81    .    
+     173   118   .   A   14   PRO   HA     A   14   PRO   HDy    1.0   .   .   .   .   4.67    .    
+     174   118   .   A   14   PRO   HA     A   14   PRO   HDx    1.0   .   .   .   .   3.57    .    
+     175   119   .   A   14   PRO   HA     A   15   ALA   HB%    1.0   .   .   .   .   4.86    .    
+     176   120   .   A   14   PRO   HBx    A   14   PRO   HGy    1.0   .   .   .   .   3.65    .    
+     177   120   .   A   14   PRO   HBy    A   14   PRO   HGy    1.0   .   .   .   .   3.65    .    
+     178   120   .   A   14   PRO   HBx    A   14   PRO   HGx    1.0   .   .   .   .   3.08    .    
+     179   120   .   A   14   PRO   HBy    A   14   PRO   HGx    1.0   .   .   .   .   3.08    .    
+     180   121   .   A   14   PRO   HBx    A   14   PRO   HDy    1.0   .   .   .   .   4.75    .    
+     181   121   .   A   14   PRO   HBy    A   14   PRO   HDy    1.0   .   .   .   .   4.75    .    
+     182   121   .   A   14   PRO   HBx    A   14   PRO   HDx    1.0   .   .   .   .   4.79    .    
+     183   121   .   A   14   PRO   HBy    A   14   PRO   HDx    1.0   .   .   .   .   4.79    .    
+     184   122   .   A   14   PRO   HGx    A   15   ALA   H      1.0   .   .   .   .   5.2     .    
+     185   123   .   A   14   PRO   HDy    A   14   PRO   HDx    1.0   .   .   .   .   2.28    .    
+     186   124   .   A   15   ALA   H      A   15   ALA   HA     1.0   .   .   .   .   3.26    .    
+     187   125   .   A   15   ALA   H      A   15   ALA   HB%    1.0   .   .   .   .   4.41    .    
+     188   126   .   A   15   ALA   H      A   16   LYS   H      1.0   .   .   .   .   4.48    .    
+     189   127   .   A   15   ALA   H      A   18   ARG   HDx    1.0   .   .   .   .   4.67    .    
+     190   128   .   A   15   ALA   HA     A   15   ALA   HB%    1.0   .   .   .   .   3.72    .    
+     191   129   .   A   15   ALA   HA     A   16   LYS   H      1.0   .   .   .   .   3.95    .    
+     192   130   .   A   15   ALA   HA     A   17   ASP   H      1.0   .   .   .   .   4.59    .    
+     193   131   .   A   15   ALA   HA     A   18   ARG   H      1.0   .   .   .   .   3.57    .    
+     194   132   .   A   15   ALA   HA     A   18   ARG   HBy    1.0   .   .   .   .   4.25    .    
+     195   133   .   A   15   ALA   HA     A   18   ARG   HGy    1.0   .   .   .   .   4.59    .    
+     196   133   .   A   15   ALA   HA     A   18   ARG   HGx    1.0   .   .   .   .   4.18    .    
+     197   134   .   A   15   ALA   HA     A   18   ARG   HDx    1.0   .   .   .   .   4.78    .    
+     198   134   .   A   15   ALA   HA     A   18   ARG   HDy    1.0   .   .   .   .   4.86    .    
+     199   135   .   A   15   ALA   HA     A   18   ARG   HE     1.0   .   .   .   .   5.24    .    
+     200   136   .   A   15   ALA   HA     A   45   VAL   HB     1.0   .   .   .   .   4.59    .    
+     201   137   .   A   15   ALA   HB%    A   45   VAL   HA     1.0   .   .   .   .   5.77    .    
+     202   138   .   A   15   ALA   HB%    A   45   VAL   HB     1.0   .   .   .   .   5.36    .    
+     203   139   .   A   16   LYS   H      A   16   LYS   HA     1.0   .   .   .   .   3.0     .    
+     204   140   .   A   16   LYS   H      A   16   LYS   HB2    1.0   .   .   .   .   3.5     .    
+     205   140   .   A   16   LYS   H      A   16   LYS   HB3    1.0   .   .   .   .   3.07    .    
+     206   141   .   A   16   LYS   H      A   16   LYS   HG3    1.0   .   .   .   .   3.0     .    
+     207   141   .   A   16   LYS   H      A   16   LYS   HG2    1.0   .   .   .   .   4.25    .    
+     208   142   .   A   16   LYS   H      A   16   LYS   HDx    1.0   .   .   .   .   5.16    .    
+     209   143   .   A   16   LYS   H      A   17   ASP   H      1.0   .   .   .   .   3.15    .    
+     210   144   .   A   16   LYS   H      A   17   ASP   HA     1.0   .   .   .   .   5.0     .    
+     211   145   .   A   16   LYS   H      A   17   ASP   HBx    1.0   .   .   .   .   4.14    .    
+     212   146   .   A   16   LYS   H      A   18   ARG   H      1.0   .   .   .   .   4.44    .    
+     213   147   .   A   16   LYS   HA     A   16   LYS   HB2    1.0   .   .   .   .   2.31    .    
+     214   147   .   A   16   LYS   HA     A   16   LYS   HB3    1.0   .   .   .   .   2.58    .    
+     215   148   .   A   16   LYS   HA     A   16   LYS   HG3    1.0   .   .   .   .   4.14    .    
+     216   148   .   A   16   LYS   HA     A   16   LYS   HG2    1.0   .   .   .   .   5.35    .    
+     217   149   .   A   16   LYS   HA     A   16   LYS   HDx    1.0   .   .   .   .   4.1     .    
+     218   150   .   A   16   LYS   HA     A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     219   150   .   A   16   LYS   HA     A   16   LYS   HEy    1.0   .   .   .   .   6.0     .    
+     220   151   .   A   16   LYS   HA     A   17   ASP   H      1.0   .   .   .   .   3.8     .    
+     221   152   .   A   16   LYS   HA     A   17   ASP   HBx    1.0   .   .   .   .   5.0     .    
+     222   153   .   A   16   LYS   HA     A   18   ARG   H      1.0   .   .   .   .   4.06    .    
+     223   154   .   A   16   LYS   HB2    A   16   LYS   HG2    1.0   .   .   .   .   3.99    .    
+     224   155   .   A   16   LYS   HB2    A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     225   155   .   A   16   LYS   HB2    A   16   LYS   HEy    1.0   .   .   .   .   5.43    .    
+     226   156   .   A   16   LYS   HB2    A   17   ASP   HA     1.0   .   .   .   .   4.78    .    
+     227   157   .   A   16   LYS   HB3    A   16   LYS   HG3    1.0   .   .   .   .   2.62    .    
+     228   157   .   A   16   LYS   HB3    A   16   LYS   HG2    1.0   .   .   .   .   3.38    .    
+     229   158   .   A   16   LYS   HB3    A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     230   158   .   A   16   LYS   HB3    A   16   LYS   HEy    1.0   .   .   .   .   6.0     .    
+     231   159   .   A   16   LYS   HG3    A   16   LYS   HG2    1.0   .   .   .   .   2.2     .    
+     232   160   .   A   16   LYS   HG3    A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     233   160   .   A   16   LYS   HG3    A   16   LYS   HEy    1.0   .   .   .   .   4.4     .    
+     234   161   .   A   16   LYS   HG3    A   17   ASP   H      1.0   .   .   .   .   4.63    .    
+     235   162   .   A   16   LYS   HG2    A   16   LYS   HDx    1.0   .   .   .   .   4.02    .    
+     236   163   .   A   16   LYS   HG2    A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     237   163   .   A   16   LYS   HG2    A   16   LYS   HEy    1.0   .   .   .   .   4.86    .    
+     238   164   .   A   16   LYS   HDx    A   16   LYS   HEx    1.0   .   .   .   .   6.0     .    
+     239   164   .   A   16   LYS   HDx    A   16   LYS   HEy    1.0   .   .   .   .   3.83    .    
+     240   165   .   A   17   ASP   H      A   17   ASP   HA     1.0   .   .   .   .   3.45    .    
+     241   166   .   A   17   ASP   H      A   17   ASP   HBy    1.0   .   .   .   .   3.26    .    
+     242   166   .   A   17   ASP   H      A   17   ASP   HBx    1.0   .   .   .   .   3.23    .    
+     243   167   .   A   17   ASP   H      A   18   ARG   H      1.0   .   .   .   .   3.15    .    
+     244   168   .   A   17   ASP   H      A   18   ARG   HA     1.0   .   .   .   .   4.63    .    
+     245   169   .   A   17   ASP   H      A   18   ARG   HBy    1.0   .   .   .   .   4.94    .    
+     246   169   .   A   17   ASP   H      A   18   ARG   HBx    1.0   .   .   .   .   5.85    .    
+     247   170   .   A   17   ASP   H      A   18   ARG   HDx    1.0   .   .   .   .   4.44    .    
+     248   171   .   A   17   ASP   HA     A   17   ASP   HBy    1.0   .   .   .   .   2.81    .    
+     249   171   .   A   17   ASP   HA     A   17   ASP   HBx    1.0   .   .   .   .   2.58    .    
+     250   172   .   A   17   ASP   HA     A   18   ARG   H      1.0   .   .   .   .   3.38    .    
+     251   173   .   A   17   ASP   HBy    A   17   ASP   HBx    1.0   .   .   .   .   2.28    .    
+     252   174   .   A   17   ASP   HBx    A   18   ARG   H      1.0   .   .   .   .   3.53    .    
+     253   175   .   A   17   ASP   HBx    A   18   ARG   HA     1.0   .   .   .   .   5.0     .    
+     254   176   .   A   18   ARG   H      A   18   ARG   HA     1.0   .   .   .   .   3.26    .    
+     255   177   .   A   18   ARG   H      A   18   ARG   HBy    1.0   .   .   .   .   2.96    .    
+     256   177   .   A   18   ARG   H      A   18   ARG   HBx    1.0   .   .   .   .   3.5     .    
+     257   178   .   A   18   ARG   H      A   18   ARG   HGy    1.0   .   .   .   .   3.49    .    
+     258   178   .   A   18   ARG   H      A   18   ARG   HGx    1.0   .   .   .   .   4.4     .    
+     259   179   .   A   18   ARG   H      A   18   ARG   HDx    1.0   .   .   .   .   6.0     .    
+     260   179   .   A   18   ARG   H      A   18   ARG   HDy    1.0   .   .   .   .   4.14    .    
+     261   180   .   A   18   ARG   H      A   18   ARG   HE     1.0   .   .   .   .   5.62    .    
+     262   181   .   A   18   ARG   H      A   19   VAL   H      1.0   .   .   .   .   5.01    .    
+     263   182   .   A   18   ARG   HA     A   18   ARG   HBy    1.0   .   .   .   .   3.38    .    
+     264   182   .   A   18   ARG   HA     A   18   ARG   HBx    1.0   .   .   .   .   3.45    .    
+     265   183   .   A   18   ARG   HA     A   18   ARG   HGx    1.0   .   .   .   .   3.23    .    
+     266   184   .   A   18   ARG   HA     A   18   ARG   HDy    1.0   .   .   .   .   4.67    .    
+     267   185   .   A   18   ARG   HA     A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     268   186   .   A   18   ARG   HA     A   19   VAL   H      1.0   .   .   .   .   3.5     .    
+     269   187   .   A   18   ARG   HA     A   49   PHE   HA     1.0   .   .   .   .   5.0     .    
+     270   188   .   A   18   ARG   HA     A   49   PHE   HBy    1.0   .   .   .   .   5.24    .    
+     271   189   .   A   18   ARG   HBy    A   18   ARG   HBx    1.0   .   .   .   .   2.96    .    
+     272   190   .   A   18   ARG   HBy    A   18   ARG   HGx    1.0   .   .   .   .   3.95    .    
+     273   191   .   A   18   ARG   HBy    A   18   ARG   HDx    1.0   .   .   .   .   4.0     .    
+     274   192   .   A   18   ARG   HBy    A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     275   193   .   A   18   ARG   HBy    A   19   VAL   H      1.0   .   .   .   .   4.78    .    
+     276   194   .   A   18   ARG   HBy    A   20   ASP   HA     1.0   .   .   .   .   5.0     .    
+     277   195   .   A   18   ARG   HBy    A   45   VAL   HA     1.0   .   .   .   .   5.43    .    
+     278   196   .   A   18   ARG   HBy    A   46   PRO   HGy    1.0   .   .   .   .   5.43    .    
+     279   197   .   A   18   ARG   HBy    A   46   PRO   HDy    1.0   .   .   .   .   4.86    .    
+     280   197   .   A   18   ARG   HBy    A   46   PRO   HDx    1.0   .   .   .   .   4.25    .    
+     281   198   .   A   18   ARG   HBy    A   49   PHE   HBy    1.0   .   .   .   .   4.18    .    
+     282   198   .   A   18   ARG   HBy    A   49   PHE   HBx    1.0   .   .   .   .   5.13    .    
+     283   199   .   A   18   ARG   HBx    A   18   ARG   HGy    1.0   .   .   .   .   3.64    .    
+     284   199   .   A   18   ARG   HBx    A   18   ARG   HGx    1.0   .   .   .   .   4.06    .    
+     285   200   .   A   18   ARG   HBx    A   18   ARG   HDx    1.0   .   .   .   .   3.99    .    
+     286   200   .   A   18   ARG   HBx    A   18   ARG   HDy    1.0   .   .   .   .   3.99    .    
+     287   201   .   A   18   ARG   HBx    A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     288   202   .   A   18   ARG   HBx    A   19   VAL   H      1.0   .   .   .   .   4.56    .    
+     289   203   .   A   18   ARG   HBx    A   49   PHE   HA     1.0   .   .   .   .   5.43    .    
+     290   204   .   A   18   ARG   HBx    A   49   PHE   HBx    1.0   .   .   .   .   4.29    .    
+     291   205   .   A   18   ARG   HGy    A   18   ARG   HGx    1.0   .   .   .   .   2.85    .    
+     292   206   .   A   18   ARG   HGy    A   18   ARG   HE     1.0   .   .   .   .   5.7     .    
+     293   207   .   A   18   ARG   HGy    A   49   PHE   HBx    1.0   .   .   .   .   3.49    .    
+     294   208   .   A   18   ARG   HGy    A   49   PHE   HD1    1.0   .   .   .   .   5.39    .    
+     295   209   .   A   18   ARG   HGx    A   18   ARG   HDx    1.0   .   .   .   .   3.23    .    
+     296   209   .   A   18   ARG   HGx    A   18   ARG   HDy    1.0   .   .   .   .   2.81    .    
+     297   210   .   A   18   ARG   HGx    A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     298   211   .   A   18   ARG   HDx    A   18   ARG   HDy    1.0   .   .   .   .   2.2     .    
+     299   212   .   A   18   ARG   HDx    A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     300   213   .   A   18   ARG   HDx    A   45   VAL   HGy%   1.0   .   .   .   .   5.89    .    
+     301   214   .   A   18   ARG   HDy    A   18   ARG   HE     1.0   .   .   .   .   6.0     .    
+     302   215   .   A   18   ARG   HDy    A   49   PHE   HA     1.0   .   .   .   .   5.16    .    
+     303   216   .   A   18   ARG   HDy    A   49   PHE   HBx    1.0   .   .   .   .   3.49    .    
+     304   217   .   A   19   VAL   H      A   19   VAL   HA     1.0   .   .   .   .   3.68    .    
+     305   218   .   A   19   VAL   H      A   19   VAL   HB     1.0   .   .   .   .   3.64    .    
+     306   219   .   A   19   VAL   H      A   19   VAL   HG1%   1.0   .   .   .   .   5.66    .    
+     307   219   .   A   19   VAL   H      A   19   VAL   HG2%   1.0   .   .   .   .   5.66    .    
+     308   220   .   A   19   VAL   H      A   20   ASP   H      1.0   .   .   .   .   5.51    .    
+     309   221   .   A   19   VAL   HA     A   19   VAL   HB     1.0   .   .   .   .   3.11    .    
+     310   222   .   A   19   VAL   HA     A   19   VAL   HG1%   1.0   .   .   .   .   3.68    .    
+     311   222   .   A   19   VAL   HA     A   19   VAL   HG2%   1.0   .   .   .   .   3.57    .    
+     312   223   .   A   19   VAL   HA     A   20   ASP   H      1.0   .   .   .   .   3.5     .    
+     313   224   .   A   19   VAL   HA     A   20   ASP   HBy    1.0   .   .   .   .   4.4     .    
+     314   225   .   A   19   VAL   HB     A   19   VAL   HG1%   1.0   .   .   .   .   3.34    .    
+     315   225   .   A   19   VAL   HB     A   19   VAL   HG2%   1.0   .   .   .   .   3.65    .    
+     316   226   .   A   19   VAL   HB     A   20   ASP   H      1.0   .   .   .   .   3.72    .    
+     317   227   .   A   19   VAL   HB     A   49   PHE   HA     1.0   .   .   .   .   5.92    .    
+     318   228   .   A   19   VAL   HG2%   A   20   ASP   H      1.0   .   .   .   .   4.44    .    
+     319   229   .   A   19   VAL   HG2%   A   21   CYS   HA     1.0   .   .   .   .   5.74    .    
+     320   230   .   A   19   VAL   HG2%   A   49   PHE   HBx    1.0   .   .   .   .   5.58    .    
+     321   231   .   A   20   ASP   H      A   20   ASP   HA     1.0   .   .   .   .   3.34    .    
+     322   232   .   A   20   ASP   H      A   20   ASP   HBy    1.0   .   .   .   .   2.85    .    
+     323   232   .   A   20   ASP   H      A   20   ASP   HBx    1.0   .   .   .   .   3.5     .    
+     324   233   .   A   20   ASP   H      A   21   CYS   H      1.0   .   .   .   .   4.67    .    
+     325   234   .   A   20   ASP   H      A   46   PRO   HGy    1.0   .   .   .   .   5.24    .    
+     326   234   .   A   20   ASP   H      A   46   PRO   HGx    1.0   .   .   .   .   5.16    .    
+     327   235   .   A   20   ASP   H      A   49   PHE   HA     1.0   .   .   .   .   5.35    .    
+     328   236   .   A   20   ASP   HA     A   20   ASP   HBy    1.0   .   .   .   .   3.15    .    
+     329   236   .   A   20   ASP   HA     A   20   ASP   HBx    1.0   .   .   .   .   2.66    .    
+     330   237   .   A   20   ASP   HA     A   21   CYS   H      1.0   .   .   .   .   2.73    .    
+     331   238   .   A   20   ASP   HA     A   22   GLY   H      1.0   .   .   .   .   3.53    .    
+     332   239   .   A   20   ASP   HA     A   46   PRO   HBy    1.0   .   .   .   .   3.87    .    
+     333   239   .   A   20   ASP   HA     A   46   PRO   HBx    1.0   .   .   .   .   3.95    .    
+     334   240   .   A   20   ASP   HA     A   46   PRO   HGy    1.0   .   .   .   .   3.99    .    
+     335   240   .   A   20   ASP   HA     A   46   PRO   HGx    1.0   .   .   .   .   4.56    .    
+     336   241   .   A   20   ASP   HA     A   49   PHE   HA     1.0   .   .   .   .   3.0     .    
+     337   242   .   A   20   ASP   HA     A   49   PHE   HBy    1.0   .   .   .   .   4.9     .    
+     338   243   .   A   20   ASP   HBy    A   20   ASP   HBx    1.0   .   .   .   .   2.2     .    
+     339   244   .   A   20   ASP   HBy    A   21   CYS   H      1.0   .   .   .   .   4.21    .    
+     340   245   .   A   20   ASP   HBy    A   22   GLY   H      1.0   .   .   .   .   4.59    .    
+     341   246   .   A   20   ASP   HBy    A   46   PRO   HA     1.0   .   .   .   .   5.39    .    
+     342   247   .   A   20   ASP   HBy    A   46   PRO   HBy    1.0   .   .   .   .   3.95    .    
+     343   248   .   A   20   ASP   HBy    A   46   PRO   HGy    1.0   .   .   .   .   4.29    .    
+     344   249   .   A   20   ASP   HBx    A   46   PRO   HDy    1.0   .   .   .   .   5.73    .    
+     345   249   .   A   20   ASP   HBx    A   46   PRO   HDx    1.0   .   .   .   .   5.89    .    
+     346   250   .   A   21   CYS   H      A   21   CYS   HA     1.0   .   .   .   .   3.38    .    
+     347   251   .   A   21   CYS   H      A   21   CYS   HBx    1.0   .   .   .   .   3.15    .    
+     348   251   .   A   21   CYS   H      A   21   CYS   HBy    1.0   .   .   .   .   3.23    .    
+     349   252   .   A   21   CYS   H      A   22   GLY   HA2    1.0   .   .   .   .   5.43    .    
+     350   252   .   A   21   CYS   H      A   22   GLY   HA3    1.0   .   .   .   .   5.43    .    
+     351   253   .   A   21   CYS   H      A   49   PHE   HA     1.0   .   .   .   .   3.11    .    
+     352   254   .   A   21   CYS   H      A   49   PHE   HBy    1.0   .   .   .   .   5.73    .    
+     353   255   .   A   21   CYS   H      A   50   LYS   H      1.0   .   .   .   .   4.4     .    
+     354   256   .   A   21   CYS   HA     A   21   CYS   HBx    1.0   .   .   .   .   2.7     .    
+     355   256   .   A   21   CYS   HA     A   21   CYS   HBy    1.0   .   .   .   .   2.81    .    
+     356   257   .   A   21   CYS   HA     A   22   GLY   H      1.0   .   .   .   .   3.72    .    
+     357   258   .   A   21   CYS   HA     A   49   PHE   HA     1.0   .   .   .   .   4.48    .    
+     358   259   .   A   21   CYS   HA     A   50   LYS   H      1.0   .   .   .   .   5.28    .    
+     359   260   .   A   21   CYS   HA     A   50   LYS   HG2    1.0   .   .   .   .   3.23    .    
+     360   260   .   A   21   CYS   HA     A   50   LYS   HG3    1.0   .   .   .   .   3.23    .    
+     361   261   .   A   21   CYS   HA     A   50   LYS   HE3    1.0   .   .   .   .   3.99    .    
+     362   262   .   A   21   CYS   HBx    A   21   CYS   HBy    1.0   .   .   .   .   2.5     .    
+     363   263   .   A   21   CYS   HBx    A   22   GLY   H      1.0   .   .   .   .   5.0     .    
+     364   264   .   A   21   CYS   HBx    A   49   PHE   HA     1.0   .   .   .   .   4.18    .    
+     365   265   .   A   21   CYS   HBy    A   22   GLY   H      1.0   .   .   .   .   3.87    .    
+     366   266   .   A   21   CYS   HBy    A   49   PHE   HA     1.0   .   .   .   .   5.01    .    
+     367   267   .   A   21   CYS   HBy    A   50   LYS   H      1.0   .   .   .   .   5.73    .    
+     368   268   .   A   22   GLY   H      A   22   GLY   HA2    1.0   .   .   .   .   3.99    .    
+     369   268   .   A   22   GLY   H      A   22   GLY   HA3    1.0   .   .   .   .   3.99    .    
+     370   269   .   A   22   GLY   H      A   23   TYR   H      1.0   .   .   .   .   3.42    .    
+     371   270   .   A   22   GLY   H      A   49   PHE   HA     1.0   .   .   .   .   4.29    .    
+     372   271   .   A   22   GLY   HA2    A   23   TYR   H      1.0   .   .   .   .   4.25    .    
+     373   271   .   A   22   GLY   HA3    A   23   TYR   H      1.0   .   .   .   .   4.25    .    
+     374   272   .   A   23   TYR   H      A   23   TYR   HA     1.0   .   .   .   .   3.64    .    
+     375   273   .   A   23   TYR   H      A   23   TYR   HBy    1.0   .   .   .   .   4.14    .    
+     376   273   .   A   23   TYR   H      A   23   TYR   HBx    1.0   .   .   .   .   3.53    .    
+     377   274   .   A   23   TYR   H      A   23   TYR   HD1    1.0   .   .   .   .   6.77    .    
+     378   274   .   A   23   TYR   H      A   23   TYR   HD2    1.0   .   .   .   .   6.77    .    
+     379   275   .   A   23   TYR   H      A   26   VAL   HG2%   1.0   .   .   .   .   5.7     .    
+     380   276   .   A   23   TYR   HA     A   23   TYR   HBy    1.0   .   .   .   .   2.54    .    
+     381   276   .   A   23   TYR   HA     A   23   TYR   HBx    1.0   .   .   .   .   2.9     .    
+     382   277   .   A   23   TYR   HA     A   23   TYR   HD1    1.0   .   .   .   .   7.19    .    
+     383   277   .   A   23   TYR   HA     A   23   TYR   HD2    1.0   .   .   .   .   7.19    .    
+     384   278   .   A   23   TYR   HA     A   23   TYR   HEx    1.0   .   .   .   .   8.13    .    
+     385   278   .   A   23   TYR   HA     A   23   TYR   HEy    1.0   .   .   .   .   8.13    .    
+     386   279   .   A   23   TYR   HA     A   24   PRO   HGx    1.0   .   .   .   .   5.0     .    
+     387   279   .   A   23   TYR   HA     A   24   PRO   HGy    1.0   .   .   .   .   5.0     .    
+     388   280   .   A   23   TYR   HA     A   24   PRO   HDx    1.0   .   .   .   .   2.2     .    
+     389   281   .   A   23   TYR   HBy    A   23   TYR   HBx    1.0   .   .   .   .   2.2     .    
+     390   282   .   A   23   TYR   HBy    A   23   TYR   HD1    1.0   .   .   .   .   7.23    .    
+     391   282   .   A   23   TYR   HBy    A   23   TYR   HD2    1.0   .   .   .   .   7.23    .    
+     392   283   .   A   23   TYR   HBy    A   23   TYR   HEx    1.0   .   .   .   .   8.13    .    
+     393   283   .   A   23   TYR   HBy    A   23   TYR   HEy    1.0   .   .   .   .   8.13    .    
+     394   284   .   A   23   TYR   HBy    A   24   PRO   HDx    1.0   .   .   .   .   3.3     .    
+     395   284   .   A   23   TYR   HBy    A   24   PRO   HDy    1.0   .   .   .   .   4.44    .    
+     396   285   .   A   23   TYR   HBx    A   23   TYR   HD1    1.0   .   .   .   .   7.23    .    
+     397   285   .   A   23   TYR   HBx    A   23   TYR   HD2    1.0   .   .   .   .   7.23    .    
+     398   286   .   A   23   TYR   HBx    A   23   TYR   HEx    1.0   .   .   .   .   8.13    .    
+     399   286   .   A   23   TYR   HBx    A   23   TYR   HEy    1.0   .   .   .   .   8.13    .    
+     400   287   .   A   23   TYR   HBx    A   24   PRO   HDx    1.0   .   .   .   .   3.3     .    
+     401   287   .   A   23   TYR   HBx    A   24   PRO   HDy    1.0   .   .   .   .   5.0     .    
+     402   288   .   A   23   TYR   HD1    A   23   TYR   HEx    1.0   .   .   .   .   7.35    .    
+     403   288   .   A   23   TYR   HD1    A   23   TYR   HEy    1.0   .   .   .   .   7.35    .    
+     404   288   .   A   23   TYR   HD2    A   23   TYR   HEx    1.0   .   .   .   .   7.35    .    
+     405   288   .   A   23   TYR   HD2    A   23   TYR   HEy    1.0   .   .   .   .   7.35    .    
+     406   289   .   A   24   PRO   HGx    A   24   PRO   HDx    1.0   .   .   .   .   2.47    .    
+     407   290   .   A   24   PRO   HGx    A   25   HIS   HD2    1.0   .   .   .   .   5.66    .    
+     408   291   .   A   24   PRO   HGy    A   24   PRO   HDx    1.0   .   .   .   .   2.2     .    
+     409   291   .   A   24   PRO   HGy    A   24   PRO   HDy    1.0   .   .   .   .   3.68    .    
+     410   292   .   A   24   PRO   HDy    A   26   VAL   HG2%   1.0   .   .   .   .   5.0     .    
+     411   293   .   A   25   HIS   H      A   25   HIS   HA     1.0   .   .   .   .   4.14    .    
+     412   294   .   A   25   HIS   H      A   25   HIS   HB3    1.0   .   .   .   .   5.05    .    
+     413   295   .   A   25   HIS   HA     A   25   HIS   HB2    1.0   .   .   .   .   3.72    .    
+     414   295   .   A   25   HIS   HA     A   25   HIS   HB3    1.0   .   .   .   .   2.43    .    
+     415   296   .   A   25   HIS   HA     A   25   HIS   HD2    1.0   .   .   .   .   5.05    .    
+     416   297   .   A   25   HIS   HA     A   25   HIS   HE1    1.0   .   .   .   .   6.5     .    
+     417   298   .   A   25   HIS   HA     A   26   VAL   H      1.0   .   .   .   .   3.15    .    
+     418   299   .   A   25   HIS   HB3    A   25   HIS   HD2    1.0   .   .   .   .   3.26    .    
+     419   300   .   A   25   HIS   HB3    A   25   HIS   HE1    1.0   .   .   .   .   6.0     .    
+     420   301   .   A   25   HIS   HD2    A   25   HIS   HE1    1.0   .   .   .   .   6.0     .    
+     421   302   .   A   25   HIS   HD2    A   34   ARG   HBx    1.0   .   .   .   .   4.37    .    
+     422   303   .   A   25   HIS   HD2    A   34   ARG   HGy    1.0   .   .   .   .   4.02    .    
+     423   304   .   A   26   VAL   H      A   26   VAL   HA     1.0   .   .   .   .   3.19    .    
+     424   305   .   A   26   VAL   H      A   26   VAL   HB     1.0   .   .   .   .   3.5     .    
+     425   306   .   A   26   VAL   H      A   26   VAL   HG2%   1.0   .   .   .   .   3.91    .    
+     426   307   .   A   26   VAL   HA     A   26   VAL   HB     1.0   .   .   .   .   2.35    .    
+     427   308   .   A   26   VAL   HA     A   26   VAL   HG1%   1.0   .   .   .   .   3.57    .    
+     428   308   .   A   26   VAL   HA     A   26   VAL   HG2%   1.0   .   .   .   .   3.65    .    
+     429   309   .   A   26   VAL   HA     A   27   THR   H      1.0   .   .   .   .   2.88    .    
+     430   310   .   A   26   VAL   HB     A   26   VAL   HG1%   1.0   .   .   .   .   3.76    .    
+     431   310   .   A   26   VAL   HB     A   26   VAL   HG2%   1.0   .   .   .   .   3.57    .    
+     432   311   .   A   26   VAL   HB     A   31   CYS   H      1.0   .   .   .   .   5.0     .    
+     433   312   .   A   26   VAL   HG1%   A   26   VAL   HG2%   1.0   .   .   .   .   5.74    .    
+     434   313   .   A   26   VAL   HG1%   A   27   THR   H      1.0   .   .   .   .   4.9     .    
+     435   314   .   A   26   VAL   HG1%   A   31   CYS   H      1.0   .   .   .   .   4.98    .    
+     436   315   .   A   26   VAL   HG1%   A   31   CYS   HA     1.0   .   .   .   .   5.36    .    
+     437   316   .   A   26   VAL   HG1%   A   31   CYS   HBy    1.0   .   .   .   .   3.91    .    
+     438   316   .   A   26   VAL   HG2%   A   31   CYS   HBy    1.0   .   .   .   .   4.29    .    
+     439   316   .   A   26   VAL   HG2%   A   31   CYS   HBx    1.0   .   .   .   .   4.98    .    
+     440   317   .   A   26   VAL   HG2%   A   38   PHE   HZ     1.0   .   .   .   .   5.2     .    
+     441   318   .   A   26   VAL   HG2%   A   48   CYS   HBy    1.0   .   .   .   .   3.38    .    
+     442   318   .   A   26   VAL   HG2%   A   48   CYS   HBx    1.0   .   .   .   .   3.3     .    
+     443   319   .   A   27   THR   H      A   27   THR   HA     1.0   .   .   .   .   3.38    .    
+     444   320   .   A   27   THR   H      A   27   THR   HB     1.0   .   .   .   .   4.52    .    
+     445   321   .   A   27   THR   H      A   27   THR   HG2%   1.0   .   .   .   .   7.03    .    
+     446   322   .   A   27   THR   HA     A   27   THR   HG2%   1.0   .   .   .   .   3.42    .    
+     447   323   .   A   27   THR   HA     A   28   PRO   HDx    1.0   .   .   .   .   5.0     .    
+     448   323   .   A   27   THR   HA     A   28   PRO   HDy    1.0   .   .   .   .   2.39    .    
+     449   324   .   A   27   THR   HB     A   28   PRO   HDx    1.0   .   .   .   .   2.66    .    
+     450   324   .   A   27   THR   HB     A   28   PRO   HDy    1.0   .   .   .   .   2.92    .    
+     451   325   .   A   27   THR   HG2%   A   28   PRO   HDx    1.0   .   .   .   .   4.6     .    
+     452   325   .   A   27   THR   HG2%   A   28   PRO   HDy    1.0   .   .   .   .   4.25    .    
+     453   326   .   A   27   THR   HG2%   A   30   GLU   HA     1.0   .   .   .   .   5.47    .    
+     454   327   .   A   28   PRO   HA     A   28   PRO   HBx    1.0   .   .   .   .   2.58    .    
+     455   328   .   A   28   PRO   HA     A   28   PRO   HGy    1.0   .   .   .   .   3.68    .    
+     456   329   .   A   28   PRO   HA     A   30   GLU   H      1.0   .   .   .   .   4.78    .    
+     457   330   .   A   28   PRO   HA     A   38   PHE   HBx    1.0   .   .   .   .   2.66    .    
+     458   330   .   A   28   PRO   HA     A   38   PHE   HBy    1.0   .   .   .   .   3.99    .    
+     459   331   .   A   28   PRO   HA     A   38   PHE   HZ     1.0   .   .   .   .   4.94    .    
+     460   332   .   A   28   PRO   HBx    A   28   PRO   HGy    1.0   .   .   .   .   3.04    .    
+     461   333   .   A   28   PRO   HBx    A   28   PRO   HDx    1.0   .   .   .   .   3.8     .    
+     462   333   .   A   28   PRO   HBx    A   28   PRO   HDy    1.0   .   .   .   .   3.61    .    
+     463   334   .   A   28   PRO   HBx    A   29   LYS   H      1.0   .   .   .   .   5.0     .    
+     464   335   .   A   28   PRO   HBy    A   28   PRO   HGy    1.0   .   .   .   .   3.04    .    
+     465   336   .   A   28   PRO   HGx    A   28   PRO   HGy    1.0   .   .   .   .   2.28    .    
+     466   337   .   A   28   PRO   HGx    A   28   PRO   HDx    1.0   .   .   .   .   3.45    .    
+     467   337   .   A   28   PRO   HGx    A   28   PRO   HDy    1.0   .   .   .   .   2.5     .    
+     468   338   .   A   28   PRO   HGx    A   38   PHE   HZ     1.0   .   .   .   .   5.43    .    
+     469   339   .   A   28   PRO   HGy    A   28   PRO   HDx    1.0   .   .   .   .   3.8     .    
+     470   339   .   A   28   PRO   HGy    A   28   PRO   HDy    1.0   .   .   .   .   3.42    .    
+     471   340   .   A   28   PRO   HGy    A   38   PHE   HZ     1.0   .   .   .   .   5.51    .    
+     472   341   .   A   28   PRO   HDx    A   28   PRO   HDy    1.0   .   .   .   .   2.28    .    
+     473   342   .   A   28   PRO   HDx    A   29   LYS   H      1.0   .   .   .   .   4.94    .    
+     474   343   .   A   28   PRO   HDx    A   38   PHE   HE1    1.0   .   .   .   .   5.47    .    
+     475   344   .   A   28   PRO   HDy    A   29   LYS   H      1.0   .   .   .   .   4.86    .    
+     476   345   .   A   28   PRO   HDy    A   29   LYS   HA     1.0   .   .   .   .   5.77    .    
+     477   346   .   A   29   LYS   H      A   29   LYS   HA     1.0   .   .   .   .   3.26    .    
+     478   347   .   A   29   LYS   H      A   29   LYS   HBy    1.0   .   .   .   .   3.15    .    
+     479   347   .   A   29   LYS   H      A   29   LYS   HBx    1.0   .   .   .   .   3.11    .    
+     480   348   .   A   29   LYS   H      A   30   GLU   H      1.0   .   .   .   .   3.45    .    
+     481   349   .   A   29   LYS   H      A   31   CYS   H      1.0   .   .   .   .   4.44    .    
+     482   350   .   A   29   LYS   HA     A   29   LYS   HBy    1.0   .   .   .   .   2.62    .    
+     483   350   .   A   29   LYS   HA     A   29   LYS   HBx    1.0   .   .   .   .   3.3     .    
+     484   351   .   A   29   LYS   HA     A   29   LYS   HG2    1.0   .   .   .   .   3.3     .    
+     485   351   .   A   29   LYS   HA     A   29   LYS   HG3    1.0   .   .   .   .   3.99    .    
+     486   352   .   A   29   LYS   HA     A   29   LYS   HDx    1.0   .   .   .   .   3.26    .    
+     487   353   .   A   29   LYS   HA     A   29   LYS   HEx    1.0   .   .   .   .   6.69    .    
+     488   353   .   A   29   LYS   HA     A   29   LYS   HEy    1.0   .   .   .   .   6.69    .    
+     489   354   .   A   29   LYS   HA     A   32   ASN   H      1.0   .   .   .   .   3.38    .    
+     490   355   .   A   29   LYS   HA     A   32   ASN   HBy    1.0   .   .   .   .   3.91    .    
+     491   355   .   A   29   LYS   HA     A   32   ASN   HBx    1.0   .   .   .   .   3.91    .    
+     492   356   .   A   29   LYS   HBy    A   29   LYS   HBx    1.0   .   .   .   .   2.43    .    
+     493   357   .   A   29   LYS   HBy    A   29   LYS   HEx    1.0   .   .   .   .   6.88    .    
+     494   357   .   A   29   LYS   HBy    A   29   LYS   HEy    1.0   .   .   .   .   6.88    .    
+     495   357   .   A   29   LYS   HBx    A   29   LYS   HEx    1.0   .   .   .   .   6.88    .    
+     496   357   .   A   29   LYS   HBx    A   29   LYS   HEy    1.0   .   .   .   .   6.88    .    
+     497   358   .   A   29   LYS   HBx    A   30   GLU   H      1.0   .   .   .   .   3.34    .    
+     498   359   .   A   29   LYS   HG2    A   29   LYS   HEx    1.0   .   .   .   .   6.15    .    
+     499   359   .   A   29   LYS   HG2    A   29   LYS   HEy    1.0   .   .   .   .   6.15    .    
+     500   359   .   A   29   LYS   HG3    A   29   LYS   HEx    1.0   .   .   .   .   6.53    .    
+     501   359   .   A   29   LYS   HG3    A   29   LYS   HEy    1.0   .   .   .   .   6.53    .    
+     502   360   .   A   29   LYS   HDx    A   29   LYS   HEx    1.0   .   .   .   .   5.39    .    
+     503   360   .   A   29   LYS   HDx    A   29   LYS   HEy    1.0   .   .   .   .   5.39    .    
+     504   361   .   A   29   LYS   HDx    A   30   GLU   HA     1.0   .   .   .   .   4.44    .    
+     505   362   .   A   30   GLU   H      A   30   GLU   HA     1.0   .   .   .   .   3.15    .    
+     506   363   .   A   30   GLU   H      A   30   GLU   HBy    1.0   .   .   .   .   3.23    .    
+     507   363   .   A   30   GLU   H      A   30   GLU   HBx    1.0   .   .   .   .   3.19    .    
+     508   364   .   A   30   GLU   H      A   30   GLU   HG2    1.0   .   .   .   .   5.39    .    
+     509   364   .   A   30   GLU   H      A   30   GLU   HG3    1.0   .   .   .   .   5.39    .    
+     510   365   .   A   30   GLU   H      A   31   CYS   H      1.0   .   .   .   .   3.11    .    
+     511   366   .   A   30   GLU   H      A   31   CYS   HA     1.0   .   .   .   .   5.0     .    
+     512   367   .   A   30   GLU   HA     A   30   GLU   HBy    1.0   .   .   .   .   2.62    .    
+     513   367   .   A   30   GLU   HA     A   30   GLU   HBx    1.0   .   .   .   .   2.85    .    
+     514   368   .   A   30   GLU   HA     A   30   GLU   HG2    1.0   .   .   .   .   5.47    .    
+     515   368   .   A   30   GLU   HA     A   30   GLU   HG3    1.0   .   .   .   .   5.47    .    
+     516   369   .   A   30   GLU   HA     A   31   CYS   H      1.0   .   .   .   .   3.95    .    
+     517   370   .   A   30   GLU   HA     A   32   ASN   H      1.0   .   .   .   .   5.2     .    
+     518   371   .   A   30   GLU   HA     A   33   ASN   H      1.0   .   .   .   .   3.42    .    
+     519   372   .   A   30   GLU   HA     A   33   ASN   HBx    1.0   .   .   .   .   2.77    .    
+     520   372   .   A   30   GLU   HA     A   33   ASN   HBy    1.0   .   .   .   .   3.0     .    
+     521   373   .   A   30   GLU   HBx    A   33   ASN   H      1.0   .   .   .   .   4.78    .    
+     522   374   .   A   31   CYS   H      A   31   CYS   HA     1.0   .   .   .   .   3.0     .    
+     523   375   .   A   31   CYS   H      A   31   CYS   HBy    1.0   .   .   .   .   3.5     .    
+     524   375   .   A   31   CYS   H      A   31   CYS   HBx    1.0   .   .   .   .   2.92    .    
+     525   376   .   A   31   CYS   H      A   32   ASN   H      1.0   .   .   .   .   3.38    .    
+     526   377   .   A   31   CYS   H      A   32   ASN   HBy    1.0   .   .   .   .   5.2     .    
+     527   377   .   A   31   CYS   H      A   32   ASN   HBx    1.0   .   .   .   .   5.2     .    
+     528   378   .   A   31   CYS   HA     A   31   CYS   HBy    1.0   .   .   .   .   3.04    .    
+     529   378   .   A   31   CYS   HA     A   31   CYS   HBx    1.0   .   .   .   .   2.81    .    
+     530   379   .   A   31   CYS   HA     A   32   ASN   H      1.0   .   .   .   .   3.38    .    
+     531   380   .   A   31   CYS   HA     A   33   ASN   H      1.0   .   .   .   .   3.53    .    
+     532   381   .   A   31   CYS   HA     A   38   PHE   HBy    1.0   .   .   .   .   5.13    .    
+     533   382   .   A   31   CYS   HBy    A   31   CYS   HBx    1.0   .   .   .   .   2.28    .    
+     534   383   .   A   31   CYS   HBy    A   32   ASN   H      1.0   .   .   .   .   5.0     .    
+     535   383   .   A   31   CYS   HBx    A   32   ASN   H      1.0   .   .   .   .   3.11    .    
+     536   384   .   A   31   CYS   HBx    A   32   ASN   HA     1.0   .   .   .   .   4.97    .    
+     537   385   .   A   31   CYS   HBx    A   38   PHE   HBy    1.0   .   .   .   .   3.83    .    
+     538   386   .   A   32   ASN   H      A   32   ASN   HA     1.0   .   .   .   .   3.23    .    
+     539   387   .   A   32   ASN   H      A   32   ASN   HBy    1.0   .   .   .   .   3.91    .    
+     540   387   .   A   32   ASN   H      A   32   ASN   HBx    1.0   .   .   .   .   3.91    .    
+     541   388   .   A   32   ASN   H      A   33   ASN   H      1.0   .   .   .   .   3.26    .    
+     542   389   .   A   32   ASN   H      A   33   ASN   HA     1.0   .   .   .   .   5.09    .    
+     543   390   .   A   32   ASN   H      A   33   ASN   HBx    1.0   .   .   .   .   5.16    .    
+     544   391   .   A   32   ASN   H      A   34   ARG   H      1.0   .   .   .   .   4.06    .    
+     545   392   .   A   32   ASN   HA     A   32   ASN   HBy    1.0   .   .   .   .   3.76    .    
+     546   392   .   A   32   ASN   HA     A   32   ASN   HBx    1.0   .   .   .   .   3.76    .    
+     547   393   .   A   32   ASN   HA     A   33   ASN   H      1.0   .   .   .   .   3.76    .    
+     548   394   .   A   32   ASN   HA     A   34   ARG   H      1.0   .   .   .   .   4.67    .    
+     549   395   .   A   32   ASN   HA     A   35   GLY   H      1.0   .   .   .   .   3.8     .    
+     550   396   .   A   32   ASN   HA     A   35   GLY   HAy    1.0   .   .   .   .   4.71    .    
+     551   397   .   A   32   ASN   HA     A   36   CYS   H      1.0   .   .   .   .   3.76    .    
+     552   398   .   A   32   ASN   HA     A   37   CYS   HA     1.0   .   .   .   .   5.43    .    
+     553   399   .   A   32   ASN   HBy    A   36   CYS   H      1.0   .   .   .   .   4.94    .    
+     554   399   .   A   32   ASN   HBx    A   36   CYS   H      1.0   .   .   .   .   4.94    .    
+     555   400   .   A   33   ASN   H      A   33   ASN   HA     1.0   .   .   .   .   2.96    .    
+     556   401   .   A   33   ASN   H      A   33   ASN   HBx    1.0   .   .   .   .   2.92    .    
+     557   401   .   A   33   ASN   H      A   33   ASN   HBy    1.0   .   .   .   .   3.19    .    
+     558   402   .   A   33   ASN   H      A   34   ARG   H      1.0   .   .   .   .   3.11    .    
+     559   403   .   A   33   ASN   H      A   34   ARG   HA     1.0   .   .   .   .   4.94    .    
+     560   404   .   A   33   ASN   H      A   34   ARG   HBy    1.0   .   .   .   .   4.48    .    
+     561   405   .   A   33   ASN   H      A   35   GLY   H      1.0   .   .   .   .   4.37    .    
+     562   406   .   A   33   ASN   H      A   35   GLY   HAy    1.0   .   .   .   .   5.0     .    
+     563   407   .   A   33   ASN   HA     A   33   ASN   HBx    1.0   .   .   .   .   3.04    .    
+     564   407   .   A   33   ASN   HA     A   33   ASN   HBy    1.0   .   .   .   .   2.47    .    
+     565   408   .   A   33   ASN   HA     A   34   ARG   H      1.0   .   .   .   .   3.83    .    
+     566   409   .   A   33   ASN   HA     A   35   GLY   H      1.0   .   .   .   .   5.0     .    
+     567   410   .   A   33   ASN   HA     A   36   CYS   H      1.0   .   .   .   .   5.16    .    
+     568   411   .   A   33   ASN   HBx    A   33   ASN   HBy    1.0   .   .   .   .   2.2     .    
+     569   412   .   A   33   ASN   HBx    A   34   ARG   H      1.0   .   .   .   .   3.64    .    
+     570   412   .   A   33   ASN   HBy    A   34   ARG   H      1.0   .   .   .   .   3.8     .    
+     571   413   .   A   34   ARG   H      A   34   ARG   HA     1.0   .   .   .   .   3.34    .    
+     572   414   .   A   34   ARG   H      A   34   ARG   HBy    1.0   .   .   .   .   3.15    .    
+     573   414   .   A   34   ARG   H      A   34   ARG   HBx    1.0   .   .   .   .   3.34    .    
+     574   415   .   A   34   ARG   H      A   34   ARG   HGy    1.0   .   .   .   .   4.21    .    
+     575   415   .   A   34   ARG   H      A   34   ARG   HGx    1.0   .   .   .   .   4.82    .    
+     576   416   .   A   34   ARG   H      A   34   ARG   HD2    1.0   .   .   .   .   5.54    .    
+     577   416   .   A   34   ARG   H      A   34   ARG   HD3    1.0   .   .   .   .   6.0     .    
+     578   417   .   A   34   ARG   H      A   35   GLY   H      1.0   .   .   .   .   3.0     .    
+     579   418   .   A   34   ARG   H      A   35   GLY   HAy    1.0   .   .   .   .   4.44    .    
+     580   419   .   A   34   ARG   HA     A   34   ARG   HBy    1.0   .   .   .   .   3.15    .    
+     581   419   .   A   34   ARG   HA     A   34   ARG   HBx    1.0   .   .   .   .   2.58    .    
+     582   420   .   A   34   ARG   HA     A   34   ARG   HGy    1.0   .   .   .   .   3.34    .    
+     583   420   .   A   34   ARG   HA     A   34   ARG   HGx    1.0   .   .   .   .   4.14    .    
+     584   421   .   A   34   ARG   HA     A   34   ARG   HD2    1.0   .   .   .   .   3.49    .    
+     585   421   .   A   34   ARG   HA     A   34   ARG   HD3    1.0   .   .   .   .   3.87    .    
+     586   422   .   A   34   ARG   HA     A   35   GLY   H      1.0   .   .   .   .   3.45    .    
+     587   423   .   A   34   ARG   HBy    A   34   ARG   HBx    1.0   .   .   .   .   2.62    .    
+     588   424   .   A   34   ARG   HBy    A   34   ARG   HGx    1.0   .   .   .   .   2.47    .    
+     589   425   .   A   34   ARG   HBy    A   34   ARG   HD2    1.0   .   .   .   .   4.21    .    
+     590   425   .   A   34   ARG   HBy    A   34   ARG   HD3    1.0   .   .   .   .   3.99    .    
+     591   426   .   A   34   ARG   HBy    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     592   427   .   A   34   ARG   HBy    A   35   GLY   H      1.0   .   .   .   .   4.1     .    
+     593   428   .   A   34   ARG   HBx    A   34   ARG   HGy    1.0   .   .   .   .   2.35    .    
+     594   428   .   A   34   ARG   HBx    A   34   ARG   HGx    1.0   .   .   .   .   2.85    .    
+     595   429   .   A   34   ARG   HBx    A   34   ARG   HD2    1.0   .   .   .   .   3.34    .    
+     596   429   .   A   34   ARG   HBx    A   34   ARG   HD3    1.0   .   .   .   .   3.95    .    
+     597   430   .   A   34   ARG   HBx    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     598   431   .   A   34   ARG   HGy    A   34   ARG   HD2    1.0   .   .   .   .   3.64    .    
+     599   431   .   A   34   ARG   HGy    A   34   ARG   HD3    1.0   .   .   .   .   3.68    .    
+     600   432   .   A   34   ARG   HGy    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     601   433   .   A   34   ARG   HGx    A   34   ARG   HD2    1.0   .   .   .   .   3.72    .    
+     602   433   .   A   34   ARG   HGx    A   34   ARG   HD3    1.0   .   .   .   .   3.53    .    
+     603   434   .   A   34   ARG   HGx    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     604   435   .   A   34   ARG   HD2    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     605   435   .   A   34   ARG   HD3    A   34   ARG   HE     1.0   .   .   .   .   6.0     .    
+     606   436   .   A   35   GLY   H      A   35   GLY   HAx    1.0   .   .   .   .   2.77    .    
+     607   436   .   A   35   GLY   H      A   35   GLY   HAy    1.0   .   .   .   .   2.69    .    
+     608   437   .   A   35   GLY   H      A   36   CYS   H      1.0   .   .   .   .   3.0     .    
+     609   438   .   A   35   GLY   H      A   36   CYS   HBx    1.0   .   .   .   .   4.18    .    
+     610   438   .   A   35   GLY   H      A   36   CYS   HBy    1.0   .   .   .   .   4.78    .    
+     611   439   .   A   35   GLY   HAx    A   35   GLY   HAy    1.0   .   .   .   .   2.5     .    
+     612   440   .   A   35   GLY   HAx    A   36   CYS   H      1.0   .   .   .   .   3.95    .    
+     613   440   .   A   35   GLY   HAy    A   36   CYS   H      1.0   .   .   .   .   3.72    .    
+     614   441   .   A   36   CYS   H      A   36   CYS   HA     1.0   .   .   .   .   2.62    .    
+     615   442   .   A   36   CYS   H      A   36   CYS   HBx    1.0   .   .   .   .   3.42    .    
+     616   442   .   A   36   CYS   H      A   36   CYS   HBy    1.0   .   .   .   .   3.72    .    
+     617   443   .   A   36   CYS   H      A   37   CYS   H      1.0   .   .   .   .   4.75    .    
+     618   444   .   A   36   CYS   HA     A   36   CYS   HBx    1.0   .   .   .   .   2.88    .    
+     619   444   .   A   36   CYS   HA     A   36   CYS   HBy    1.0   .   .   .   .   3.57    .    
+     620   445   .   A   36   CYS   HA     A   37   CYS   H      1.0   .   .   .   .   4.1     .    
+     621   446   .   A   36   CYS   HBx    A   36   CYS   HBy    1.0   .   .   .   .   2.35    .    
+     622   447   .   A   36   CYS   HBx    A   37   CYS   H      1.0   .   .   .   .   3.23    .    
+     623   448   .   A   36   CYS   HBx    A   50   LYS   HA     1.0   .   .   .   .   5.0     .    
+     624   449   .   A   36   CYS   HBy    A   37   CYS   H      1.0   .   .   .   .   3.38    .    
+     625   450   .   A   36   CYS   HBy    A   50   LYS   HA     1.0   .   .   .   .   4.21    .    
+     626   451   .   A   37   CYS   H      A   37   CYS   HA     1.0   .   .   .   .   3.68    .    
+     627   452   .   A   37   CYS   H      A   37   CYS   HBy    1.0   .   .   .   .   3.38    .    
+     628   452   .   A   37   CYS   H      A   37   CYS   HBx    1.0   .   .   .   .   3.61    .    
+     629   453   .   A   37   CYS   H      A   49   PHE   H      1.0   .   .   .   .   3.91    .    
+     630   454   .   A   37   CYS   H      A   51   PRO   HDy    1.0   .   .   .   .   5.77    .    
+     631   455   .   A   37   CYS   HA     A   37   CYS   HBy    1.0   .   .   .   .   2.85    .    
+     632   455   .   A   37   CYS   HA     A   37   CYS   HBx    1.0   .   .   .   .   3.11    .    
+     633   456   .   A   37   CYS   HA     A   38   PHE   H      1.0   .   .   .   .   2.92    .    
+     634   457   .   A   37   CYS   HBy    A   37   CYS   HBx    1.0   .   .   .   .   3.26    .    
+     635   458   .   A   37   CYS   HBy    A   38   PHE   H      1.0   .   .   .   .   3.99    .    
+     636   459   .   A   37   CYS   HBy    A   38   PHE   HA     1.0   .   .   .   .   4.18    .    
+     637   460   .   A   37   CYS   HBy    A   39   ASP   H      1.0   .   .   .   .   5.66    .    
+     638   461   .   A   37   CYS   HBy    A   48   CYS   HA     1.0   .   .   .   .   4.14    .    
+     639   462   .   A   37   CYS   HBx    A   38   PHE   H      1.0   .   .   .   .   4.02    .    
+     640   463   .   A   37   CYS   HBx    A   49   PHE   HD1    1.0   .   .   .   .   5.62    .    
+     641   464   .   A   37   CYS   HBx    A   49   PHE   HZ     1.0   .   .   .   .   3.72    .    
+     642   465   .   A   38   PHE   H      A   38   PHE   HA     1.0   .   .   .   .   3.72    .    
+     643   466   .   A   38   PHE   H      A   38   PHE   HBx    1.0   .   .   .   .   3.42    .    
+     644   466   .   A   38   PHE   H      A   38   PHE   HBy    1.0   .   .   .   .   3.72    .    
+     645   467   .   A   38   PHE   H      A   38   PHE   HD1    1.0   .   .   .   .   7.97    .    
+     646   467   .   A   38   PHE   H      A   38   PHE   HD2    1.0   .   .   .   .   7.97    .    
+     647   468   .   A   38   PHE   HA     A   38   PHE   HBx    1.0   .   .   .   .   2.85    .    
+     648   468   .   A   38   PHE   HA     A   38   PHE   HBy    1.0   .   .   .   .   2.88    .    
+     649   469   .   A   38   PHE   HA     A   38   PHE   HD1    1.0   .   .   .   .   5.58    .    
+     650   469   .   A   38   PHE   HA     A   38   PHE   HD2    1.0   .   .   .   .   5.58    .    
+     651   470   .   A   38   PHE   HA     A   38   PHE   HE1    1.0   .   .   .   .   6.0     .    
+     652   471   .   A   38   PHE   HA     A   39   ASP   H      1.0   .   .   .   .   2.62    .    
+     653   472   .   A   38   PHE   HA     A   48   CYS   HBy    1.0   .   .   .   .   5.51    .    
+     654   472   .   A   38   PHE   HA     A   48   CYS   HBx    1.0   .   .   .   .   4.4     .    
+     655   473   .   A   38   PHE   HBx    A   38   PHE   HBy    1.0   .   .   .   .   3.04    .    
+     656   474   .   A   38   PHE   HBx    A   38   PHE   HD1    1.0   .   .   .   .   5.16    .    
+     657   474   .   A   38   PHE   HBx    A   38   PHE   HD2    1.0   .   .   .   .   5.16    .    
+     658   475   .   A   38   PHE   HBx    A   38   PHE   HE1    1.0   .   .   .   .   6.68    .    
+     659   475   .   A   38   PHE   HBx    A   38   PHE   HE2    1.0   .   .   .   .   6.68    .    
+     660   476   .   A   38   PHE   HBx    A   39   ASP   H      1.0   .   .   .   .   3.99    .    
+     661   477   .   A   38   PHE   HBy    A   38   PHE   HD1    1.0   .   .   .   .   5.54    .    
+     662   477   .   A   38   PHE   HBy    A   38   PHE   HD2    1.0   .   .   .   .   5.54    .    
+     663   478   .   A   38   PHE   HBy    A   38   PHE   HE1    1.0   .   .   .   .   7.44    .    
+     664   478   .   A   38   PHE   HBy    A   38   PHE   HE2    1.0   .   .   .   .   7.44    .    
+     665   479   .   A   38   PHE   HBy    A   39   ASP   H      1.0   .   .   .   .   3.95    .    
+     666   480   .   A   38   PHE   HBy    A   48   CYS   HA     1.0   .   .   .   .   5.81    .    
+     667   481   .   A   38   PHE   HD1    A   38   PHE   HE1    1.0   .   .   .   .   7.58    .    
+     668   481   .   A   38   PHE   HD1    A   38   PHE   HE2    1.0   .   .   .   .   7.58    .    
+     669   481   .   A   38   PHE   HD2    A   38   PHE   HE1    1.0   .   .   .   .   7.58    .    
+     670   481   .   A   38   PHE   HD2    A   38   PHE   HE2    1.0   .   .   .   .   7.58    .    
+     671   482   .   A   38   PHE   HD1    A   38   PHE   HZ     1.0   .   .   .   .   5.54    .    
+     672   482   .   A   38   PHE   HD2    A   38   PHE   HZ     1.0   .   .   .   .   5.54    .    
+     673   483   .   A   38   PHE   HD1    A   47   TRP   HBx    1.0   .   .   .   .   5.16    .    
+     674   484   .   A   38   PHE   HE1    A   48   CYS   HBy    1.0   .   .   .   .   5.05    .    
+     675   485   .   A   38   PHE   HZ     A   39   ASP   HA     1.0   .   .   .   .   5.0     .    
+     676   486   .   A   38   PHE   HZ     A   40   SER   HBx    1.0   .   .   .   .   3.8     .    
+     677   486   .   A   38   PHE   HZ     A   40   SER   HBy    1.0   .   .   .   .   3.8     .    
+     678   487   .   A   39   ASP   H      A   39   ASP   HA     1.0   .   .   .   .   3.49    .    
+     679   488   .   A   39   ASP   H      A   39   ASP   HBx    1.0   .   .   .   .   3.76    .    
+     680   488   .   A   39   ASP   H      A   39   ASP   HBy    1.0   .   .   .   .   3.53    .    
+     681   489   .   A   39   ASP   H      A   40   SER   H      1.0   .   .   .   .   5.13    .    
+     682   490   .   A   39   ASP   H      A   47   TRP   HA     1.0   .   .   .   .   3.87    .    
+     683   491   .   A   39   ASP   H      A   47   TRP   HBx    1.0   .   .   .   .   5.47    .    
+     684   492   .   A   39   ASP   HA     A   39   ASP   HBx    1.0   .   .   .   .   2.96    .    
+     685   492   .   A   39   ASP   HA     A   39   ASP   HBy    1.0   .   .   .   .   3.07    .    
+     686   493   .   A   39   ASP   HA     A   40   SER   H      1.0   .   .   .   .   3.45    .    
+     687   494   .   A   39   ASP   HA     A   41   ARG   H      1.0   .   .   .   .   3.72    .    
+     688   495   .   A   39   ASP   HBx    A   39   ASP   HBy    1.0   .   .   .   .   2.2     .    
+     689   496   .   A   39   ASP   HBx    A   40   SER   H      1.0   .   .   .   .   4.14    .    
+     690   497   .   A   39   ASP   HBx    A   49   PHE   HZ     1.0   .   .   .   .   3.53    .    
+     691   498   .   A   39   ASP   HBx    A   49   PHE   HD1    1.0   .   .   .   .   4.52    .    
+     692   499   .   A   39   ASP   HBy    A   40   SER   H      1.0   .   .   .   .   5.24    .    
+     693   500   .   A   39   ASP   HBy    A   49   PHE   HZ     1.0   .   .   .   .   3.38    .    
+     694   501   .   A   39   ASP   HBy    A   49   PHE   HD1    1.0   .   .   .   .   5.0     .    
+     695   502   .   A   40   SER   H      A   40   SER   HA     1.0   .   .   .   .   3.91    .    
+     696   503   .   A   40   SER   H      A   40   SER   HBx    1.0   .   .   .   .   6.0     .    
+     697   503   .   A   40   SER   H      A   40   SER   HBy    1.0   .   .   .   .   6.0     .    
+     698   504   .   A   40   SER   H      A   41   ARG   H      1.0   .   .   .   .   3.95    .    
+     699   505   .   A   40   SER   H      A   41   ARG   HA     1.0   .   .   .   .   4.97    .    
+     700   506   .   A   40   SER   HA     A   40   SER   HBx    1.0   .   .   .   .   2.28    .    
+     701   506   .   A   40   SER   HA     A   40   SER   HBy    1.0   .   .   .   .   2.43    .    
+     702   507   .   A   40   SER   HA     A   41   ARG   H      1.0   .   .   .   .   3.83    .    
+     703   508   .   A   40   SER   HA     A   42   ILE   H      1.0   .   .   .   .   4.94    .    
+     704   509   .   A   40   SER   HA     A   47   TRP   HA     1.0   .   .   .   .   4.52    .    
+     705   510   .   A   40   SER   HA     A   47   TRP   HD1    1.0   .   .   .   .   3.99    .    
+     706   511   .   A   40   SER   HA     A   47   TRP   HE3    1.0   .   .   .   .   5.77    .    
+     707   512   .   A   40   SER   HA     A   47   TRP   HZ2    1.0   .   .   .   .   3.61    .    
+     708   513   .   A   40   SER   HBx    A   40   SER   HBy    1.0   .   .   .   .   2.96    .    
+     709   514   .   A   40   SER   HBx    A   47   TRP   HE3    1.0   .   .   .   .   4.86    .    
+     710   514   .   A   40   SER   HBy    A   47   TRP   HE3    1.0   .   .   .   .   5.16    .    
+     711   515   .   A   41   ARG   H      A   41   ARG   HA     1.0   .   .   .   .   3.04    .    
+     712   516   .   A   41   ARG   H      A   41   ARG   HB2    1.0   .   .   .   .   3.04    .    
+     713   516   .   A   41   ARG   H      A   41   ARG   HB3    1.0   .   .   .   .   2.92    .    
+     714   517   .   A   41   ARG   H      A   41   ARG   HGy    1.0   .   .   .   .   5.0     .    
+     715   517   .   A   41   ARG   H      A   41   ARG   HGx    1.0   .   .   .   .   5.0     .    
+     716   518   .   A   41   ARG   H      A   41   ARG   HD2    1.0   .   .   .   .   6.0     .    
+     717   518   .   A   41   ARG   H      A   41   ARG   HD3    1.0   .   .   .   .   5.89    .    
+     718   519   .   A   41   ARG   H      A   42   ILE   H      1.0   .   .   .   .   3.64    .    
+     719   520   .   A   41   ARG   HA     A   41   ARG   HB2    1.0   .   .   .   .   2.92    .    
+     720   520   .   A   41   ARG   HA     A   41   ARG   HB3    1.0   .   .   .   .   2.88    .    
+     721   521   .   A   41   ARG   HA     A   41   ARG   HGy    1.0   .   .   .   .   3.04    .    
+     722   521   .   A   41   ARG   HA     A   41   ARG   HGx    1.0   .   .   .   .   3.38    .    
+     723   522   .   A   41   ARG   HA     A   41   ARG   HD2    1.0   .   .   .   .   5.77    .    
+     724   522   .   A   41   ARG   HA     A   41   ARG   HD3    1.0   .   .   .   .   4.86    .    
+     725   523   .   A   41   ARG   HA     A   42   ILE   H      1.0   .   .   .   .   3.8     .    
+     726   524   .   A   41   ARG   HA     A   42   ILE   HG1x   1.0   .   .   .   .   5.09    .    
+     727   525   .   A   41   ARG   HA     A   42   ILE   HD1%   1.0   .   .   .   .   5.66    .    
+     728   526   .   A   41   ARG   HB2    A   41   ARG   HD2    1.0   .   .   .   .   4.02    .    
+     729   526   .   A   41   ARG   HB2    A   41   ARG   HD3    1.0   .   .   .   .   3.19    .    
+     730   527   .   A   41   ARG   HB2    A   42   ILE   H      1.0   .   .   .   .   4.71    .    
+     731   528   .   A   41   ARG   HB3    A   41   ARG   HD2    1.0   .   .   .   .   4.29    .    
+     732   528   .   A   41   ARG   HB3    A   41   ARG   HD3    1.0   .   .   .   .   3.42    .    
+     733   529   .   A   41   ARG   HB3    A   42   ILE   H      1.0   .   .   .   .   4.14    .    
+     734   530   .   A   41   ARG   HB3    A   42   ILE   HG1x   1.0   .   .   .   .   4.29    .    
+     735   531   .   A   41   ARG   HGy    A   41   ARG   HD3    1.0   .   .   .   .   3.61    .    
+     736   531   .   A   41   ARG   HGx    A   41   ARG   HD2    1.0   .   .   .   .   3.57    .    
+     737   531   .   A   41   ARG   HGx    A   41   ARG   HD3    1.0   .   .   .   .   2.88    .    
+     738   532   .   A   42   ILE   H      A   42   ILE   HA     1.0   .   .   .   .   5.24    .    
+     739   533   .   A   42   ILE   H      A   42   ILE   HB     1.0   .   .   .   .   3.5     .    
+     740   534   .   A   42   ILE   H      A   42   ILE   HG2%   1.0   .   .   .   .   7.03    .    
+     741   535   .   A   42   ILE   H      A   42   ILE   HG1x   1.0   .   .   .   .   4.56    .    
+     742   535   .   A   42   ILE   H      A   42   ILE   HG1y   1.0   .   .   .   .   5.32    .    
+     743   536   .   A   42   ILE   H      A   42   ILE   HD1%   1.0   .   .   .   .   7.03    .    
+     744   537   .   A   42   ILE   HA     A   42   ILE   HB     1.0   .   .   .   .   3.57    .    
+     745   538   .   A   42   ILE   HA     A   42   ILE   HG2%   1.0   .   .   .   .   5.2     .    
+     746   539   .   A   42   ILE   HA     A   42   ILE   HG1y   1.0   .   .   .   .   4.97    .    
+     747   540   .   A   42   ILE   HA     A   42   ILE   HD1%   1.0   .   .   .   .   6.08    .    
+     748   541   .   A   42   ILE   HA     A   43   PRO   HBx    1.0   .   .   .   .   5.0     .    
+     749   542   .   A   42   ILE   HA     A   43   PRO   HGx    1.0   .   .   .   .   4.4     .    
+     750   543   .   A   42   ILE   HA     A   43   PRO   HDx    1.0   .   .   .   .   3.3     .    
+     751   543   .   A   42   ILE   HA     A   43   PRO   HDy    1.0   .   .   .   .   3.3     .    
+     752   544   .   A   42   ILE   HB     A   42   ILE   HG2%   1.0   .   .   .   .   3.49    .    
+     753   545   .   A   42   ILE   HB     A   42   ILE   HG1y   1.0   .   .   .   .   3.76    .    
+     754   546   .   A   42   ILE   HB     A   42   ILE   HD1%   1.0   .   .   .   .   3.23    .    
+     755   547   .   A   42   ILE   HB     A   47   TRP   HD1    1.0   .   .   .   .   5.28    .    
+     756   548   .   A   42   ILE   HG2%   A   42   ILE   HG1x   1.0   .   .   .   .   4.9     .    
+     757   548   .   A   42   ILE   HG2%   A   42   ILE   HG1y   1.0   .   .   .   .   7.03    .    
+     758   549   .   A   42   ILE   HG2%   A   42   ILE   HD1%   1.0   .   .   .   .   6.92    .    
+     759   550   .   A   42   ILE   HG2%   A   43   PRO   HDx    1.0   .   .   .   .   5.05    .    
+     760   550   .   A   42   ILE   HG2%   A   43   PRO   HDy    1.0   .   .   .   .   5.0     .    
+     761   551   .   A   42   ILE   HG1x   A   42   ILE   HG1y   1.0   .   .   .   .   2.24    .    
+     762   552   .   A   42   ILE   HG1x   A   42   ILE   HD1%   1.0   .   .   .   .   3.91    .    
+     763   552   .   A   42   ILE   HG1y   A   42   ILE   HD1%   1.0   .   .   .   .   4.18    .    
+     764   553   .   A   42   ILE   HG1y   A   43   PRO   HDy    1.0   .   .   .   .   5.09    .    
+     765   554   .   A   42   ILE   HD1%   A   43   PRO   HA     1.0   .   .   .   .   5.58    .    
+     766   555   .   A   43   PRO   HA     A   43   PRO   HBx    1.0   .   .   .   .   2.58    .    
+     767   555   .   A   43   PRO   HA     A   43   PRO   HBy    1.0   .   .   .   .   2.35    .    
+     768   556   .   A   43   PRO   HA     A   43   PRO   HGx    1.0   .   .   .   .   2.54    .    
+     769   557   .   A   43   PRO   HA     A   43   PRO   HDx    1.0   .   .   .   .   4.82    .    
+     770   557   .   A   43   PRO   HA     A   43   PRO   HDy    1.0   .   .   .   .   4.06    .    
+     771   558   .   A   43   PRO   HA     A   44   GLY   H      1.0   .   .   .   .   3.38    .    
+     772   559   .   A   43   PRO   HA     A   45   VAL   H      1.0   .   .   .   .   5.62    .    
+     773   560   .   A   43   PRO   HA     A   47   TRP   HZ2    1.0   .   .   .   .   4.33    .    
+     774   561   .   A   43   PRO   HBx    A   43   PRO   HBy    1.0   .   .   .   .   2.28    .    
+     775   562   .   A   43   PRO   HBx    A   43   PRO   HGx    1.0   .   .   .   .   2.58    .    
+     776   563   .   A   43   PRO   HBx    A   43   PRO   HDx    1.0   .   .   .   .   4.37    .    
+     777   563   .   A   43   PRO   HBx    A   43   PRO   HDy    1.0   .   .   .   .   4.25    .    
+     778   564   .   A   43   PRO   HBx    A   44   GLY   H      1.0   .   .   .   .   5.01    .    
+     779   565   .   A   43   PRO   HBx    A   47   TRP   HZ2    1.0   .   .   .   .   5.24    .    
+     780   566   .   A   43   PRO   HBy    A   43   PRO   HDx    1.0   .   .   .   .   4.37    .    
+     781   566   .   A   43   PRO   HBy    A   43   PRO   HDy    1.0   .   .   .   .   3.0     .    
+     782   567   .   A   43   PRO   HBy    A   44   GLY   H      1.0   .   .   .   .   4.75    .    
+     783   568   .   A   43   PRO   HGx    A   43   PRO   HDx    1.0   .   .   .   .   2.43    .    
+     784   568   .   A   43   PRO   HGx    A   43   PRO   HDy    1.0   .   .   .   .   2.28    .    
+     785   569   .   A   43   PRO   HDx    A   43   PRO   HDy    1.0   .   .   .   .   2.2     .    
+     786   570   .   A   44   GLY   H      A   44   GLY   HAx    1.0   .   .   .   .   3.72    .    
+     787   570   .   A   44   GLY   H      A   44   GLY   HAy    1.0   .   .   .   .   3.53    .    
+     788   571   .   A   44   GLY   H      A   45   VAL   H      1.0   .   .   .   .   3.95    .    
+     789   572   .   A   44   GLY   HAx    A   44   GLY   HAy    1.0   .   .   .   .   2.81    .    
+     790   573   .   A   44   GLY   HAx    A   45   VAL   H      1.0   .   .   .   .   4.48    .    
+     791   573   .   A   44   GLY   HAy    A   45   VAL   H      1.0   .   .   .   .   4.33    .    
+     792   574   .   A   45   VAL   H      A   45   VAL   HA     1.0   .   .   .   .   3.38    .    
+     793   575   .   A   45   VAL   H      A   45   VAL   HB     1.0   .   .   .   .   3.76    .    
+     794   576   .   A   45   VAL   H      A   45   VAL   HGy%   1.0   .   .   .   .   5.96    .    
+     795   576   .   A   45   VAL   H      A   45   VAL   HGx%   1.0   .   .   .   .   6.88    .    
+     796   577   .   A   45   VAL   HA     A   45   VAL   HB     1.0   .   .   .   .   2.47    .    
+     797   578   .   A   45   VAL   HA     A   45   VAL   HGy%   1.0   .   .   .   .   4.22    .    
+     798   578   .   A   45   VAL   HA     A   45   VAL   HGx%   1.0   .   .   .   .   3.57    .    
+     799   579   .   A   45   VAL   HA     A   46   PRO   HA     1.0   .   .   .   .   5.54    .    
+     800   580   .   A   45   VAL   HA     A   46   PRO   HBx    1.0   .   .   .   .   5.0     .    
+     801   581   .   A   45   VAL   HA     A   46   PRO   HGy    1.0   .   .   .   .   5.0     .    
+     802   581   .   A   45   VAL   HA     A   46   PRO   HGx    1.0   .   .   .   .   5.0     .    
+     803   582   .   A   45   VAL   HA     A   46   PRO   HDy    1.0   .   .   .   .   3.3     .    
+     804   582   .   A   45   VAL   HA     A   46   PRO   HDx    1.0   .   .   .   .   2.73    .    
+     805   583   .   A   45   VAL   HB     A   45   VAL   HGy%   1.0   .   .   .   .   3.57    .    
+     806   583   .   A   45   VAL   HB     A   45   VAL   HGx%   1.0   .   .   .   .   3.42    .    
+     807   584   .   A   45   VAL   HB     A   46   PRO   HDy    1.0   .   .   .   .   2.69    .    
+     808   584   .   A   45   VAL   HB     A   46   PRO   HDx    1.0   .   .   .   .   3.04    .    
+     809   585   .   A   45   VAL   HGy%   A   45   VAL   HGx%   1.0   .   .   .   .   5.59    .    
+     810   586   .   A   45   VAL   HGy%   A   46   PRO   HDy    1.0   .   .   .   .   4.98    .    
+     811   586   .   A   45   VAL   HGy%   A   46   PRO   HDx    1.0   .   .   .   .   5.32    .    
+     812   587   .   A   45   VAL   HGy%   A   47   TRP   HD1    1.0   .   .   .   .   4.25    .    
+     813   588   .   A   45   VAL   HGx%   A   46   PRO   HDy    1.0   .   .   .   .   4.25    .    
+     814   588   .   A   45   VAL   HGx%   A   46   PRO   HDx    1.0   .   .   .   .   4.71    .    
+     815   589   .   A   46   PRO   HA     A   46   PRO   HBy    1.0   .   .   .   .   2.43    .    
+     816   589   .   A   46   PRO   HA     A   46   PRO   HBx    1.0   .   .   .   .   3.42    .    
+     817   590   .   A   46   PRO   HA     A   46   PRO   HGy    1.0   .   .   .   .   3.57    .    
+     818   590   .   A   46   PRO   HA     A   46   PRO   HGx    1.0   .   .   .   .   3.61    .    
+     819   591   .   A   46   PRO   HA     A   46   PRO   HDy    1.0   .   .   .   .   3.91    .    
+     820   591   .   A   46   PRO   HA     A   46   PRO   HDx    1.0   .   .   .   .   4.44    .    
+     821   592   .   A   46   PRO   HA     A   47   TRP   H      1.0   .   .   .   .   2.81    .    
+     822   593   .   A   46   PRO   HA     A   47   TRP   HD1    1.0   .   .   .   .   4.94    .    
+     823   594   .   A   46   PRO   HA     A   48   CYS   H      1.0   .   .   .   .   3.64    .    
+     824   595   .   A   46   PRO   HBy    A   46   PRO   HBx    1.0   .   .   .   .   2.5     .    
+     825   596   .   A   46   PRO   HBy    A   46   PRO   HDy    1.0   .   .   .   .   3.83    .    
+     826   596   .   A   46   PRO   HBy    A   46   PRO   HDx    1.0   .   .   .   .   4.14    .    
+     827   597   .   A   46   PRO   HBy    A   49   PHE   HA     1.0   .   .   .   .   3.95    .    
+     828   598   .   A   46   PRO   HBy    A   49   PHE   HBy    1.0   .   .   .   .   5.24    .    
+     829   598   .   A   46   PRO   HBy    A   49   PHE   HBx    1.0   .   .   .   .   3.04    .    
+     830   599   .   A   46   PRO   HBx    A   46   PRO   HGy    1.0   .   .   .   .   2.2     .    
+     831   600   .   A   46   PRO   HBx    A   46   PRO   HDy    1.0   .   .   .   .   3.57    .    
+     832   600   .   A   46   PRO   HBx    A   46   PRO   HDx    1.0   .   .   .   .   4.29    .    
+     833   601   .   A   46   PRO   HBx    A   47   TRP   H      1.0   .   .   .   .   3.99    .    
+     834   602   .   A   46   PRO   HBx    A   48   CYS   H      1.0   .   .   .   .   4.25    .    
+     835   603   .   A   46   PRO   HGy    A   46   PRO   HDx    1.0   .   .   .   .   3.53    .    
+     836   603   .   A   46   PRO   HGx    A   46   PRO   HDy    1.0   .   .   .   .   2.96    .    
+     837   603   .   A   46   PRO   HGx    A   46   PRO   HDx    1.0   .   .   .   .   3.19    .    
+     838   604   .   A   46   PRO   HDy    A   46   PRO   HDx    1.0   .   .   .   .   2.43    .    
+     839   605   .   A   47   TRP   H      A   47   TRP   HA     1.0   .   .   .   .   3.76    .    
+     840   606   .   A   47   TRP   H      A   47   TRP   HBy    1.0   .   .   .   .   3.38    .    
+     841   606   .   A   47   TRP   H      A   47   TRP   HBx    1.0   .   .   .   .   3.34    .    
+     842   607   .   A   47   TRP   H      A   47   TRP   HD1    1.0   .   .   .   .   4.37    .    
+     843   608   .   A   47   TRP   H      A   47   TRP   HE1    1.0   .   .   .   .   6.0     .    
+     844   609   .   A   47   TRP   H      A   48   CYS   H      1.0   .   .   .   .   3.8     .    
+     845   610   .   A   47   TRP   H      A   48   CYS   HBy    1.0   .   .   .   .   5.16    .    
+     846   611   .   A   47   TRP   HA     A   47   TRP   HBy    1.0   .   .   .   .   3.0     .    
+     847   611   .   A   47   TRP   HA     A   47   TRP   HBx    1.0   .   .   .   .   3.38    .    
+     848   612   .   A   47   TRP   HA     A   47   TRP   HD1    1.0   .   .   .   .   2.47    .    
+     849   613   .   A   47   TRP   HA     A   47   TRP   HE3    1.0   .   .   .   .   5.66    .    
+     850   614   .   A   47   TRP   HA     A   47   TRP   HE1    1.0   .   .   .   .   5.66    .    
+     851   615   .   A   47   TRP   HA     A   48   CYS   H      1.0   .   .   .   .   4.52    .    
+     852   616   .   A   47   TRP   HA     A   49   PHE   HEx    1.0   .   .   .   .   5.0     .    
+     853   617   .   A   47   TRP   HBy    A   47   TRP   HBx    1.0   .   .   .   .   2.5     .    
+     854   618   .   A   47   TRP   HBy    A   47   TRP   HD1    1.0   .   .   .   .   3.99    .    
+     855   619   .   A   47   TRP   HBy    A   47   TRP   HE1    1.0   .   .   .   .   6.0     .    
+     856   620   .   A   47   TRP   HBy    A   47   TRP   HE3    1.0   .   .   .   .   3.57    .    
+     857   621   .   A   47   TRP   HBy    A   48   CYS   H      1.0   .   .   .   .   3.76    .    
+     858   622   .   A   47   TRP   HBx    A   47   TRP   HD1    1.0   .   .   .   .   3.23    .    
+     859   623   .   A   47   TRP   HBx    A   47   TRP   HE3    1.0   .   .   .   .   3.49    .    
+     860   624   .   A   47   TRP   HBx    A   47   TRP   HZ2    1.0   .   .   .   .   6.18    .    
+     861   625   .   A   47   TRP   HBx    A   48   CYS   H      1.0   .   .   .   .   3.91    .    
+     862   626   .   A   47   TRP   HD1    A   47   TRP   HE3    1.0   .   .   .   .   4.86    .    
+     863   627   .   A   47   TRP   HD1    A   47   TRP   HE1    1.0   .   .   .   .   3.11    .    
+     864   628   .   A   47   TRP   HE3    A   47   TRP   HZ3    1.0   .   .   .   .   2.81    .    
+     865   629   .   A   47   TRP   HE3    A   47   TRP   HZ2    1.0   .   .   .   .   3.15    .    
+     866   630   .   A   47   TRP   HE1    A   47   TRP   HZ3    1.0   .   .   .   .   6.0     .    
+     867   631   .   A   47   TRP   HE1    A   47   TRP   HZ2    1.0   .   .   .   .   3.83    .    
+     868   632   .   A   47   TRP   HZ2    A   47   TRP   HH2    1.0   .   .   .   .   2.47    .    
+     869   633   .   A   48   CYS   H      A   48   CYS   HA     1.0   .   .   .   .   3.99    .    
+     870   634   .   A   48   CYS   H      A   48   CYS   HBy    1.0   .   .   .   .   3.95    .    
+     871   634   .   A   48   CYS   H      A   48   CYS   HBx    1.0   .   .   .   .   3.57    .    
+     872   635   .   A   48   CYS   H      A   49   PHE   H      1.0   .   .   .   .   4.59    .    
+     873   636   .   A   48   CYS   HA     A   48   CYS   HBy    1.0   .   .   .   .   3.07    .    
+     874   636   .   A   48   CYS   HA     A   48   CYS   HBx    1.0   .   .   .   .   3.34    .    
+     875   637   .   A   48   CYS   HA     A   49   PHE   H      1.0   .   .   .   .   3.19    .    
+     876   638   .   A   48   CYS   HA     A   49   PHE   HA     1.0   .   .   .   .   4.9     .    
+     877   639   .   A   48   CYS   HA     A   49   PHE   HD1    1.0   .   .   .   .   5.73    .    
+     878   640   .   A   48   CYS   HBy    A   48   CYS   HBx    1.0   .   .   .   .   2.54    .    
+     879   641   .   A   48   CYS   HBy    A   49   PHE   H      1.0   .   .   .   .   5.28    .    
+     880   641   .   A   48   CYS   HBx    A   49   PHE   H      1.0   .   .   .   .   4.59    .    
+     881   642   .   A   49   PHE   H      A   49   PHE   HA     1.0   .   .   .   .   4.1     .    
+     882   643   .   A   49   PHE   H      A   49   PHE   HBy    1.0   .   .   .   .   4.33    .    
+     883   643   .   A   49   PHE   H      A   49   PHE   HBx    1.0   .   .   .   .   5.09    .    
+     884   644   .   A   49   PHE   H      A   49   PHE   HD1    1.0   .   .   .   .   6.0     .    
+     885   644   .   A   49   PHE   H      A   49   PHE   HD2    1.0   .   .   .   .   6.0     .    
+     886   645   .   A   49   PHE   HA     A   49   PHE   HBy    1.0   .   .   .   .   2.69    .    
+     887   645   .   A   49   PHE   HA     A   49   PHE   HBx    1.0   .   .   .   .   2.54    .    
+     888   646   .   A   49   PHE   HA     A   49   PHE   HD1    1.0   .   .   .   .   5.28    .    
+     889   646   .   A   49   PHE   HA     A   49   PHE   HD2    1.0   .   .   .   .   6.0     .    
+     890   647   .   A   49   PHE   HA     A   50   LYS   H      1.0   .   .   .   .   3.0     .    
+     891   648   .   A   49   PHE   HBy    A   49   PHE   HBx    1.0   .   .   .   .   2.69    .    
+     892   649   .   A   49   PHE   HBy    A   49   PHE   HD1    1.0   .   .   .   .   4.21    .    
+     893   649   .   A   49   PHE   HBy    A   49   PHE   HD2    1.0   .   .   .   .   4.33    .    
+     894   650   .   A   49   PHE   HBy    A   50   LYS   H      1.0   .   .   .   .   3.26    .    
+     895   651   .   A   49   PHE   HBx    A   49   PHE   HD1    1.0   .   .   .   .   3.64    .    
+     896   652   .   A   49   PHE   HBx    A   49   PHE   HEx    1.0   .   .   .   .   6.0     .    
+     897   653   .   A   49   PHE   HBx    A   49   PHE   HD2    1.0   .   .   .   .   4.67    .    
+     898   654   .   A   49   PHE   HBx    A   50   LYS   H      1.0   .   .   .   .   3.57    .    
+     899   655   .   A   49   PHE   HD1    A   49   PHE   HD2    1.0   .   .   .   .   3.23    .    
+     900   656   .   A   49   PHE   HEx    A   49   PHE   HD2    1.0   .   .   .   .   4.14    .    
+     901   657   .   A   49   PHE   HZ     A   49   PHE   HD2    1.0   .   .   .   .   3.38    .    
+     902   658   .   A   50   LYS   H      A   50   LYS   HA     1.0   .   .   .   .   3.45    .    
+     903   659   .   A   50   LYS   H      A   50   LYS   HB2    1.0   .   .   .   .   2.92    .    
+     904   660   .   A   50   LYS   H      A   50   LYS   HG2    1.0   .   .   .   .   3.83    .    
+     905   661   .   A   50   LYS   HA     A   50   LYS   HB2    1.0   .   .   .   .   3.3     .    
+     906   661   .   A   50   LYS   HA     A   50   LYS   HB3    1.0   .   .   .   .   2.73    .    
+     907   662   .   A   50   LYS   HA     A   50   LYS   HG2    1.0   .   .   .   .   3.42    .    
+     908   662   .   A   50   LYS   HA     A   50   LYS   HG3    1.0   .   .   .   .   3.19    .    
+     909   663   .   A   50   LYS   HA     A   51   PRO   HDy    1.0   .   .   .   .   4.0     .    
+     910   663   .   A   50   LYS   HA     A   51   PRO   HDx    1.0   .   .   .   .   2.5     .    
+     911   664   .   A   50   LYS   HB2    A   50   LYS   HG2    1.0   .   .   .   .   2.39    .    
+     912   665   .   A   50   LYS   HB2    A   50   LYS   HE2    1.0   .   .   .   .   4.25    .    
+     913   665   .   A   50   LYS   HB2    A   50   LYS   HE3    1.0   .   .   .   .   3.72    .    
+     914   665   .   A   50   LYS   HB3    A   50   LYS   HE2    1.0   .   .   .   .   4.9     .    
+     915   665   .   A   50   LYS   HB3    A   50   LYS   HE3    1.0   .   .   .   .   3.72    .    
+     916   666   .   A   50   LYS   HG2    A   50   LYS   HE2    1.0   .   .   .   .   4.06    .    
+     917   666   .   A   50   LYS   HG2    A   50   LYS   HE3    1.0   .   .   .   .   3.8     .    
+     918   666   .   A   50   LYS   HG3    A   50   LYS   HE2    1.0   .   .   .   .   3.8     .    
+     919   666   .   A   50   LYS   HG3    A   50   LYS   HE3    1.0   .   .   .   .   3.8     .    
+     920   667   .   A   50   LYS   HD2    A   50   LYS   HE2    1.0   .   .   .   .   3.45    .    
+     921   667   .   A   50   LYS   HD2    A   50   LYS   HE3    1.0   .   .   .   .   3.45    .    
+     922   667   .   A   50   LYS   HD3    A   50   LYS   HE2    1.0   .   .   .   .   3.61    .    
+     923   667   .   A   50   LYS   HD3    A   50   LYS   HE3    1.0   .   .   .   .   4.29    .    
+     924   668   .   A   51   PRO   HA     A   51   PRO   HDy    1.0   .   .   .   .   4.44    .    
+     925   668   .   A   51   PRO   HA     A   51   PRO   HDx    1.0   .   .   .   .   5.09    .    
+     926   669   .   A   51   PRO   HA     A   52   LEU   H      1.0   .   .   .   .   2.66    .    
+     927   670   .   A   51   PRO   HDy    A   51   PRO   HDx    1.0   .   .   .   .   2.85    .    
+     928   671   .   A   52   LEU   H      A   52   LEU   HA     1.0   .   .   .   .   3.0     .    
+     929   672   .   A   52   LEU   H      A   52   LEU   HB2    1.0   .   .   .   .   2.88    .    
+     930   672   .   A   52   LEU   H      A   52   LEU   HB3    1.0   .   .   .   .   2.77    .    
+     931   673   .   A   52   LEU   H      A   52   LEU   HG     1.0   .   .   .   .   5.0     .    
+     932   674   .   A   52   LEU   H      A   52   LEU   HD1%   1.0   .   .   .   .   5.09    .    
+     933   674   .   A   52   LEU   H      A   52   LEU   HD2%   1.0   .   .   .   .   5.09    .    
+     934   675   .   A   52   LEU   H      A   53   GLN   H      1.0   .   .   .   .   4.59    .    
+     935   676   .   A   52   LEU   HA     A   52   LEU   HB2    1.0   .   .   .   .   2.5     .    
+     936   676   .   A   52   LEU   HA     A   52   LEU   HB3    1.0   .   .   .   .   3.3     .    
+     937   677   .   A   52   LEU   HA     A   52   LEU   HG     1.0   .   .   .   .   2.66    .    
+     938   678   .   A   52   LEU   HA     A   52   LEU   HD1%   1.0   .   .   .   .   5.0     .    
+     939   678   .   A   52   LEU   HA     A   52   LEU   HD2%   1.0   .   .   .   .   3.87    .    
+     940   679   .   A   52   LEU   HA     A   53   GLN   H      1.0   .   .   .   .   2.58    .    
+     941   680   .   A   52   LEU   HB2    A   52   LEU   HG     1.0   .   .   .   .   2.31    .    
+     942   681   .   A   52   LEU   HB2    A   52   LEU   HD1%   1.0   .   .   .   .   3.34    .    
+     943   681   .   A   52   LEU   HB2    A   52   LEU   HD2%   1.0   .   .   .   .   4.0     .    
+     944   682   .   A   52   LEU   HB3    A   52   LEU   HG     1.0   .   .   .   .   5.0     .    
+     945   683   .   A   52   LEU   HB3    A   52   LEU   HD1%   1.0   .   .   .   .   3.23    .    
+     946   683   .   A   52   LEU   HB3    A   52   LEU   HD2%   1.0   .   .   .   .   3.23    .    
+     947   684   .   A   53   GLN   H      A   53   GLN   HA     1.0   .   .   .   .   3.26    .    
+     948   685   .   A   53   GLN   H      A   53   GLN   HBy    1.0   .   .   .   .   2.85    .    
+     949   685   .   A   53   GLN   H      A   53   GLN   HBx    1.0   .   .   .   .   3.3     .    
+     950   686   .   A   53   GLN   H      A   53   GLN   HGx    1.0   .   .   .   .   4.44    .    
+     951   687   .   A   53   GLN   HA     A   53   GLN   HBy    1.0   .   .   .   .   2.58    .    
+     952   687   .   A   53   GLN   HA     A   53   GLN   HBx    1.0   .   .   .   .   2.85    .    
+     953   688   .   A   53   GLN   HA     A   53   GLN   HGy    1.0   .   .   .   .   6.0     .    
+     954   688   .   A   53   GLN   HA     A   53   GLN   HGx    1.0   .   .   .   .   3.57    .    
+     955   689   .   A   53   GLN   HA     A   53   GLN   HE2y   1.0   .   .   .   .   6.0     .    
+     956   689   .   A   53   GLN   HA     A   53   GLN   HE2x   1.0   .   .   .   .   6.0     .    
+     957   690   .   A   53   GLN   HA     A   54   GLU   H      1.0   .   .   .   .   2.81    .    
+     958   691   .   A   53   GLN   HBy    A   53   GLN   HGx    1.0   .   .   .   .   3.23    .    
+     959   691   .   A   53   GLN   HBx    A   53   GLN   HGx    1.0   .   .   .   .   2.88    .    
+     960   692   .   A   53   GLN   HGx    A   53   GLN   HE2y   1.0   .   .   .   .   5.54    .    
+     961   692   .   A   53   GLN   HGx    A   53   GLN   HE2x   1.0   .   .   .   .   6.0     .    
+     962   693   .   A   53   GLN   HGx    A   54   GLU   H      1.0   .   .   .   .   5.85    .    
+     963   694   .   A   53   GLN   HE2y   A   53   GLN   HE2x   1.0   .   .   .   .   2.31    .    
+     964   695   .   A   54   GLU   H      A   54   GLU   HA     1.0   .   .   .   .   3.76    .    
+     965   696   .   A   54   GLU   H      A   54   GLU   HBy    1.0   .   .   .   .   3.26    .    
+     966   696   .   A   54   GLU   H      A   54   GLU   HBx    1.0   .   .   .   .   3.3     .    
+     967   697   .   A   54   GLU   H      A   54   GLU   HGx    1.0   .   .   .   .   5.81    .    
+     968   697   .   A   54   GLU   H      A   54   GLU   HGy    1.0   .   .   .   .   5.81    .    
+     969   698   .   A   54   GLU   HA     A   54   GLU   HBy    1.0   .   .   .   .   2.43    .    
+     970   698   .   A   54   GLU   HA     A   54   GLU   HBx    1.0   .   .   .   .   2.5     .    
+     971   699   .   A   54   GLU   HA     A   54   GLU   HGx    1.0   .   .   .   .   5.24    .    
+     972   699   .   A   54   GLU   HA     A   54   GLU   HGy    1.0   .   .   .   .   5.24    .    
+     973   700   .   A   54   GLU   HA     A   55   ALA   H      1.0   .   .   .   .   2.77    .    
+     974   701   .   A   55   ALA   H      A   55   ALA   HA     1.0   .   .   .   .   3.8     .    
+     975   702   .   A   55   ALA   H      A   55   ALA   HB%    1.0   .   .   .   .   4.6     .    
+     976   703   .   A   55   ALA   HA     A   55   ALA   HB%    1.0   .   .   .   .   4.29    .    
+     977   704   .   A   56   GLU   HBy    A   56   GLU   HGx    1.0   .   .   .   .   3.68    .    
+     978   705   .   A   58   THR   H      A   58   THR   HA     1.0   .   .   .   .   5.09    .    
+     979   706   .   A   58   THR   H      A   58   THR   HB     1.0   .   .   .   .   4.52    .    
+     980   707   .   A   58   THR   H      A   58   THR   HG1    1.0   .   .   .   .   6.0     .    
+     981   708   .   A   58   THR   HA     A   58   THR   HB     1.0   .   .   .   .   3.57    .    
+     982   709   .   A   58   THR   HA     A   58   THR   HG2%   1.0   .   .   .   .   5.51    .    
+     983   710   .   A   58   THR   HA     A   58   THR   HG1    1.0   .   .   .   .   4.48    .    
+     984   711   .   A   58   THR   HB     A   58   THR   HG2%   1.0   .   .   .   .   4.9     .    
+     985   712   .   A   58   THR   HB     A   58   THR   HG1    1.0   .   .   .   .   4.63    .    
+     986   713   .   A   59   PHE   HDx    A   59   PHE   HEx    1.0   .   .   .   .   3.8     .    
+     987   714   .   A   59   PHE   HDx    A   59   PHE   HZ     1.0   .   .   .   .   6.0     .    
+
+   stop_
+
+save_
+
+save_CYANA_distance_restraints_2
+   _nef_distance_restraint_list.sf_category       nef_distance_restraint_list
+   _nef_distance_restraint_list.sf_framecode      CYANA_distance_restraints_2
+   _nef_distance_restraint_list.restraint_origin  undefined
+   _nef_distance_restraint_list.potential_type    upper-bound-parabolic
+
+   loop_
+      _nef_distance_restraint.index
+      _nef_distance_restraint.restraint_id
+      _nef_distance_restraint.restraint_combination_id
+      _nef_distance_restraint.chain_code_1
+      _nef_distance_restraint.sequence_code_1
+      _nef_distance_restraint.residue_name_1
+      _nef_distance_restraint.atom_name_1
+      _nef_distance_restraint.chain_code_2
+      _nef_distance_restraint.sequence_code_2
+      _nef_distance_restraint.residue_name_2
+      _nef_distance_restraint.atom_name_2
+      _nef_distance_restraint.weight
+      _nef_distance_restraint.target_value
+      _nef_distance_restraint.target_value_uncertainty
+      _nef_distance_restraint.lower_linear_limit
+      _nef_distance_restraint.lower_limit
+      _nef_distance_restraint.upper_limit
+      _nef_distance_restraint.upper_linear_limit
+
+     1     1     .   A   3    TYR   HD1    A   4    VAL   H      1.0   .   .   .   .   8.14   .    
+     2     1     .   A   3    TYR   HD2    A   4    VAL   H      1.0   .   .   .   .   8.14   .    
+     3     2     .   A   3    TYR   HD1    A   4    VAL   HB     1.0   .   .   .   .   8.14   .    
+     4     2     .   A   3    TYR   HD2    A   4    VAL   HB     1.0   .   .   .   .   8.14   .    
+     5     3     .   A   3    TYR   HD1    A   4    VAL   HG1%   1.0   .   .   .   .   9.17   .    
+     6     3     .   A   3    TYR   HD2    A   4    VAL   HG1%   1.0   .   .   .   .   9.17   .    
+     7     3     .   A   3    TYR   HD1    A   4    VAL   HG2%   1.0   .   .   .   .   9.17   .    
+     8     3     .   A   3    TYR   HD2    A   4    VAL   HG2%   1.0   .   .   .   .   9.17   .    
+     9     4     .   A   3    TYR   HD1    A   5    GLY   HAy    1.0   .   .   .   .   8.14   .    
+     10    4     .   A   3    TYR   HD2    A   5    GLY   HAy    1.0   .   .   .   .   8.14   .    
+     11    4     .   A   3    TYR   HD1    A   5    GLY   HAx    1.0   .   .   .   .   8.14   .    
+     12    4     .   A   3    TYR   HD2    A   5    GLY   HAx    1.0   .   .   .   .   8.14   .    
+     13    5     .   A   3    TYR   HEx    A   4    VAL   HB     1.0   .   .   .   .   8.13   .    
+     14    5     .   A   3    TYR   HEy    A   4    VAL   HB     1.0   .   .   .   .   8.13   .    
+     15    6     .   A   3    TYR   HEx    A   4    VAL   HG1%   1.0   .   .   .   .   9.16   .    
+     16    6     .   A   3    TYR   HEy    A   4    VAL   HG1%   1.0   .   .   .   .   9.16   .    
+     17    6     .   A   3    TYR   HEx    A   4    VAL   HG2%   1.0   .   .   .   .   9.16   .    
+     18    6     .   A   3    TYR   HEy    A   4    VAL   HG2%   1.0   .   .   .   .   9.16   .    
+     19    7     .   A   3    TYR   HEx    A   5    GLY   HAy    1.0   .   .   .   .   8.13   .    
+     20    7     .   A   3    TYR   HEy    A   5    GLY   HAy    1.0   .   .   .   .   8.13   .    
+     21    7     .   A   3    TYR   HEx    A   5    GLY   HAx    1.0   .   .   .   .   8.13   .    
+     22    7     .   A   3    TYR   HEy    A   5    GLY   HAx    1.0   .   .   .   .   8.13   .    
+     23    8     .   A   4    VAL   H      A   6    LEU   HD1%   1.0   .   .   .   .   8.13   .    
+     24    8     .   A   4    VAL   H      A   6    LEU   HD2%   1.0   .   .   .   .   8.13   .    
+     25    9     .   A   4    VAL   H      A   9    ASN   HB2    1.0   .   .   .   .   6.88   .    
+     26    9     .   A   4    VAL   H      A   9    ASN   HB3    1.0   .   .   .   .   6.88   .    
+     27    10    .   A   4    VAL   HG1%   A   5    GLY   H      1.0   .   .   .   .   7.03   .    
+     28    11    .   A   4    VAL   HG1%   A   5    GLY   HAy    1.0   .   .   .   .   7.03   .    
+     29    11    .   A   4    VAL   HG1%   A   5    GLY   HAx    1.0   .   .   .   .   7.03   .    
+     30    12    .   A   4    VAL   HG1%   A   6    LEU   H      1.0   .   .   .   .   7.03   .    
+     31    13    .   A   4    VAL   HG2%   A   5    GLY   H      1.0   .   .   .   .   7.03   .    
+     32    14    .   A   4    VAL   HG2%   A   5    GLY   HAy    1.0   .   .   .   .   6.72   .    
+     33    14    .   A   4    VAL   HG2%   A   5    GLY   HAx    1.0   .   .   .   .   6.65   .    
+     34    15    .   A   4    VAL   HG2%   A   6    LEU   H      1.0   .   .   .   .   7.03   .    
+     35    16    .   A   5    GLY   H      A   6    LEU   HB2    1.0   .   .   .   .   6.0    .    
+     36    17    .   A   5    GLY   H      A   6    LEU   HG     1.0   .   .   .   .   6.0    .    
+     37    18    .   A   5    GLY   H      A   10   GLN   HBx    1.0   .   .   .   .   6.0    .    
+     38    19    .   A   5    GLY   HAy    A   6    LEU   HD1%   1.0   .   .   .   .   7.98   .    
+     39    19    .   A   5    GLY   HAy    A   6    LEU   HD2%   1.0   .   .   .   .   7.98   .    
+     40    19    .   A   5    GLY   HAx    A   6    LEU   HD1%   1.0   .   .   .   .   8.13   .    
+     41    19    .   A   5    GLY   HAx    A   6    LEU   HD2%   1.0   .   .   .   .   8.13   .    
+     42    20    .   A   6    LEU   HD1%   A   10   GLN   HE2y   1.0   .   .   .   .   8.13   .    
+     43    20    .   A   6    LEU   HD2%   A   10   GLN   HE2y   1.0   .   .   .   .   8.13   .    
+     44    21    .   A   7    SER   HBy    A   8    ALA   HB%    1.0   .   .   .   .   7.03   .    
+     45    22    .   A   7    SER   HBy    A   10   GLN   H      1.0   .   .   .   .   6.0    .    
+     46    23    .   A   8    ALA   H      A   12   ALA   HA     1.0   .   .   .   .   6.0    .    
+     47    24    .   A   8    ALA   HA     A   10   GLN   H      1.0   .   .   .   .   6.0    .    
+     48    25    .   A   8    ALA   HA     A   11   CYS   HA     1.0   .   .   .   .   6.0    .    
+     49    26    .   A   8    ALA   HA     A   12   ALA   H      1.0   .   .   .   .   6.0    .    
+     50    27    .   A   8    ALA   HB%    A   9    ASN   H      1.0   .   .   .   .   6.53   .    
+     51    28    .   A   10   GLN   H      A   11   CYS   HA     1.0   .   .   .   .   6.0    .    
+     52    29    .   A   10   GLN   H      A   11   CYS   HBy    1.0   .   .   .   .   6.0    .    
+     53    30    .   A   10   GLN   H      A   12   ALA   HB%    1.0   .   .   .   .   7.03   .    
+     54    31    .   A   10   GLN   H      A   52   LEU   HB3    1.0   .   .   .   .   6.0    .    
+     55    32    .   A   10   GLN   HA     A   11   CYS   HA     1.0   .   .   .   .   6.0    .    
+     56    33    .   A   10   GLN   HG2    A   11   CYS   H      1.0   .   .   .   .   6.88   .    
+     57    33    .   A   10   GLN   HG3    A   11   CYS   H      1.0   .   .   .   .   6.88   .    
+     58    34    .   A   10   GLN   HG2    A   52   LEU   H      1.0   .   .   .   .   6.88   .    
+     59    34    .   A   10   GLN   HG3    A   52   LEU   H      1.0   .   .   .   .   6.88   .    
+     60    35    .   A   11   CYS   H      A   52   LEU   H      1.0   .   .   .   .   6.0    .    
+     61    36    .   A   11   CYS   HA     A   12   ALA   HB%    1.0   .   .   .   .   7.03   .    
+     62    37    .   A   11   CYS   HA     A   37   CYS   HBy    1.0   .   .   .   .   6.0    .    
+     63    38    .   A   11   CYS   HA     A   49   PHE   HEx    1.0   .   .   .   .   6.0    .    
+     64    39    .   A   11   CYS   HA     A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     65    40    .   A   11   CYS   HA     A   52   LEU   HA     1.0   .   .   .   .   6.0    .    
+     66    41    .   A   11   CYS   HA     A   52   LEU   HB2    1.0   .   .   .   .   6.0    .    
+     67    41    .   A   11   CYS   HA     A   52   LEU   HB3    1.0   .   .   .   .   6.0    .    
+     68    42    .   A   11   CYS   HBy    A   12   ALA   HB%    1.0   .   .   .   .   6.0    .    
+     69    43    .   A   11   CYS   HBy    A   13   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     70    43    .   A   11   CYS   HBx    A   13   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     71    44    .   A   11   CYS   HBx    A   49   PHE   HD1    1.0   .   .   .   .   6.0    .    
+     72    45    .   A   12   ALA   HA     A   13   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     73    45    .   A   12   ALA   HA     A   13   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     74    46    .   A   13   VAL   H      A   14   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     75    47    .   A   13   VAL   H      A   18   ARG   HGx    1.0   .   .   .   .   6.0    .    
+     76    48    .   A   13   VAL   H      A   18   ARG   HE     1.0   .   .   .   .   6.0    .    
+     77    49    .   A   13   VAL   HB     A   19   VAL   H      1.0   .   .   .   .   6.0    .    
+     78    50    .   A   13   VAL   HB     A   49   PHE   HD1    1.0   .   .   .   .   6.0    .    
+     79    51    .   A   13   VAL   HGx%   A   15   ALA   HA     1.0   .   .   .   .   7.03   .    
+     80    52    .   A   13   VAL   HGx%   A   17   ASP   H      1.0   .   .   .   .   7.03   .    
+     81    53    .   A   13   VAL   HGx%   A   17   ASP   HA     1.0   .   .   .   .   7.03   .    
+     82    54    .   A   13   VAL   HGx%   A   17   ASP   HBx    1.0   .   .   .   .   7.03   .    
+     83    55    .   A   13   VAL   HGx%   A   18   ARG   HE     1.0   .   .   .   .   7.03   .    
+     84    56    .   A   13   VAL   HGx%   A   19   VAL   H      1.0   .   .   .   .   6.31   .    
+     85    57    .   A   13   VAL   HGx%   A   49   PHE   HD1    1.0   .   .   .   .   7.03   .    
+     86    58    .   A   13   VAL   HGx%   A   49   PHE   HZ     1.0   .   .   .   .   7.03   .    
+     87    59    .   A   13   VAL   HGx%   A   49   PHE   HD2    1.0   .   .   .   .   7.03   .    
+     88    60    .   A   13   VAL   HGx%   A   51   PRO   HA     1.0   .   .   .   .   7.03   .    
+     89    61    .   A   13   VAL   HGx%   A   53   GLN   HE2y   1.0   .   .   .   .   7.03   .    
+     90    61    .   A   13   VAL   HGx%   A   53   GLN   HE2x   1.0   .   .   .   .   7.03   .    
+     91    62    .   A   13   VAL   HGy%   A   15   ALA   HA     1.0   .   .   .   .   7.03   .    
+     92    63    .   A   13   VAL   HGy%   A   17   ASP   HA     1.0   .   .   .   .   7.03   .    
+     93    64    .   A   13   VAL   HGy%   A   17   ASP   HBx    1.0   .   .   .   .   7.03   .    
+     94    65    .   A   13   VAL   HGy%   A   49   PHE   HD1    1.0   .   .   .   .   7.03   .    
+     95    66    .   A   13   VAL   HGy%   A   53   GLN   H      1.0   .   .   .   .   7.03   .    
+     96    67    .   A   13   VAL   HGy%   A   53   GLN   HE2y   1.0   .   .   .   .   7.03   .    
+     97    67    .   A   13   VAL   HGy%   A   53   GLN   HE2x   1.0   .   .   .   .   7.03   .    
+     98    68    .   A   14   PRO   HBx    A   16   LYS   H      1.0   .   .   .   .   6.88   .    
+     99    68    .   A   14   PRO   HBy    A   16   LYS   H      1.0   .   .   .   .   6.88   .    
+     100   69    .   A   14   PRO   HGy    A   15   ALA   H      1.0   .   .   .   .   6.0    .    
+     101   70    .   A   14   PRO   HGy    A   16   LYS   H      1.0   .   .   .   .   6.0    .    
+     102   71    .   A   14   PRO   HDx    A   16   LYS   H      1.0   .   .   .   .   6.0    .    
+     103   72    .   A   14   PRO   HDx    A   17   ASP   H      1.0   .   .   .   .   6.0    .    
+     104   73    .   A   15   ALA   H      A   18   ARG   HA     1.0   .   .   .   .   6.0    .    
+     105   74    .   A   15   ALA   H      A   18   ARG   HE     1.0   .   .   .   .   6.0    .    
+     106   75    .   A   15   ALA   H      A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     107   76    .   A   15   ALA   HA     A   18   ARG   HA     1.0   .   .   .   .   6.0    .    
+     108   77    .   A   15   ALA   HA     A   45   VAL   HGy%   1.0   .   .   .   .   6.27   .    
+     109   77    .   A   15   ALA   HA     A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     110   78    .   A   15   ALA   HA     A   46   PRO   HGy    1.0   .   .   .   .   6.0    .    
+     111   79    .   A   15   ALA   HA     A   49   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     112   80    .   A   15   ALA   HB%    A   18   ARG   HGx    1.0   .   .   .   .   7.03   .    
+     113   81    .   A   15   ALA   HB%    A   18   ARG   HDx    1.0   .   .   .   .   6.0    .    
+     114   82    .   A   15   ALA   HB%    A   18   ARG   HE     1.0   .   .   .   .   6.0    .    
+     115   83    .   A   15   ALA   HB%    A   45   VAL   H      1.0   .   .   .   .   7.03   .    
+     116   84    .   A   15   ALA   HB%    A   45   VAL   HGy%   1.0   .   .   .   .   8.06   .    
+     117   84    .   A   15   ALA   HB%    A   45   VAL   HGx%   1.0   .   .   .   .   7.75   .    
+     118   85    .   A   16   LYS   H      A   42   ILE   HD1%   1.0   .   .   .   .   7.03   .    
+     119   86    .   A   16   LYS   H      A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     120   87    .   A   16   LYS   HA     A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     121   88    .   A   16   LYS   HA     A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     122   88    .   A   16   LYS   HA     A   45   VAL   HGx%   1.0   .   .   .   .   6.0    .    
+     123   89    .   A   16   LYS   HB3    A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     124   90    .   A   16   LYS   HG3    A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     125   91    .   A   16   LYS   HG3    A   18   ARG   H      1.0   .   .   .   .   6.0    .    
+     126   92    .   A   16   LYS   HG2    A   17   ASP   H      1.0   .   .   .   .   6.0    .    
+     127   93    .   A   16   LYS   HG2    A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     128   94    .   A   16   LYS   HDx    A   17   ASP   HA     1.0   .   .   .   .   6.0    .    
+     129   95    .   A   17   ASP   H      A   18   ARG   HGx    1.0   .   .   .   .   6.0    .    
+     130   96    .   A   17   ASP   HA     A   53   GLN   HE2x   1.0   .   .   .   .   6.0    .    
+     131   97    .   A   18   ARG   H      A   45   VAL   HB     1.0   .   .   .   .   6.0    .    
+     132   98    .   A   18   ARG   H      A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     133   98    .   A   18   ARG   H      A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     134   99    .   A   18   ARG   H      A   46   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     135   100   .   A   18   ARG   HA     A   49   PHE   HBx    1.0   .   .   .   .   6.0    .    
+     136   101   .   A   18   ARG   HA     A   49   PHE   HD1    1.0   .   .   .   .   6.0    .    
+     137   101   .   A   18   ARG   HA     A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     138   102   .   A   18   ARG   HBy    A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     139   103   .   A   18   ARG   HBy    A   49   PHE   HA     1.0   .   .   .   .   6.0    .    
+     140   104   .   A   18   ARG   HBx    A   45   VAL   HA     1.0   .   .   .   .   6.0    .    
+     141   105   .   A   18   ARG   HBx    A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     142   105   .   A   18   ARG   HBx    A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     143   106   .   A   18   ARG   HGy    A   19   VAL   H      1.0   .   .   .   .   6.0    .    
+     144   107   .   A   18   ARG   HGy    A   49   PHE   HA     1.0   .   .   .   .   6.0    .    
+     145   108   .   A   18   ARG   HGy    A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     146   109   .   A   18   ARG   HGx    A   19   VAL   H      1.0   .   .   .   .   6.0    .    
+     147   110   .   A   18   ARG   HGx    A   49   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     148   110   .   A   18   ARG   HGx    A   49   PHE   HBx    1.0   .   .   .   .   6.0    .    
+     149   111   .   A   18   ARG   HGx    A   49   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     150   112   .   A   18   ARG   HDx    A   19   VAL   H      1.0   .   .   .   .   6.0    .    
+     151   113   .   A   18   ARG   HDx    A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     152   114   .   A   18   ARG   HDx    A   49   PHE   HEx    1.0   .   .   .   .   6.0    .    
+     153   115   .   A   18   ARG   HDx    A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     154   116   .   A   18   ARG   HDy    A   45   VAL   HGy%   1.0   .   .   .   .   6.0    .    
+     155   116   .   A   18   ARG   HDy    A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     156   117   .   A   18   ARG   HDy    A   47   TRP   HA     1.0   .   .   .   .   6.0    .    
+     157   118   .   A   18   ARG   HE     A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     158   119   .   A   19   VAL   H      A   20   ASP   HBx    1.0   .   .   .   .   6.0    .    
+     159   120   .   A   19   VAL   H      A   49   PHE   HA     1.0   .   .   .   .   6.0    .    
+     160   121   .   A   19   VAL   H      A   49   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     161   122   .   A   19   VAL   H      A   50   LYS   H      1.0   .   .   .   .   6.0    .    
+     162   123   .   A   19   VAL   H      A   52   LEU   HA     1.0   .   .   .   .   6.0    .    
+     163   124   .   A   19   VAL   HA     A   20   ASP   HBx    1.0   .   .   .   .   6.0    .    
+     164   125   .   A   19   VAL   HA     A   46   PRO   HGx    1.0   .   .   .   .   6.0    .    
+     165   126   .   A   19   VAL   HG1%   A   50   LYS   H      1.0   .   .   .   .   7.03   .    
+     166   127   .   A   19   VAL   HG2%   A   20   ASP   HA     1.0   .   .   .   .   6.34   .    
+     167   128   .   A   19   VAL   HG2%   A   21   CYS   H      1.0   .   .   .   .   7.03   .    
+     168   129   .   A   19   VAL   HG2%   A   49   PHE   HA     1.0   .   .   .   .   7.03   .    
+     169   130   .   A   20   ASP   H      A   46   PRO   HBy    1.0   .   .   .   .   6.0    .    
+     170   130   .   A   20   ASP   H      A   46   PRO   HBx    1.0   .   .   .   .   6.0    .    
+     171   131   .   A   20   ASP   H      A   46   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     172   131   .   A   20   ASP   H      A   46   PRO   HDx    1.0   .   .   .   .   6.0    .    
+     173   132   .   A   20   ASP   H      A   49   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     174   132   .   A   20   ASP   H      A   49   PHE   HBx    1.0   .   .   .   .   6.0    .    
+     175   133   .   A   20   ASP   HBx    A   21   CYS   H      1.0   .   .   .   .   6.0    .    
+     176   134   .   A   20   ASP   HBx    A   22   GLY   H      1.0   .   .   .   .   6.0    .    
+     177   135   .   A   20   ASP   HBx    A   46   PRO   HA     1.0   .   .   .   .   6.0    .    
+     178   136   .   A   21   CYS   H      A   23   TYR   H      1.0   .   .   .   .   6.0    .    
+     179   137   .   A   21   CYS   H      A   23   TYR   HBx    1.0   .   .   .   .   6.0    .    
+     180   138   .   A   21   CYS   H      A   23   TYR   HD1    1.0   .   .   .   .   8.14   .    
+     181   138   .   A   21   CYS   H      A   23   TYR   HD2    1.0   .   .   .   .   8.14   .    
+     182   139   .   A   21   CYS   H      A   46   PRO   HBy    1.0   .   .   .   .   6.0    .    
+     183   139   .   A   21   CYS   H      A   46   PRO   HBx    1.0   .   .   .   .   6.0    .    
+     184   140   .   A   21   CYS   H      A   46   PRO   HGx    1.0   .   .   .   .   6.0    .    
+     185   141   .   A   21   CYS   H      A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     186   142   .   A   21   CYS   H      A   48   CYS   HBy    1.0   .   .   .   .   6.0    .    
+     187   143   .   A   21   CYS   H      A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     188   144   .   A   21   CYS   H      A   50   LYS   HB2    1.0   .   .   .   .   6.0    .    
+     189   145   .   A   21   CYS   HBx    A   23   TYR   HD1    1.0   .   .   .   .   8.14   .    
+     190   145   .   A   21   CYS   HBx    A   23   TYR   HD2    1.0   .   .   .   .   8.14   .    
+     191   146   .   A   21   CYS   HBx    A   23   TYR   HEx    1.0   .   .   .   .   8.13   .    
+     192   146   .   A   21   CYS   HBx    A   23   TYR   HEy    1.0   .   .   .   .   8.13   .    
+     193   147   .   A   21   CYS   HBx    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     194   148   .   A   21   CYS   HBy    A   23   TYR   H      1.0   .   .   .   .   6.0    .    
+     195   149   .   A   21   CYS   HBy    A   23   TYR   HD1    1.0   .   .   .   .   8.14   .    
+     196   149   .   A   21   CYS   HBy    A   23   TYR   HD2    1.0   .   .   .   .   8.14   .    
+     197   150   .   A   21   CYS   HBy    A   23   TYR   HEx    1.0   .   .   .   .   8.13   .    
+     198   150   .   A   21   CYS   HBy    A   23   TYR   HEy    1.0   .   .   .   .   8.13   .    
+     199   151   .   A   21   CYS   HBy    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     200   152   .   A   22   GLY   H      A   23   TYR   HA     1.0   .   .   .   .   6.0    .    
+     201   153   .   A   22   GLY   H      A   23   TYR   HBy    1.0   .   .   .   .   6.0    .    
+     202   153   .   A   22   GLY   H      A   23   TYR   HBx    1.0   .   .   .   .   6.0    .    
+     203   154   .   A   22   GLY   H      A   23   TYR   HD1    1.0   .   .   .   .   8.14   .    
+     204   154   .   A   22   GLY   H      A   23   TYR   HD2    1.0   .   .   .   .   8.14   .    
+     205   155   .   A   22   GLY   H      A   26   VAL   HG2%   1.0   .   .   .   .   6.0    .    
+     206   156   .   A   22   GLY   H      A   48   CYS   HBy    1.0   .   .   .   .   6.0    .    
+     207   157   .   A   22   GLY   HA2    A   23   TYR   HA     1.0   .   .   .   .   6.88   .    
+     208   157   .   A   22   GLY   HA3    A   23   TYR   HA     1.0   .   .   .   .   6.88   .    
+     209   158   .   A   22   GLY   HA2    A   23   TYR   HD1    1.0   .   .   .   .   9.02   .    
+     210   158   .   A   22   GLY   HA2    A   23   TYR   HD2    1.0   .   .   .   .   9.02   .    
+     211   158   .   A   22   GLY   HA3    A   23   TYR   HD1    1.0   .   .   .   .   9.02   .    
+     212   158   .   A   22   GLY   HA3    A   23   TYR   HD2    1.0   .   .   .   .   9.02   .    
+     213   159   .   A   22   GLY   HA2    A   48   CYS   H      1.0   .   .   .   .   6.88   .    
+     214   159   .   A   22   GLY   HA3    A   48   CYS   H      1.0   .   .   .   .   6.88   .    
+     215   160   .   A   23   TYR   H      A   26   VAL   HB     1.0   .   .   .   .   6.0    .    
+     216   161   .   A   23   TYR   HA     A   26   VAL   HG1%   1.0   .   .   .   .   6.53   .    
+     217   161   .   A   23   TYR   HA     A   26   VAL   HG2%   1.0   .   .   .   .   7.03   .    
+     218   162   .   A   23   TYR   HD1    A   26   VAL   HA     1.0   .   .   .   .   8.14   .    
+     219   162   .   A   23   TYR   HD2    A   26   VAL   HA     1.0   .   .   .   .   8.14   .    
+     220   163   .   A   23   TYR   HD1    A   26   VAL   HB     1.0   .   .   .   .   8.14   .    
+     221   163   .   A   23   TYR   HD2    A   26   VAL   HB     1.0   .   .   .   .   8.14   .    
+     222   164   .   A   23   TYR   HD1    A   26   VAL   HG1%   1.0   .   .   .   .   9.17   .    
+     223   164   .   A   23   TYR   HD2    A   26   VAL   HG1%   1.0   .   .   .   .   9.17   .    
+     224   164   .   A   23   TYR   HD1    A   26   VAL   HG2%   1.0   .   .   .   .   9.17   .    
+     225   164   .   A   23   TYR   HD2    A   26   VAL   HG2%   1.0   .   .   .   .   9.17   .    
+     226   165   .   A   23   TYR   HD1    A   31   CYS   HA     1.0   .   .   .   .   8.14   .    
+     227   165   .   A   23   TYR   HD2    A   31   CYS   HA     1.0   .   .   .   .   8.14   .    
+     228   166   .   A   23   TYR   HD1    A   34   ARG   HBy    1.0   .   .   .   .   8.14   .    
+     229   166   .   A   23   TYR   HD2    A   34   ARG   HBy    1.0   .   .   .   .   8.14   .    
+     230   166   .   A   23   TYR   HD1    A   34   ARG   HBx    1.0   .   .   .   .   8.14   .    
+     231   166   .   A   23   TYR   HD2    A   34   ARG   HBx    1.0   .   .   .   .   8.14   .    
+     232   167   .   A   23   TYR   HD1    A   34   ARG   HGy    1.0   .   .   .   .   8.14   .    
+     233   167   .   A   23   TYR   HD2    A   34   ARG   HGy    1.0   .   .   .   .   8.14   .    
+     234   167   .   A   23   TYR   HD1    A   34   ARG   HGx    1.0   .   .   .   .   8.14   .    
+     235   167   .   A   23   TYR   HD2    A   34   ARG   HGx    1.0   .   .   .   .   8.14   .    
+     236   168   .   A   23   TYR   HD1    A   34   ARG   HD3    1.0   .   .   .   .   8.14   .    
+     237   168   .   A   23   TYR   HD2    A   34   ARG   HD3    1.0   .   .   .   .   8.14   .    
+     238   169   .   A   23   TYR   HEx    A   24   PRO   HDx    1.0   .   .   .   .   6.0    .    
+     239   169   .   A   23   TYR   HEx    A   24   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     240   170   .   A   23   TYR   HEx    A   26   VAL   HB     1.0   .   .   .   .   8.13   .    
+     241   170   .   A   23   TYR   HEy    A   26   VAL   HB     1.0   .   .   .   .   8.13   .    
+     242   171   .   A   23   TYR   HEx    A   26   VAL   HG1%   1.0   .   .   .   .   9.16   .    
+     243   171   .   A   23   TYR   HEy    A   26   VAL   HG1%   1.0   .   .   .   .   9.16   .    
+     244   171   .   A   23   TYR   HEx    A   26   VAL   HG2%   1.0   .   .   .   .   9.16   .    
+     245   171   .   A   23   TYR   HEy    A   26   VAL   HG2%   1.0   .   .   .   .   9.16   .    
+     246   172   .   A   23   TYR   HEx    A   27   THR   H      1.0   .   .   .   .   8.13   .    
+     247   172   .   A   23   TYR   HEy    A   27   THR   H      1.0   .   .   .   .   8.13   .    
+     248   173   .   A   23   TYR   HEx    A   30   GLU   HG2    1.0   .   .   .   .   6.88   .    
+     249   173   .   A   23   TYR   HEx    A   30   GLU   HG3    1.0   .   .   .   .   6.88   .    
+     250   174   .   A   23   TYR   HEx    A   31   CYS   HA     1.0   .   .   .   .   8.13   .    
+     251   174   .   A   23   TYR   HEy    A   31   CYS   HA     1.0   .   .   .   .   8.13   .    
+     252   175   .   A   23   TYR   HEx    A   34   ARG   HA     1.0   .   .   .   .   8.13   .    
+     253   175   .   A   23   TYR   HEy    A   34   ARG   HA     1.0   .   .   .   .   8.13   .    
+     254   176   .   A   23   TYR   HEx    A   34   ARG   HBy    1.0   .   .   .   .   8.13   .    
+     255   176   .   A   23   TYR   HEy    A   34   ARG   HBy    1.0   .   .   .   .   8.13   .    
+     256   176   .   A   23   TYR   HEx    A   34   ARG   HBx    1.0   .   .   .   .   8.13   .    
+     257   176   .   A   23   TYR   HEy    A   34   ARG   HBx    1.0   .   .   .   .   8.13   .    
+     258   177   .   A   23   TYR   HEx    A   34   ARG   HGy    1.0   .   .   .   .   8.13   .    
+     259   177   .   A   23   TYR   HEy    A   34   ARG   HGy    1.0   .   .   .   .   8.13   .    
+     260   177   .   A   23   TYR   HEx    A   34   ARG   HGx    1.0   .   .   .   .   8.13   .    
+     261   177   .   A   23   TYR   HEy    A   34   ARG   HGx    1.0   .   .   .   .   8.13   .    
+     262   178   .   A   23   TYR   HEx    A   34   ARG   HD3    1.0   .   .   .   .   8.13   .    
+     263   178   .   A   23   TYR   HEy    A   34   ARG   HD3    1.0   .   .   .   .   8.13   .    
+     264   179   .   A   24   PRO   HGy    A   25   HIS   HD2    1.0   .   .   .   .   6.0    .    
+     265   180   .   A   24   PRO   HDx    A   25   HIS   HD2    1.0   .   .   .   .   6.0    .    
+     266   181   .   A   24   PRO   HDx    A   26   VAL   HG2%   1.0   .   .   .   .   6.0    .    
+     267   181   .   A   24   PRO   HDy    A   26   VAL   HG1%   1.0   .   .   .   .   6.0    .    
+     268   182   .   A   25   HIS   HD2    A   26   VAL   HG2%   1.0   .   .   .   .   7.03   .    
+     269   183   .   A   25   HIS   HD2    A   31   CYS   HA     1.0   .   .   .   .   6.0    .    
+     270   184   .   A   25   HIS   HD2    A   34   ARG   HGx    1.0   .   .   .   .   6.0    .    
+     271   185   .   A   25   HIS   HE1    A   34   ARG   HBx    1.0   .   .   .   .   6.0    .    
+     272   186   .   A   25   HIS   HE1    A   34   ARG   HGy    1.0   .   .   .   .   6.0    .    
+     273   187   .   A   26   VAL   HA     A   38   PHE   HE1    1.0   .   .   .   .   6.0    .    
+     274   188   .   A   26   VAL   HB     A   38   PHE   HE1    1.0   .   .   .   .   6.0    .    
+     275   189   .   A   26   VAL   HG1%   A   28   PRO   HA     1.0   .   .   .   .   7.03   .    
+     276   190   .   A   26   VAL   HG1%   A   31   CYS   HBx    1.0   .   .   .   .   7.03   .    
+     277   191   .   A   26   VAL   HG1%   A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     278   192   .   A   26   VAL   HG2%   A   31   CYS   HA     1.0   .   .   .   .   7.03   .    
+     279   193   .   A   26   VAL   HG2%   A   38   PHE   HD1    1.0   .   .   .   .   7.71   .    
+     280   193   .   A   26   VAL   HG2%   A   38   PHE   HD2    1.0   .   .   .   .   7.71   .    
+     281   194   .   A   26   VAL   HG2%   A   38   PHE   HE1    1.0   .   .   .   .   7.67   .    
+     282   194   .   A   26   VAL   HG2%   A   38   PHE   HE2    1.0   .   .   .   .   7.67   .    
+     283   195   .   A   26   VAL   HG2%   A   47   TRP   HA     1.0   .   .   .   .   7.03   .    
+     284   196   .   A   26   VAL   HG2%   A   47   TRP   HBy    1.0   .   .   .   .   7.03   .    
+     285   197   .   A   26   VAL   HG2%   A   47   TRP   HE3    1.0   .   .   .   .   6.69   .    
+     286   198   .   A   27   THR   H      A   30   GLU   HA     1.0   .   .   .   .   6.0    .    
+     287   199   .   A   27   THR   H      A   30   GLU   HBy    1.0   .   .   .   .   6.0    .    
+     288   199   .   A   27   THR   H      A   30   GLU   HBx    1.0   .   .   .   .   6.0    .    
+     289   200   .   A   27   THR   H      A   30   GLU   HG2    1.0   .   .   .   .   6.88   .    
+     290   200   .   A   27   THR   H      A   30   GLU   HG3    1.0   .   .   .   .   6.88   .    
+     291   201   .   A   27   THR   HA     A   38   PHE   HD1    1.0   .   .   .   .   8.12   .    
+     292   201   .   A   27   THR   HA     A   38   PHE   HD2    1.0   .   .   .   .   8.12   .    
+     293   202   .   A   27   THR   HA     A   38   PHE   HE1    1.0   .   .   .   .   8.12   .    
+     294   202   .   A   27   THR   HA     A   38   PHE   HE2    1.0   .   .   .   .   8.12   .    
+     295   203   .   A   27   THR   HA     A   38   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     296   204   .   A   27   THR   HG2%   A   30   GLU   H      1.0   .   .   .   .   7.03   .    
+     297   205   .   A   27   THR   HG2%   A   30   GLU   HG2    1.0   .   .   .   .   7.9    .    
+     298   205   .   A   27   THR   HG2%   A   30   GLU   HG3    1.0   .   .   .   .   7.9    .    
+     299   206   .   A   27   THR   HG2%   A   38   PHE   HE1    1.0   .   .   .   .   7.03   .    
+     300   207   .   A   27   THR   HG2%   A   38   PHE   HZ     1.0   .   .   .   .   7.03   .    
+     301   208   .   A   28   PRO   HA     A   31   CYS   H      1.0   .   .   .   .   6.0    .    
+     302   209   .   A   28   PRO   HA     A   32   ASN   H      1.0   .   .   .   .   6.0    .    
+     303   210   .   A   28   PRO   HA     A   38   PHE   HE1    1.0   .   .   .   .   6.98   .    
+     304   210   .   A   28   PRO   HA     A   38   PHE   HE2    1.0   .   .   .   .   6.98   .    
+     305   211   .   A   28   PRO   HBx    A   38   PHE   HD1    1.0   .   .   .   .   6.56   .    
+     306   211   .   A   28   PRO   HBx    A   38   PHE   HD2    1.0   .   .   .   .   6.56   .    
+     307   212   .   A   28   PRO   HBx    A   38   PHE   HE1    1.0   .   .   .   .   7.4    .    
+     308   212   .   A   28   PRO   HBx    A   38   PHE   HE2    1.0   .   .   .   .   7.4    .    
+     309   213   .   A   28   PRO   HBx    A   38   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     310   214   .   A   28   PRO   HGx    A   38   PHE   HD1    1.0   .   .   .   .   7.86   .    
+     311   214   .   A   28   PRO   HGx    A   38   PHE   HD2    1.0   .   .   .   .   7.86   .    
+     312   215   .   A   28   PRO   HGx    A   38   PHE   HE1    1.0   .   .   .   .   7.7    .    
+     313   215   .   A   28   PRO   HGx    A   38   PHE   HE2    1.0   .   .   .   .   7.7    .    
+     314   216   .   A   28   PRO   HGy    A   29   LYS   H      1.0   .   .   .   .   6.0    .    
+     315   217   .   A   28   PRO   HGy    A   38   PHE   HD1    1.0   .   .   .   .   8.12   .    
+     316   217   .   A   28   PRO   HGy    A   38   PHE   HD2    1.0   .   .   .   .   8.12   .    
+     317   218   .   A   28   PRO   HGy    A   38   PHE   HE1    1.0   .   .   .   .   7.25   .    
+     318   218   .   A   28   PRO   HGy    A   38   PHE   HE2    1.0   .   .   .   .   7.25   .    
+     319   219   .   A   28   PRO   HDx    A   38   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     320   220   .   A   28   PRO   HDy    A   38   PHE   HD1    1.0   .   .   .   .   6.3    .    
+     321   220   .   A   28   PRO   HDy    A   38   PHE   HD2    1.0   .   .   .   .   6.3    .    
+     322   221   .   A   29   LYS   H      A   30   GLU   HBy    1.0   .   .   .   .   6.0    .    
+     323   221   .   A   29   LYS   H      A   30   GLU   HBx    1.0   .   .   .   .   6.0    .    
+     324   222   .   A   29   LYS   H      A   32   ASN   HBy    1.0   .   .   .   .   6.88   .    
+     325   222   .   A   29   LYS   H      A   32   ASN   HBx    1.0   .   .   .   .   6.88   .    
+     326   223   .   A   30   GLU   H      A   31   CYS   HBy    1.0   .   .   .   .   6.0    .    
+     327   223   .   A   30   GLU   H      A   31   CYS   HBx    1.0   .   .   .   .   6.0    .    
+     328   224   .   A   31   CYS   H      A   33   ASN   H      1.0   .   .   .   .   6.0    .    
+     329   225   .   A   31   CYS   H      A   38   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     330   226   .   A   31   CYS   H      A   38   PHE   HD1    1.0   .   .   .   .   8.12   .    
+     331   226   .   A   31   CYS   H      A   38   PHE   HD2    1.0   .   .   .   .   8.12   .    
+     332   227   .   A   31   CYS   HA     A   34   ARG   H      1.0   .   .   .   .   6.0    .    
+     333   228   .   A   31   CYS   HA     A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     334   229   .   A   31   CYS   HA     A   38   PHE   HD1    1.0   .   .   .   .   7.78   .    
+     335   229   .   A   31   CYS   HA     A   38   PHE   HD2    1.0   .   .   .   .   7.78   .    
+     336   230   .   A   31   CYS   HA     A   38   PHE   HE1    1.0   .   .   .   .   6.0    .    
+     337   231   .   A   31   CYS   HA     A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     338   232   .   A   31   CYS   HBx    A   38   PHE   HD1    1.0   .   .   .   .   6.15   .    
+     339   232   .   A   31   CYS   HBx    A   38   PHE   HD2    1.0   .   .   .   .   6.15   .    
+     340   233   .   A   32   ASN   H      A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     341   234   .   A   32   ASN   H      A   38   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     342   235   .   A   32   ASN   HA     A   33   ASN   HBx    1.0   .   .   .   .   6.0    .    
+     343   236   .   A   32   ASN   HBy    A   33   ASN   H      1.0   .   .   .   .   6.88   .    
+     344   236   .   A   32   ASN   HBx    A   33   ASN   H      1.0   .   .   .   .   6.88   .    
+     345   237   .   A   33   ASN   H      A   34   ARG   HGx    1.0   .   .   .   .   6.0    .    
+     346   238   .   A   34   ARG   H      A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     347   239   .   A   34   ARG   HA     A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     348   240   .   A   34   ARG   HBy    A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     349   240   .   A   34   ARG   HBx    A   36   CYS   H      1.0   .   .   .   .   6.0    .    
+     350   241   .   A   34   ARG   HGy    A   35   GLY   H      1.0   .   .   .   .   6.0    .    
+     351   242   .   A   35   GLY   HAy    A   37   CYS   H      1.0   .   .   .   .   6.0    .    
+     352   243   .   A   36   CYS   HBy    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     353   244   .   A   36   CYS   HBy    A   50   LYS   H      1.0   .   .   .   .   6.0    .    
+     354   245   .   A   37   CYS   H      A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     355   246   .   A   37   CYS   H      A   49   PHE   HA     1.0   .   .   .   .   6.0    .    
+     356   247   .   A   37   CYS   HA     A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     357   248   .   A   37   CYS   HA     A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     358   249   .   A   37   CYS   HBy    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     359   250   .   A   37   CYS   HBx    A   38   PHE   HA     1.0   .   .   .   .   6.0    .    
+     360   251   .   A   37   CYS   HBx    A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     361   252   .   A   37   CYS   HBx    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     362   253   .   A   38   PHE   H      A   49   PHE   HEx    1.0   .   .   .   .   8.12   .    
+     363   253   .   A   38   PHE   H      A   49   PHE   HEy    1.0   .   .   .   .   8.12   .    
+     364   254   .   A   38   PHE   HA     A   39   ASP   HA     1.0   .   .   .   .   6.0    .    
+     365   255   .   A   38   PHE   HA     A   47   TRP   HE3    1.0   .   .   .   .   6.0    .    
+     366   256   .   A   38   PHE   HBy    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     367   257   .   A   38   PHE   HD1    A   39   ASP   H      1.0   .   .   .   .   8.12   .    
+     368   257   .   A   38   PHE   HD2    A   39   ASP   H      1.0   .   .   .   .   8.12   .    
+     369   258   .   A   38   PHE   HD1    A   39   ASP   HA     1.0   .   .   .   .   6.94   .    
+     370   258   .   A   38   PHE   HD2    A   39   ASP   HA     1.0   .   .   .   .   6.94   .    
+     371   259   .   A   38   PHE   HD1    A   40   SER   H      1.0   .   .   .   .   8.12   .    
+     372   259   .   A   38   PHE   HD2    A   40   SER   H      1.0   .   .   .   .   8.12   .    
+     373   260   .   A   38   PHE   HD1    A   40   SER   HBx    1.0   .   .   .   .   8.12   .    
+     374   260   .   A   38   PHE   HD2    A   40   SER   HBx    1.0   .   .   .   .   8.12   .    
+     375   260   .   A   38   PHE   HD1    A   40   SER   HBy    1.0   .   .   .   .   6.0    .    
+     376   261   .   A   38   PHE   HD1    A   48   CYS   HBy    1.0   .   .   .   .   6.72   .    
+     377   261   .   A   38   PHE   HD2    A   48   CYS   HBy    1.0   .   .   .   .   6.72   .    
+     378   261   .   A   38   PHE   HD1    A   48   CYS   HBx    1.0   .   .   .   .   6.26   .    
+     379   261   .   A   38   PHE   HD2    A   48   CYS   HBx    1.0   .   .   .   .   6.26   .    
+     380   262   .   A   38   PHE   HD1    A   49   PHE   H      1.0   .   .   .   .   8.12   .    
+     381   262   .   A   38   PHE   HD2    A   49   PHE   H      1.0   .   .   .   .   8.12   .    
+     382   263   .   A   38   PHE   HE1    A   39   ASP   HA     1.0   .   .   .   .   8.05   .    
+     383   263   .   A   38   PHE   HE2    A   39   ASP   HA     1.0   .   .   .   .   8.05   .    
+     384   264   .   A   38   PHE   HE1    A   40   SER   H      1.0   .   .   .   .   8.12   .    
+     385   264   .   A   38   PHE   HE2    A   40   SER   H      1.0   .   .   .   .   8.12   .    
+     386   265   .   A   38   PHE   HE1    A   40   SER   HBx    1.0   .   .   .   .   6.49   .    
+     387   265   .   A   38   PHE   HE2    A   40   SER   HBx    1.0   .   .   .   .   6.49   .    
+     388   266   .   A   38   PHE   HE1    A   47   TRP   HA     1.0   .   .   .   .   6.0    .    
+     389   267   .   A   38   PHE   HE1    A   47   TRP   HBy    1.0   .   .   .   .   6.98   .    
+     390   267   .   A   38   PHE   HE2    A   47   TRP   HBy    1.0   .   .   .   .   6.98   .    
+     391   267   .   A   38   PHE   HE1    A   47   TRP   HBx    1.0   .   .   .   .   6.98   .    
+     392   267   .   A   38   PHE   HE2    A   47   TRP   HBx    1.0   .   .   .   .   6.98   .    
+     393   268   .   A   38   PHE   HE1    A   48   CYS   HBx    1.0   .   .   .   .   7.44   .    
+     394   268   .   A   38   PHE   HE2    A   48   CYS   HBx    1.0   .   .   .   .   7.44   .    
+     395   269   .   A   38   PHE   HZ     A   39   ASP   H      1.0   .   .   .   .   6.0    .    
+     396   270   .   A   39   ASP   H      A   40   SER   HBx    1.0   .   .   .   .   6.0    .    
+     397   271   .   A   39   ASP   H      A   47   TRP   H      1.0   .   .   .   .   6.0    .    
+     398   272   .   A   39   ASP   H      A   47   TRP   HZ3    1.0   .   .   .   .   6.0    .    
+     399   273   .   A   39   ASP   HA     A   49   PHE   HD1    1.0   .   .   .   .   6.0    .    
+     400   274   .   A   39   ASP   HBx    A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     401   274   .   A   39   ASP   HBy    A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     402   275   .   A   40   SER   HA     A   41   ARG   HA     1.0   .   .   .   .   6.0    .    
+     403   276   .   A   40   SER   HA     A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     404   277   .   A   40   SER   HBx    A   41   ARG   H      1.0   .   .   .   .   6.0    .    
+     405   278   .   A   40   SER   HBx    A   47   TRP   HA     1.0   .   .   .   .   6.0    .    
+     406   279   .   A   40   SER   HBx    A   47   TRP   HBy    1.0   .   .   .   .   6.0    .    
+     407   280   .   A   40   SER   HBx    A   47   TRP   HD1    1.0   .   .   .   .   6.5    .    
+     408   281   .   A   40   SER   HBx    A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     409   282   .   A   40   SER   HBy    A   47   TRP   HD1    1.0   .   .   .   .   6.5    .    
+     410   283   .   A   41   ARG   HA     A   47   TRP   HZ2    1.0   .   .   .   .   6.0    .    
+     411   284   .   A   42   ILE   H      A   43   PRO   HDx    1.0   .   .   .   .   6.0    .    
+     412   285   .   A   42   ILE   H      A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     413   286   .   A   42   ILE   H      A   47   TRP   HA     1.0   .   .   .   .   6.0    .    
+     414   287   .   A   42   ILE   H      A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     415   288   .   A   42   ILE   H      A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     416   289   .   A   42   ILE   HA     A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     417   290   .   A   42   ILE   HB     A   43   PRO   HA     1.0   .   .   .   .   6.0    .    
+     418   291   .   A   42   ILE   HB     A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     419   292   .   A   42   ILE   HG2%   A   43   PRO   HA     1.0   .   .   .   .   6.8    .    
+     420   293   .   A   42   ILE   HG2%   A   43   PRO   HBx    1.0   .   .   .   .   7.03   .    
+     421   294   .   A   42   ILE   HG2%   A   45   VAL   H      1.0   .   .   .   .   7.03   .    
+     422   295   .   A   42   ILE   HG2%   A   47   TRP   HD1    1.0   .   .   .   .   7.03   .    
+     423   296   .   A   42   ILE   HG2%   A   47   TRP   HE1    1.0   .   .   .   .   7.03   .    
+     424   297   .   A   42   ILE   HG1x   A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     425   298   .   A   42   ILE   HG1x   A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     426   299   .   A   42   ILE   HD1%   A   43   PRO   HBx    1.0   .   .   .   .   7.03   .    
+     427   300   .   A   42   ILE   HD1%   A   43   PRO   HDx    1.0   .   .   .   .   6.95   .    
+     428   301   .   A   43   PRO   HA     A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     429   302   .   A   43   PRO   HA     A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     430   303   .   A   43   PRO   HA     A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     431   304   .   A   43   PRO   HBy    A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     432   305   .   A   43   PRO   HBy    A   47   TRP   HZ2    1.0   .   .   .   .   6.0    .    
+     433   306   .   A   43   PRO   HGx    A   44   GLY   H      1.0   .   .   .   .   6.0    .    
+     434   307   .   A   43   PRO   HGx    A   47   TRP   HZ2    1.0   .   .   .   .   6.0    .    
+     435   308   .   A   43   PRO   HGx    A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     436   309   .   A   43   PRO   HDx    A   47   TRP   HZ2    1.0   .   .   .   .   6.0    .    
+     437   310   .   A   43   PRO   HDy    A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     438   311   .   A   44   GLY   H      A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     439   312   .   A   44   GLY   H      A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     440   313   .   A   44   GLY   HAx    A   45   VAL   HGy%   1.0   .   .   .   .   7.03   .    
+     441   313   .   A   44   GLY   HAx    A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     442   313   .   A   44   GLY   HAy    A   45   VAL   HGx%   1.0   .   .   .   .   7.03   .    
+     443   314   .   A   45   VAL   H      A   46   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     444   314   .   A   45   VAL   H      A   46   PRO   HDx    1.0   .   .   .   .   6.0    .    
+     445   315   .   A   45   VAL   H      A   47   TRP   HE1    1.0   .   .   .   .   6.0    .    
+     446   316   .   A   45   VAL   HA     A   46   PRO   HBy    1.0   .   .   .   .   6.0    .    
+     447   317   .   A   45   VAL   HA     A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     448   318   .   A   45   VAL   HB     A   47   TRP   HD1    1.0   .   .   .   .   6.0    .    
+     449   319   .   A   45   VAL   HGy%   A   46   PRO   HA     1.0   .   .   .   .   7.03   .    
+     450   320   .   A   45   VAL   HGy%   A   47   TRP   HA     1.0   .   .   .   .   7.03   .    
+     451   321   .   A   45   VAL   HGy%   A   47   TRP   HE1    1.0   .   .   .   .   6.46   .    
+     452   322   .   A   45   VAL   HGx%   A   46   PRO   HA     1.0   .   .   .   .   7.03   .    
+     453   323   .   A   45   VAL   HGx%   A   47   TRP   HD1    1.0   .   .   .   .   7.03   .    
+     454   324   .   A   45   VAL   HGx%   A   49   PHE   HEx    1.0   .   .   .   .   7.03   .    
+     455   325   .   A   46   PRO   HA     A   47   TRP   HA     1.0   .   .   .   .   6.0    .    
+     456   326   .   A   46   PRO   HBy    A   49   PHE   H      1.0   .   .   .   .   6.0    .    
+     457   327   .   A   46   PRO   HBx    A   49   PHE   HA     1.0   .   .   .   .   6.0    .    
+     458   328   .   A   46   PRO   HGy    A   47   TRP   H      1.0   .   .   .   .   6.0    .    
+     459   329   .   A   46   PRO   HGy    A   47   TRP   HD1    1.0   .   .   .   .   6.5    .    
+     460   330   .   A   46   PRO   HGx    A   47   TRP   H      1.0   .   .   .   .   6.0    .    
+     461   331   .   A   47   TRP   H      A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     462   332   .   A   47   TRP   H      A   49   PHE   HEx    1.0   .   .   .   .   8.12   .    
+     463   332   .   A   47   TRP   H      A   49   PHE   HEy    1.0   .   .   .   .   8.12   .    
+     464   333   .   A   47   TRP   HA     A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     465   334   .   A   47   TRP   HA     A   49   PHE   HD1    1.0   .   .   .   .   6.0    .    
+     466   335   .   A   47   TRP   HA     A   49   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     467   336   .   A   47   TRP   HBx    A   48   CYS   HA     1.0   .   .   .   .   6.0    .    
+     468   337   .   A   47   TRP   HD1    A   48   CYS   H      1.0   .   .   .   .   6.0    .    
+     469   338   .   A   48   CYS   H      A   49   PHE   HBx    1.0   .   .   .   .   6.0    .    
+     470   339   .   A   48   CYS   HA     A   49   PHE   HBy    1.0   .   .   .   .   6.0    .    
+     471   339   .   A   48   CYS   HA     A   49   PHE   HBx    1.0   .   .   .   .   6.0    .    
+     472   340   .   A   48   CYS   HA     A   49   PHE   HZ     1.0   .   .   .   .   6.0    .    
+     473   341   .   A   48   CYS   HA     A   49   PHE   HD2    1.0   .   .   .   .   6.0    .    
+     474   342   .   A   49   PHE   H      A   50   LYS   HA     1.0   .   .   .   .   6.0    .    
+     475   343   .   A   50   LYS   H      A   51   PRO   HDy    1.0   .   .   .   .   6.0    .    
+     476   343   .   A   50   LYS   H      A   51   PRO   HDx    1.0   .   .   .   .   6.0    .    
+     477   344   .   A   50   LYS   HB2    A   52   LEU   H      1.0   .   .   .   .   6.0    .    
+     478   345   .   A   51   PRO   HDy    A   52   LEU   H      1.0   .   .   .   .   6.0    .    
+     479   345   .   A   51   PRO   HDx    A   52   LEU   H      1.0   .   .   .   .   6.0    .    
+     480   346   .   A   52   LEU   H      A   54   GLU   HBy    1.0   .   .   .   .   6.0    .    
+     481   347   .   A   52   LEU   HB3    A   53   GLN   H      1.0   .   .   .   .   6.0    .    
+     482   348   .   A   52   LEU   HB3    A   54   GLU   H      1.0   .   .   .   .   6.0    .    
+     483   349   .   A   53   GLN   H      A   55   ALA   HB%    1.0   .   .   .   .   7.03   .    
+     484   350   .   A   54   GLU   H      A   55   ALA   HB%    1.0   .   .   .   .   7.03   .    
+     485   351   .   A   54   GLU   HGx    A   55   ALA   H      1.0   .   .   .   .   6.88   .    
+     486   351   .   A   54   GLU   HGy    A   55   ALA   H      1.0   .   .   .   .   6.88   .    
+
+   stop_
+
+save_
+
+save_CYANA_distance_restraints_3
+   _nef_distance_restraint_list.sf_category       nef_distance_restraint_list
+   _nef_distance_restraint_list.sf_framecode      CYANA_distance_restraints_3
+   _nef_distance_restraint_list.restraint_origin  hbond
+   _nef_distance_restraint_list.potential_type    upper-bound-parabolic
+
+   loop_
+      _nef_distance_restraint.index
+      _nef_distance_restraint.restraint_id
+      _nef_distance_restraint.restraint_combination_id
+      _nef_distance_restraint.chain_code_1
+      _nef_distance_restraint.sequence_code_1
+      _nef_distance_restraint.residue_name_1
+      _nef_distance_restraint.atom_name_1
+      _nef_distance_restraint.chain_code_2
+      _nef_distance_restraint.sequence_code_2
+      _nef_distance_restraint.residue_name_2
+      _nef_distance_restraint.atom_name_2
+      _nef_distance_restraint.weight
+      _nef_distance_restraint.target_value
+      _nef_distance_restraint.target_value_uncertainty
+      _nef_distance_restraint.lower_linear_limit
+      _nef_distance_restraint.lower_limit
+      _nef_distance_restraint.upper_limit
+      _nef_distance_restraint.upper_linear_limit
+
+     1   1   .   A   37   CYS   N   A   49   PHE   O   1.0   .   .   .   .   3.3   .    
+     2   2   .   A   37   CYS   H   A   49   PHE   O   1.0   .   .   .   .   2.3   .    
+     3   3   .   A   37   CYS   O   A   49   PHE   N   1.0   .   .   .   .   3.3   .    
+     4   4   .   A   37   CYS   O   A   49   PHE   H   1.0   .   .   .   .   2.3   .    
+
+   stop_
+
+save_

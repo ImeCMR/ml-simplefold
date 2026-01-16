@@ -1,0 +1,77 @@
+# Fine-tuning configuration for SimpleNOEFold
+# @package _global_
+
+defaults:
+  - data: pdb
+  - model/architecture: foldingdit_100M
+  - model/sampler: euler_maruyama
+  - model: simplefold
+  - model/processor: protein_processor
+  - compute: local
+  - callbacks: default
+  - logger: null
+  - trainer: default
+  - paths: default
+  - extras: default
+  - hydra: default
+  - _self_
+
+# Training configuration
+train: True
+test: False
+seed: 42
+
+# Fine-tuning specific parameters
+finetune: True
+finetune_checkpoint: null  # Set to path of pretrained model
+
+# Model parameters for fine-tuning
+model:
+  # Enable Bayesian loss terms
+  use_bayesian_loss: True
+  bayesian_loss_type: "noe_geom"  # Options: "noe_only", "geom_only", "noe_geom"
+  
+  # Bayesian loss weights (time-dependent)
+  bayesian_alpha_schedule: "linear"  # Schedule for LDDT loss weight
+  bayesian_beta_start: 0.1  # Initial weight for Bayesian loss
+  bayesian_beta_end: 0.5  # Final weight for Bayesian loss
+  
+  # NOE energy parameters
+  noe_potential_type: "gaussian"  # "gaussian" or "lognormal"
+  noe_base_sigma: 0.5
+  noe_time_dependent: True
+  
+  # Geometric prior parameters
+  geometric_clash_cutoff: 2.5
+  geometric_clash_penalty: 10.0
+  geometric_covalent_penalty: 5.0
+  
+  # Smooth LDDT loss (keep from base training)
+  smooth_lddt_loss_weight: 0.5
+  lddt_weight_schedule: True
+  
+  # Learning rate for fine-tuning (typically lower than pre-training)
+  learning_rate: 1.0e-5
+  weight_decay: 1.0e-6
+
+# Trainer configuration
+trainer:
+  max_steps: 50000  # Shorter than pre-training
+  val_check_interval: 5000
+  
+# Data configuration
+data:
+  # Use high-quality PDB structures for fine-tuning
+  subset_fraction: 1.0
+  max_residues: 2000
+
+# Logging and checkpointing
+callbacks:
+  - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: "finetune-{epoch:02d}-{loss/loss:.4f}"
+    monitor: "loss/loss"
+    mode: "min"
+    save_top_k: 3
+    save_last: True
+    every_n_epochs: 1
