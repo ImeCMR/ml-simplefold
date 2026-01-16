@@ -86,13 +86,10 @@ class TestDataPipeline(unittest.TestCase):
         tokenized.structure.atoms = [atom1, atom2]
         tokenized.structure.chains = [{"name": "A"}]
 
-        dataset_obj = MagicMock(spec=Dataset)
-        # We need an actual instance to call process_nef
-        # SimpleFoldTrainingDataset.__init__ is heavy, so we mock it or use it carefully
-        ds = SimpleFoldTrainingDataset.__new__(SimpleFoldTrainingDataset)
+        from simplefold.nef.processing import process_nef_restraints
 
         features = {}
-        features = ds.process_nef(self.record_id, self.target_dir, tokenized, features)
+        features = process_nef_restraints(self.record_id, self.target_dir, tokenized, features)
 
         self.assertIn("noe_at1_idx", features)
         self.assertEqual(features["noe_at1_idx"].shape, (1, 1))
