@@ -87,6 +87,17 @@ class SimpleFold(pl.LightningModule):
         lddt_weight_schedule=False,
         plddt_training=False,
         sample_dir='artifacts/',
+        # Bayesian Steering parameters
+        use_bayesian_loss=False,
+        bayesian_loss_type="noe_geom",
+        bayesian_beta_start=0.0,
+        bayesian_beta_end=0.0,
+        noe_potential_type="gaussian",
+        noe_base_sigma=0.5,
+        noe_time_dependent=True,
+        geometric_clash_cutoff=2.5,
+        geometric_clash_penalty=10.0,
+        geometric_covalent_penalty=5.0,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
@@ -136,6 +147,21 @@ class SimpleFold(pl.LightningModule):
         if self.plddt_training:
             assert self.plddt_module is not None, "PLDDT module must be provided for PLDDT training"
             self.model.eval()
+
+        if self.hparams.use_bayesian_loss:
+            from model.torch.bayesian_steering import BayesianSteering
+            self.bayesian_steering = BayesianSteering(
+                use_noe="noe" in self.hparams.bayesian_loss_type,
+                use_geom="geom" in self.hparams.bayesian_loss_type,
+                noe_potential_type=self.hparams.noe_potential_type,
+                noe_base_sigma=self.hparams.noe_base_sigma,
+                noe_time_dependent=self.hparams.noe_time_dependent,
+                geometric_clash_cutoff=self.hparams.geometric_clash_cutoff,
+                geometric_clash_penalty=self.hparams.geometric_clash_penalty,
+                geometric_covalent_penalty=self.hparams.geometric_covalent_penalty,
+            )
+        else:
+            self.bayesian_steering = None
 
     def register(self, name, tensor):
         self.register_buffer(name, tensor.type(torch.float32))
@@ -422,6 +448,48 @@ class SimpleFold(pl.LightningModule):
         loss_mask = resolved_atom_mask * align_weights
         loss = self.loss_masking(loss, loss_mask)
         loss = loss.mean()
+
+        # Add Bayesian loss if enabled
+        if self.bayesian_steering is not None:
+            # One-step Euler to get coordinates at time t
+            # y_t is already the coordinates at time t
+
+            # For the loss, we want to evaluate the energy of the denoised coordinates?
+            # Or the energy of y_t?
+            # The user's plan says: "Integrating E_Bayesian' as a Training Loss"
+            # "By training with the gradient of E_Geom ... explicitly in the loss function,
+            # the network v_theta learns to intrinsically avoid the specific clashing...".
+
+            # If we want to fine-tune the velocity field v_theta, we should probably
+            # penalize the denoised coordinates produced by v_theta.
+
+            denoised_coords = y_t + out_dict['predict_velocity'] * (1.0 - t[:, None, None])
+
+            # Calculate Bayesian energy of denoised coordinates
+            bayesian_energy, bayesian_stats = self.bayesian_steering(
+                denoised_coords, batch, t
+            )
+
+            # Time-dependent weight beta(t)
+            # beta(t) increases as t -> 1 (less noise)
+            beta_t = self.hparams.bayesian_beta_start + t * (
+                self.hparams.bayesian_beta_end - self.hparams.bayesian_beta_start
+            )
+
+            bayesian_loss = (bayesian_energy * beta_t).mean()
+            loss += bayesian_loss
+
+            # Log Bayesian stats
+            for k, v in bayesian_stats.items():
+                if isinstance(v, torch.Tensor) and v.numel() == 1:
+                    self.log(
+                        f"loss/{k}",
+                        v.item(),
+                        on_epoch=True,
+                        logger=True,
+                        prog_bar=False,
+                        rank_zero_only=True,
+                    )
 
         self.log(
             "loss/mse",
