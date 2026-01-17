@@ -1,0 +1,2 @@
+# @package model.path
+_target_: simplefold.model.flow.LinearPath

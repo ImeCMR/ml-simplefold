@@ -1,39 +1,24 @@
-_target_: model.simplefold.SimpleFold
-ema_decay: 0.999
-clip_grad_norm_val: 2.0
-use_rigid_align: True
-smooth_lddt_loss_weight: 1.0
-lddt_cutoff: 15.0
-esm_model: "esm2_3B"
-lddt_weight_schedule: False
-sample_dir: ${paths.sample_dir}
+# @package _global_
 
-architecture:
-  esm_model: ${model.esm_model}
-
-path: 
-  _target_: model.flow.LinearPath
-
-loss:
-  _target_: torch.nn.MSELoss
-  reduction: 'none'
-  reduce: False
-
-optimizer:
-  _target_: torch.optim.AdamW
-  _partial_: true
-  lr: 1e-4
-  weight_decay: 0.0
-  max_steps: ???
-
-scheduler:
-  _target_: utils.lr_scheduler.LinearWarmup
-  _partial_: true
-  min_lr: 1e-6
-  max_lr: ${model.optimizer.lr}
-  warmup_steps: 10
-
-processor:
-  scale: 16.0
-  ref_scale: 5.0
-  multiplicity: 16
+model:
+  _target_: simplefold.model.simplefold.SimpleFold
+  architecture: ${model.architecture}
+  processor: ${model.processor}
+  loss: ${model.loss}
+  path: ${model.path}
+  sampler: ${model.sampler}
+  use_bayesian_loss: False
+  bayesian_loss_type: "noe_geom"
+  bayesian_beta_start: 0.0
+  bayesian_beta_end: 0.0
+  noe_potential_type: "gaussian"
+  noe_base_sigma: 0.5
+  noe_time_dependent: True
+  geometric_clash_cutoff: 2.5
+  geometric_clash_penalty: 10.0
+  geometric_covalent_penalty: 5.0
+  smooth_lddt_loss_weight: 1.0
+  lddt_cutoff: 15.0
+  clip_grad_norm_val: 1.0
+  lddt_weight_schedule: False
+  plddt_training: False

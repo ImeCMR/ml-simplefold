@@ -1,5 +1,12 @@
-defaults:
-  - model_checkpoint
-  - model_summary
-  - _self_
+# @package _global_
 
+callbacks:
+  model_checkpoint:
+    _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: "finetune-{epoch:02d}-{loss/loss:.4f}"
+    monitor: "loss/loss"
+    mode: "min"
+    save_top_k: 3
+    save_last: True
+    every_n_epochs: 1

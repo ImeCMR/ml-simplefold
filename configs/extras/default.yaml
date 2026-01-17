@@ -1,5 +1,4 @@
-# disable python warnings if they annoy you
-ignore_warnings: False
-
-# pretty print config tree at the start of the run using Rich library
-print_config: True
+# @package _global_
+extras:
+  disable_lightning_help: True
+  enforce_hydra_dir: False
