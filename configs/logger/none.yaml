@@ -1,2 +1,2 @@
 # @package _global_
-logger: false
+logger: null

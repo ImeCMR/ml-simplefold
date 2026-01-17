@@ -24,8 +24,7 @@ export WORLD_SIZE=$SLURM_NTASKS
 OUTPUT_DIR="outputs/finetune_bayesian"
 mkdir -p $OUTPUT_DIR
 
-# Run training with Hydra overrides
-# Using --config-name to select our new finetune_bayesian config
+# Run training
 srun python src/simplefold/train_fsdp.py \
     --config-name finetune_bayesian \
     data=nef_train \
@@ -35,4 +34,4 @@ srun python src/simplefold/train_fsdp.py \
     model.bayesian_beta_end=0.5 \
     trainer.max_steps=50000 \
     paths.output_dir=$OUTPUT_DIR \
-    finetune_checkpoint="/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/checkpoints/simplefold_base.ckpt"
+    load_ckpt_path="/orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/checkpoints/simplefold_base.ckpt"
