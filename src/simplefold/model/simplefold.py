@@ -465,9 +465,12 @@ class SimpleFold(pl.LightningModule):
 
             denoised_coords = y_t + out_dict['predict_velocity'] * (1.0 - t[:, None, None])
 
+            # Rescale coordinates to angstroms for Bayesian energy calculation
+            denoised_coords_ang = denoised_coords * self.processor.scale
+
             # Calculate Bayesian energy of denoised coordinates
             bayesian_energy, bayesian_stats = self.bayesian_steering(
-                denoised_coords, batch, t
+                denoised_coords_ang, batch, t
             )
 
             # Time-dependent weight beta(t)

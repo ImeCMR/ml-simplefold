@@ -190,9 +190,11 @@ class BayesianSteering(nn.Module):
 
         total_noe_energy = torch.sum(energy, dim=-1) # [B]
 
+        # Mask violations for stats calculation to avoid padding skew
+        valid_violations = violation[weights > 0]
         stats = {
-            "mean_violation": violation[violation > 0].mean() if (violation > 0).any() else torch.tensor(0.0, device=coords.device),
-            "max_violation": violation.max(),
+            "mean_violation": valid_violations[valid_violations > 0].mean() if (valid_violations > 0).any() else torch.tensor(0.0, device=coords.device),
+            "max_violation": valid_violations.max() if valid_violations.numel() > 0 else torch.tensor(0.0, device=coords.device),
         }
 
         return total_noe_energy, stats

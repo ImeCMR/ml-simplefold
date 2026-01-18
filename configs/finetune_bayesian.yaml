@@ -15,7 +15,6 @@ defaults:
   - trainer: fsdp
   - paths: default
   - extras: default
-  - hydra: default
   - _self_
 
 # Training configuration

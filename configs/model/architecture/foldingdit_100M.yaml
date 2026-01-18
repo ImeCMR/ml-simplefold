@@ -4,3 +4,11 @@ depth: 12
 hidden_size: 768
 num_heads: 12
 patch_size: 1
+trunk:
+  _target_: simplefold.model.torch.blocks.FoldingTrunk
+  num_blocks: 12
+  hidden_size: 768
+  num_heads: 12
+embedder:
+  _target_: simplefold.model.torch.architecture.FoldingEmbedder
+  hidden_size: 768
