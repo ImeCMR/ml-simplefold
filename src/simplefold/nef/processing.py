@@ -6,7 +6,7 @@
 import torch
 from pathlib import Path
 from typing import Dict, Any, Optional
-from simplefold.nef.parser import NEFParser
+from nef.parser import NEFParser
 
 def process_nef_restraints(record_id: str, dataset_target_dir: Path, tokenized: Any, features: Dict[str, Any]) -> Dict[str, Any]:
     """Load and process NEF restraints for the given record."""
