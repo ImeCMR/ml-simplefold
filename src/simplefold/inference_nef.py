@@ -45,9 +45,25 @@ def run_inference_nef(args):
 
     # 1. Initialize models
     print("Initializing models...")
-    model, _ = initialize_folding_model(args)
+    # Support direct path to checkpoint
+    if args.ckpt_path:
+        # We still use initialize_folding_model to get the right config,
+        # but we'll override the loaded weights if a direct path is provided.
+        model, _ = initialize_folding_model(args)
+        print(f"Overriding weights with local checkpoint: {args.ckpt_path}")
+        checkpoint = torch.load(args.ckpt_path, map_location="cpu", weights_only=False)
+        # Handle state_dict if it's a Lightning checkpoint
+        if "state_dict" in checkpoint:
+            checkpoint = checkpoint["state_dict"]
+            # Remove 'model.' prefix if present
+            checkpoint = {k.replace("model.", ""): v for k, v in checkpoint.items()}
+        model.load_state_dict(checkpoint, strict=False)
+    else:
+        model, _ = initialize_folding_model(args)
+
     plddt_latent_module, plddt_out_module = initialize_plddt_module(args, device)
     esm_model, esm_dict, af2_to_esm = initialize_esm_model(args, device)
+    model = model.to(device).eval()
 
     # 2. Setup Data Pipeline
     tokenizer = BoltzTokenizer()
@@ -152,6 +168,7 @@ if __name__ == "__main__":
     parser.add_argument("--nef_path", type=str, required=True, help="Path to NEF file")
     parser.add_argument("--output_dir", type=str, default="outputs/inference_nef")
     parser.add_argument("--simplefold_model", type=str, default="simplefold_100M")
+    parser.add_argument("--ckpt_path", type=str, default=None, help="Direct path to checkpoint file")
     parser.add_argument("--ckpt_dir", type=str, default="artifacts/")
     parser.add_argument("--nsamples", type=int, default=1)
     parser.add_argument("--num_steps", type=int, default=500)
