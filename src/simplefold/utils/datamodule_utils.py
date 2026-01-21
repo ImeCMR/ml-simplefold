@@ -149,6 +149,16 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
             else:
                 values = torch.stack(values, dim=0)
 
+        # Handle NOE tensors
+        if key in ["noe_at1_idx", "noe_at2_idx", "noe_mask"]:
+            values, _ = pad_to_max(values, fill_value=0)
+            collated[key] = values
+            continue
+        if key == "noe_upper_bounds":
+            values, _ = pad_to_max(values, fill_value=1e10)
+            collated[key] = values
+            continue
+
         # Stack the values
         collated[key] = values
 
