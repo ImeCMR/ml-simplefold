@@ -87,6 +87,8 @@ class SimpleFold(pl.LightningModule):
         lddt_weight_schedule=False,
         plddt_training=False,
         sample_dir='artifacts/',
+        bayesian_steering=None,
+        bayesian_loss_weight=1.0,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
@@ -112,6 +114,8 @@ class SimpleFold(pl.LightningModule):
         self.lddt_weight_schedule = lddt_weight_schedule
         self.plddt_training = plddt_training
         self.sample_dir = sample_dir
+        self.bayesian_steering = bayesian_steering
+        self.bayesian_loss_weight = bayesian_loss_weight
 
         self.aa_bolt_link = aa_bolt_link
         self.nval_steps = 0
@@ -422,6 +426,28 @@ class SimpleFold(pl.LightningModule):
         loss_mask = resolved_atom_mask * align_weights
         loss = self.loss_masking(loss, loss_mask)
         loss = loss.mean()
+
+        if self.bayesian_steering is not None:
+            # Rescale coords to angstroms for Bayesian energy
+            rescaled_coords = center_random_augmentation(
+                batch['coords'],
+                batch['atom_pad_mask'],
+                augmentation=False,
+                centering=True,
+            ) * self.processor.scale
+
+            bayesian_energy = self.bayesian_steering(rescaled_coords, batch, t)
+            bayesian_loss = self.bayesian_loss_weight * bayesian_energy.mean()
+            loss += bayesian_loss
+
+            self.log(
+                "loss/bayesian",
+                bayesian_loss.item(),
+                on_epoch=True,
+                logger=True,
+                prog_bar=True,
+                rank_zero_only=True,
+            )
 
         self.log(
             "loss/mse",

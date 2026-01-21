@@ -44,7 +44,6 @@ class EMSampler():
             w = 0.0
         return w
 
-    @torch.no_grad()
     def euler_maruyama_step(
         self,
         model_fn,
@@ -53,6 +52,8 @@ class EMSampler():
         t, 
         t_next, 
         batch, 
+        steering_fn=None,
+        steering_weight=1.0,
     ):
         dt = t_next - t
         eps = torch.randn_like(y).to(y)
@@ -65,22 +66,31 @@ class EMSampler():
         )
 
         batched_t = repeat(t, " -> b", b=y.shape[0])
-        velocity = model_fn(
-            noised_pos=y,
-            t=batched_t,
-            feats=batch,
-        )['predict_velocity']
-        score = flow.compute_score_from_velocity(velocity, y, t)
+        with torch.no_grad():
+            velocity = model_fn(
+                noised_pos=y,
+                t=batched_t,
+                feats=batch,
+            )['predict_velocity']
+            score = flow.compute_score_from_velocity(velocity, y, t)
 
-        diff_coeff = self.diffusion_coefficient(t)
-        drift = velocity + diff_coeff * score
+        omega = self.diffusion_coefficient(t) * 2.0 # Plan uses omega(t) = 2(1-t)/(t+eps)
+
+        # Bayesian Steering
+        steering_force = 0.0
+        if steering_fn is not None:
+            # gamma(t) = gamma0 * t
+            gamma_t = steering_weight * t
+            steering_force = gamma_t * steering_fn(y, batch, t)
+
+        # dx = [v + gamma*F]dt + 0.5*omega*score*dt + sqrt(tau*omega)*dW
+        drift = velocity + steering_force + 0.5 * omega * score
         mean_y = y + drift * dt
-        y_sample = mean_y + torch.sqrt(2.0 * dt * diff_coeff * self.tau) * eps
+        y_sample = mean_y + torch.sqrt(self.tau * omega * dt) * eps
 
         return y_sample
 
-    @torch.no_grad()
-    def sample(self, model_fn, flow, noise, batch):
+    def sample(self, model_fn, flow, noise, batch, steering_fn=None, steering_weight=1.0):
         sampling_timesteps = self.num_timesteps
         steps = self.steps.to(noise.device)
         y_sampled = noise
@@ -101,6 +111,8 @@ class EMSampler():
                 t,
                 t_next,
                 feats,
+                steering_fn=steering_fn,
+                steering_weight=steering_weight,
             )
 
         return {
