@@ -1,0 +1,4 @@
+# @package model.loss
+# By default, SimpleFold uses direct MSE in the training step.
+# This config placeholder is for optional additional loss modules.
+null

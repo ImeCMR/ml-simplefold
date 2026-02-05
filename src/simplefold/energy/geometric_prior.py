@@ -163,7 +163,9 @@ class GeometricPrior(nn.Module):
         
         # Non-bonded pairs
         non_bonded = (~identity) & (~bonded)
-        non_bonded = non_bonded.unsqueeze(0) & (atom_mask.unsqueeze(2) & atom_mask.unsqueeze(1))
+        # atom_mask is float, convert to bool for bitwise AND or use multiplication
+        atom_pair_mask = (atom_mask.unsqueeze(2) * atom_mask.unsqueeze(1)).bool()
+        non_bonded = non_bonded.unsqueeze(0) & atom_pair_mask
         
         # Apply mask
         distances_masked = distances.clone()

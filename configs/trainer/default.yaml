@@ -1,24 +1,13 @@
-_target_: lightning.pytorch.trainer.Trainer
-default_root_dir: ${paths.output_dir}
+# @package _global_
 
-# set True to to ensure deterministic results
-# makes training slower but gives more reproducibility than just setting seeds
-deterministic: False
-
-accelerator: gpu
-devices: auto
-strategy: 
-  _target_: lightning.pytorch.strategies.DDPStrategy
-  find_unused_parameters: True
-  gradient_as_bucket_view: True
-  timeout:
-    _target_: datetime.timedelta
-    seconds: 1800 # 30 minutes timeout for each training step
-num_nodes: 1
-min_epochs: 1 # prevents early stopping
-max_steps: 100000
-precision: bf16-mixed
-val_check_interval: 5000
-check_val_every_n_epoch: null
-num_sanity_val_steps: 0
-limit_val_batches: 0.0
+trainer:
+  _target_: lightning.pytorch.Trainer
+  default_root_dir: ${paths.output_dir}
+  min_epochs: 1
+  max_epochs: 100
+  accelerator: gpu
+  devices: auto
+  strategy: fsdp
+  precision: 32
+  accumulate_grad_batches: 1
+  deterministic: False

@@ -202,6 +202,10 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
             print(f"Featurizer failed on {record.id} with error {e}. Skipping.")
             return self.__getitem__(random.randint(0, self.num_samples - 1))
 
+        # Load NEF restraints if available
+        from simplefold.nef.processing import process_nef_restraints
+        features = process_nef_restraints(record.id, dataset.target_dir, tokenized, features)
+
         return features
 
     def __len__(self) -> int:

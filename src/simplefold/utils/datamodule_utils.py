@@ -132,6 +132,29 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
     for key in keys:
         values = [d[key] for d in data]
 
+        if key in ["noe_at1_idx", "noe_at2_idx", "noe_mask"]:
+            # Pad [K, M] to [max_K, max_M]
+            max_K = max(v.shape[0] for v in values)
+            max_M = max(v.shape[1] for v in values)
+            padded_values = []
+            for v in values:
+                padded = torch.zeros((max_K, max_M), dtype=v.dtype, device=v.device)
+                padded[:v.shape[0], :v.shape[1]] = v
+                padded_values.append(padded)
+            collated[key] = torch.stack(padded_values)
+            continue
+
+        if key in ["noe_upper_bounds", "noe_weights"]:
+            # Pad [K] to [max_K]
+            max_K = max(v.shape[0] for v in values)
+            padded_values = []
+            for v in values:
+                padded = torch.zeros(max_K, dtype=v.dtype, device=v.device)
+                padded[:v.shape[0]] = v
+                padded_values.append(padded)
+            collated[key] = torch.stack(padded_values)
+            continue
+
         if key not in [
             "all_coords",
             "all_resolved_mask",
