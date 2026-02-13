@@ -1,0 +1,26 @@
+# configs/experiment/debug_finetune.yaml
+
+# 1. Inherit all settings from your main 'finetune_noesy' configuration.
+defaults:
+  - finetune_noesy
+  # 2. This is the key fix: Use the 'override' keyword in the defaults list
+  #    to replace the 'fsdp' trainer with the 'default' (single-GPU) trainer.
+  - override /trainer: default
+  - _self_
+
+# 3. Apply specific value changes for a fast, lightweight debug run.
+#    These will correctly merge on top of the loaded defaults.
+data:
+  batch_size: 1
+  num_workers: 0
+  # NOTE: You may want to create a smaller record_list file for faster debugging,
+  # e.g., a file with just 2-3 PDB IDs.
+  # For now, it will use the full list from finetune_noesy.yaml
+
+trainer:
+  # Run for only a few steps to confirm the pipeline works.
+  max_steps: 10
+  # Ensure it runs on a single device.
+  devices: 1
+
+task_name: "debug_run"

@@ -1,0 +1,38 @@
+# configs/experiment/finetune_noesy.yaml
+
+# Inherit from the base configurations.
+# ALL paths now have a leading '/' to make them absolute to the configs/ root.
+defaults:
+  - /data: pdb
+  - /model: simplefold
+  - /trainer: fsdp
+  - /paths: default
+  - /extras: default
+  - /hydra: default
+  - _self_
+
+# This name will be used for output directory naming.
+task_name: "SimpleNOEFold_Finetune_3429"
+
+seed: 42
+
+# --- SECTION 1: DATA CONFIGURATION ---
+data:
+  nef_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef
+  datasets:
+    - name: "nmr_finetune_set"
+      target_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/structures
+      tokenized_dir: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/tokenized
+      record_list: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/data/data_train/nef_train_pdb_ids.txt
+
+# --- SECTION 2: TRAINER CONFIGURATION ---
+trainer:
+  ckpt_path: /orange/alberto.perezant/imesh.ranaweera/softwares/ml-simplefold/artifacts/simplefold_100M.ckpt
+  max_epochs: 50
+
+# --- SECTION 3: MODEL CONFIGURATION ---
+model:
+  bayesian_steering:
+    bayesian_loss_weight: 0.1
+  optimizer:
+    lr: 1e-5

@@ -29,6 +29,7 @@ from utils.datamodule_utils import (
     collate,
     extract_sequence_from_tokens,
 )
+from .nef_parser import NEFParser
 
 
 """
@@ -68,6 +69,7 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
         return_symmetries: Optional[bool] = False,
         rotation_augment_ref_pos: Optional[bool] = False,
         rotation_augment_coords: Optional[bool] = True,
+        nef_dir: Optional[str] = None,
         **kwargs: dict[str, any],
     ) -> None:
         """Initialize the training dataset."""
@@ -85,6 +87,7 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
         self.return_symmetries = return_symmetries
         self.rotation_augment_ref_pos = rotation_augment_ref_pos
         self.rotation_augment_coords = rotation_augment_coords
+        self.nef_dir = nef_dir
         self.samples = []
         self.num_samples = 0
         for dataset_idx, dataset in enumerate(datasets):
@@ -148,11 +151,17 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
             except:
                 print(f"Failed tokenize {record.id}")
                 return self.__getitem__(random.randint(0, self.num_samples - 1))
+                #####################################################
+                #return None
+                ######################################################
 
         max_num_tokens = len(tokenized.tokens)
         if max_num_tokens == 0:
             print(f"No tokens in {record.id}. Skipping.")
             return self.__getitem__(random.randint(0, self.num_samples - 1))
+            ###############################################
+            #return None
+            ###############################################
 
         # Compute crop
         try:
@@ -160,15 +169,33 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
             max_tokens = self.max_tokens
 
             if self.max_tokens is not None:
+            #######################################################
+            #if self.max_tokens is not None and dataset.cropper is not None:
+            #######################################################
                 tokenized = dataset.cropper.crop(
                     tokenized,
                     max_atoms=max_atoms,
                     max_tokens=max_tokens,
                     random=np.random,
                 )
+
+            ##################################
+            # If no cropper but we have token limits, skip structures that are too large
+            #elif self.max_tokens is not None and len(tokenized.tokens) > self.max_tokens:
+            #    print(f"Skipping {record.id}: {len(tokenized.tokens)} tokens exceeds max {self.max_tokens}")
+            #    return None
+            
+        #except Exception as e:
+        #    print(f"Cropper failed on {record.id} with error {e}. Skipping.")
+        #    return None
+
+            ####################################
         except Exception as e:
             print(f"Cropper failed on {record.id} with error {e}. Skipping.")
             return self.__getitem__(random.randint(0, self.num_samples - 1))
+            ####################################################
+            #return None
+            ###################################################
 
         sequence = extract_sequence_from_tokens(tokenized)
 
@@ -197,6 +224,25 @@ class SimpleFoldTrainingDataset(torch.utils.data.Dataset):
             features['record'] = asdict(record)
             features['max_num_tokens'] = torch.tensor(max_num_tokens, dtype=torch.long)
             features['cropped_num_tokens'] = torch.tensor(len(tokenized.tokens), dtype=torch.long)
+
+            # Generate atom_to_idx map and bonds list
+            atom_names = tokenized.atom_names
+            atom_to_idx = {atom_name: i for i, atom_name in enumerate(atom_names)}
+            bonds = tokenized.bonds
+            features['atom_names'] = atom_names
+            features['atom_to_idx'] = atom_to_idx
+            features['bonds'] = bonds
+
+            # Load NEF restraints if nef_dir is provided
+            if self.nef_dir:
+                nef_path = os.path.join(self.nef_dir, f"{record.id}.nef")
+                if os.path.exists(nef_path):
+                    parser = NEFParser(nef_path)
+                    features['noesy_restraints'] = parser.get_distance_restraints()
+                else:
+                    features['noesy_restraints'] = []
+            else:
+                features['noesy_restraints'] = []
 
         except Exception as e:
             print(f"Featurizer failed on {record.id} with error {e}. Skipping.")
@@ -232,6 +278,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
         return_train_symmetries: bool = False,
         rotation_augment_ref_pos: Optional[bool] = False,
         rotation_augment_coords: Optional[bool] = False,
+        nef_dir: Optional[str] = None,
     ):
 
         super().__init__()
@@ -241,6 +288,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
+        self.nef_dir = nef_dir
         self.batch_size_per_device_test = 1
 
         # Load datasets
@@ -333,6 +381,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
             return_symmetries=return_train_symmetries,
             rotation_augment_ref_pos=rotation_augment_ref_pos,
             rotation_augment_coords=rotation_augment_coords,
+            nef_dir=self.nef_dir,
         )
         # this is a dummy validation set, as we disable validation in training
         self._val_set = SimpleFoldTrainingDataset(
@@ -349,6 +398,7 @@ class SimpleFoldTrainingDataModule(LightningDataModule):
             return_symmetries=True,
             rotation_augment_ref_pos=False,
             rotation_augment_coords=False,
+            nef_dir=self.nef_dir,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:

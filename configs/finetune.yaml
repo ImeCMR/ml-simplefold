@@ -1,0 +1,19 @@
+# configs/finetune.yaml
+
+# This is a top-level configuration for fine-tuning jobs.
+
+defaults:
+  - /data: pdb
+  - /model: simplefold
+  - /model/processor: protein_processor
+  - /trainer: fsdp
+  - /paths: default
+  - /extras: default
+  - /hydra: default
+  - /logger: tensorboard
+  - _self_
+
+# A generic task name that will be overridden from the command line.
+task_name: "finetuning_run"
+
+seed: 42

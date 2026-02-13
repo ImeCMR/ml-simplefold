@@ -4,3 +4,6 @@ t_start: 1e-4
 tau: 0.3
 log_timesteps: True
 w_cutoff: 0.99
+# steering module parameters
+steering_schedule_type: 'linera' # Options: 'linear', 'sigmoid', 'exponential', 'constant', 'square'
+steering_schedule_gramma: 1.0 # Overall scale factor for steering force

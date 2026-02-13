@@ -8,11 +8,20 @@ esm_model: "esm2_3B"
 lddt_weight_schedule: False
 sample_dir: ${paths.sample_dir}
 
+# The weight for the Bayesian steering loss term in the training objective.
+bayesian_loss_weight: 0.1
+
+# Placeholder for the Bayesian Steering module.
+bayesian_steering: null
+
 architecture:
   esm_model: ${model.esm_model}
 
-path: 
+path:
   _target_: model.flow.LinearPath
+
+sampler:
+  _target_: model.torch.sampler.EMSampler
 
 loss:
   _target_: torch.nn.MSELoss

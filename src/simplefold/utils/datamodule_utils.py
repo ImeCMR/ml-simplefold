@@ -124,6 +124,13 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
         The collated data.
 
     """
+    ###################################
+    # Filter out None values
+    #data = [d for d in data if d is not None]
+    #if not data:
+    #    return {}
+    
+    ###################################
     # Get the keys
     keys = data[0].keys()
 
@@ -141,6 +148,10 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
             "ligand_symmetries",
             "record",
             "aa_seq",
+            "noesy_restraints",
+            "atom_to_idx",
+            "bonds",
+            "atom_names",
         ]:
             # Check if all have the same shape
             shape = values[0].shape
@@ -151,6 +162,25 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
 
         # Stack the values
         collated[key] = values
+
+        # Store per-item metadata for batch processing
+        #Thse are used by Bayesian steering to process restraints per itm
+        if 'atom_to_idx' in keys:
+            # atom_to_idx should remain as list of dicts, not stacked
+            collated['atom_to_idx_list'] = [d['atom_to_idx'] for d in data]
+
+        if 'atom_names' in keys:
+            # atom_names should remain as list of lists
+            collated['atom_names_list'] = [d['atom_names'] for d in data]
+
+        if 'bonds' in keys:
+            # bonds should remain as list of lists
+            collated['bond_list'] = [d['bonds'] for d in data]
+
+        # Keep original stacked versions for backward compatibility if needed
+        # collated['atom_to_idx'] = [d.get('atom_to_idx', {}) for d in data]
+        # collated['atom_names'] = [d.get('atom_names', []) for d in data]
+        # collated['bonds'] = [d.get('bonds', []) for d in data]
 
     return collated
 

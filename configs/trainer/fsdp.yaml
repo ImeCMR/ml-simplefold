@@ -2,12 +2,18 @@ _target_: lightning.pytorch.trainer.Trainer
 
 default_root_dir: ${paths.output_dir}
 
+# The path to a checkpoint file to resume training from.
+ckpt_path: null
+
+max_epochs: null
+
 # set True to to ensure deterministic results
 # makes training slower but gives more reproducibility than just setting seeds
 deterministic: False
 
 accelerator: gpu
 devices: auto
+#devices: 1
 num_nodes: 1
 min_epochs: 1 # prevents early stopping
 max_steps: 100000

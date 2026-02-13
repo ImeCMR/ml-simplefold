@@ -87,11 +87,15 @@ class SimpleFold(pl.LightningModule):
         lddt_weight_schedule=False,
         plddt_training=False,
         sample_dir='artifacts/',
+        bayesian_steering=None,
+        bayesian_loss_weight=0.0,
     ):
         super().__init__()
         self.save_hyperparameters(logger=False)
 
         self.model = architecture
+        self.bayesian_steering = bayesian_steering
+        self.bayesian_loss_weight = bayesian_loss_weight
         self.model_ema = AveragedModel(
             self.model,
             multi_avg_fn=torch.optim.swa_utils.get_ema_multi_avg_fn(
@@ -493,6 +497,63 @@ class SimpleFold(pl.LightningModule):
         self.global_training_step = self.trainer.global_step
         self.epoch = self.trainer.current_epoch
         self.world_size = self.trainer.world_size
+
+        # Bayesian steering loss for fine-tuning
+        if self.bayesian_steering is not None and 'noesy_restraints' in batch and batch['noesy_restraints']:
+            # Get per -item restraint data
+            atom_to_idx_list = batch.get('atom_to_idx_list', [])
+            bonds_list = batch.get('bonds_list', [])
+            atom_names_list = batch.get('atom_names_list', [])
+
+            # Compute Bayesian loss with proper per-batch handling
+            total_e_bayesian = torch.tensor(0.0, device=self.device)
+            total_restraints = 0
+
+            for batch_idx in range(len(batch['noesy_restraints'])):
+                restraints_item = batch['noesy_restraints'][batch_idx]
+                if not restraints_item:
+                    continue
+
+                # Extract per-item data
+                atom_to_idx_item = atom_to_idx_list[batch_idx] if atom_to_idx_list else {}
+                bonds_item = bonds_list[batch_idx] if bonds_list else []
+                atom_names_item = atom_names_list[batch_idx] if atom_names_list else []
+
+                # Compute steering force for this item
+                coords_item = denoised_coords[batch_idx:batch_idx+1]
+                restraints_batch = [restraints_item] # Wrap in list for batch format
+
+                _, e_bayesian_item = self.bayesian_steering(
+                    coords_item, restraints_batch, t[batch_idx:batch_idx+1],
+                    bonds_item, atom_to_idx_item, atom_names_item
+                )
+
+                total_e_bayesian += e_bayesian_item
+                total_restraints += len(restraints_item)
+
+            # Normalize by number of restraints
+            if total_restraints > 0:
+                e_bayesian_normalized = total_e_bayesian / total_restraints
+                loss += e_bayesian_normalized * self.bayesian_loss_weight
+
+                self.log(
+                    "loss/bayesian",
+                    e_bayesian_normalized.item(),
+                    on_epoch=True,
+                    logger=True,
+                    prog_bar=True,
+                    rank_zero_only=True,
+                )
+
+                self.log(
+                    "loss/bayesian_raw",
+                    total_e_bayesian.item(),
+                    on_epoch=True,
+                    logger=True,
+                    prog_bar=False,
+                    rank_zero_only=True,
+                )
+
         return loss
 
     def training_step(self, batch, batch_idx):
