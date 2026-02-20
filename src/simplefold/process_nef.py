@@ -385,7 +385,7 @@ class NEFParser:
                     res_i = self.sequence[(seq1, chain1)]
                     res_j = self.sequence[(seq2, chain2)]
                     
-                    # Apply heavy atom mapping - THIS IS THE KEY FIX
+                    # Apply heavy atom mapping
                     mapped_restraints = self._map_to_heavy_atoms(
                         res_i, res1_name, atom1,
                         res_j, res2_name, atom2,
@@ -400,10 +400,22 @@ class NEFParser:
                 except (ValueError, IndexError, KeyError) as e:
                     continue
             
-            # Convert to groups
+            # Convert to groups WITH deduplication
+            # -------------------------------------------------------
+            # FIX: Multiple NEF rows or ambiguous atom expansions can
+            # produce identical (res_i, atom_i, res_j, atom_j) pairs.
+            # We deduplicate within each group before storing it.
+            # -------------------------------------------------------
             for group in restraints_by_id.values():
                 if group:
-                    self.distance_restraints.append(group)
+                    seen = set()
+                    unique_group = []
+                    for r in group:
+                        key = (r.res_i, r.atom_i, r.res_j, r.atom_j)
+                        if key not in seen:
+                            seen.add(key)
+                            unique_group.append(r)
+                    self.distance_restraints.append(unique_group)
             
             pos = loop_pos + 1
         
@@ -565,14 +577,13 @@ class NEFParser:
         res_j: int, res_j_name: str, atom_j: str,
         distance: float
     ) -> List[DistanceRestraint]:
-        """Map ambiguous hydrogens to heavy atoms - CRITICAL FIX"""
+        """Map ambiguous hydrogens to heavy atoms"""
         
         # Map atom 1
         key1 = (res_i_name, atom_i)
         if key1 in map_to_heavy:
             heavy_atoms_1, correction_1 = map_to_heavy[key1]
         else:
-            # If not in mapping, assume it's already a heavy atom
             heavy_atoms_1, correction_1 = [atom_i], 0.0
         
         # Map atom 2
@@ -580,7 +591,6 @@ class NEFParser:
         if key2 in map_to_heavy:
             heavy_atoms_2, correction_2 = map_to_heavy[key2]
         else:
-            # If not in mapping, assume it's already a heavy atom
             heavy_atoms_2, correction_2 = [atom_j], 0.0
         
         # Create all combinations
