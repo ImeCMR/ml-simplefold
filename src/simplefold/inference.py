@@ -15,7 +15,7 @@ from itertools import starmap
 import lightning.pytorch as pl
 
 from model.flow import LinearPath
-from model.torch.sampler import EMSampler
+from model.torch.sampler import NMRGuidedSampler
 
 from processor.protein_processor import ProteinDataProcessor
 from utils.datamodule_utils import process_one_inference_structure
@@ -24,6 +24,8 @@ from utils.boltz_utils import process_structure, save_structure
 from utils.fasta_utils import process_fastas, download_fasta_utilities, check_fasta_inputs
 from boltz_data_pipeline.feature.featurizer import BoltzFeaturizer
 from boltz_data_pipeline.tokenize.boltz_protein import BoltzTokenizer
+
+from nmr.nmr_restraints import NMRGuidanceEnergy, NMRRestraintParser
 
 try: 
     import mlx.core as mx
@@ -173,43 +175,262 @@ def initialize_esm_model(args, device):
     esm_model.eval()
     return esm_model, esm_dict, af2_to_esm
 
+#def parse_nmr_data(args):
+#    """Load NMR restraints if provided"""
+#    if not hasattr(args, 'noe_file') or args.noe_file is None:
+#        return None, None
+#    
+#    
+#    distance_groups = []
+#    torsion_groups = []
+#    
+#    if args.noe_file and os.path.exists(args.noe_file):
+#        distance_groups = NMRRestraintParser.parse_noe_file(args.noe_file)
+#    
+#    
+#    if hasattr(args, 'talos_file') and args.talos_file and os.path.exists(args.talos_file):
+#        torsion_groups = NMRRestraintParser.parse_talos_file(args.talos_file)
+#    
+#    if not distance_groups and not torsion_groups:
+#        return None, None
+#    
+#    return distance_groups, torsion_groups
 
-def initialize_others(args, device):
-    # prepare data tokenizer, featurizer, and processor
-    tokenizer = BoltzTokenizer()
-    featurizer = BoltzFeaturizer()
-    processor = ProteinDataProcessor(
-        device=device,
-        scale=16.0, 
-        ref_scale=5.0, 
-        multiplicity=1,
-        backend=args.backend,
-    )
 
-    # define flow process and sampler
-    flow = LinearPath()
+def parse_nmr_data(args):
+    """Load NMR restraints if provided"""
+    if not hasattr(args, 'noe_file') or args.noe_file is None:
+        return None, None
+    
+    distance_groups = []
+    torsion_groups = []
+    
+    # === NOE LOADING ===
+    if args.noe_file and os.path.exists(args.noe_file):
+        print(f"Loading NOE file: {args.noe_file}")
+        distance_groups = NMRRestraintParser.parse_noe_file(args.noe_file)
+    else:
+        print(f"⚠️  NOE file not found or not provided")
+    
+    # === TORSION LOADING (ADD DIAGNOSTICS) ===
+    print(f"\n=== TORSION DEBUG ===")
+    print(f"hasattr(args, 'talos_file'): {hasattr(args, 'talos_file')}")
+    
+    if hasattr(args, 'talos_file'):
+        print(f"args.talos_file: {args.talos_file}")
+        print(f"File exists: {os.path.exists(args.talos_file) if args.talos_file else 'N/A'}")
+        
+        if args.talos_file and os.path.exists(args.talos_file):
+            print(f"✓ Loading TALOS file: {args.talos_file}")
+            torsion_groups = NMRRestraintParser.parse_talos_file(args.talos_file)
+        else:
+            print(f"✗ TALOS file check failed")
+            if args.talos_file:
+                print(f"  File does not exist at: {args.talos_file}")
+            else:
+                print(f"  args.talos_file is None or empty")
+    else:
+        print(f"✗ args.talos_file attribute not found")
+    print(f"===================\n")
+    
+    if not distance_groups and not torsion_groups:
+        return None, None
+    
+    return distance_groups, torsion_groups
 
-    if args.backend == "torch":
-        sampler_cls = EMSampler
-    elif args.backend == "mlx":
-        sampler_cls = EMSamplerMLX
 
-    sampler = sampler_cls(
+def initialize_nmr_guided_sampler(args, device, batch):
+    """Initialize sampler with or without NMR guidance"""
+    
+    # Parse NMR data
+    distance_groups, torsion_groups = parse_nmr_data(args)
+
+    #==================================== Debug prints ==============================
+    print(f"\n{'='*60}")
+    print("NMR Initialization")
+    print(f"{'='*60}")
+    print(f"Distance groups loaded: {len(distance_groups) if distance_groups else 0}")
+    print(f"Torsion groups loaded: {len(torsion_groups) if torsion_groups else 0}")
+    #================================================================================
+    
+    # Create NMR energy computer if restraints provided
+    nmr_energy = None
+    if distance_groups or torsion_groups:
+        n_dist_active = int(len(distance_groups) * args.nmr_activation_fraction) if distance_groups else 0
+        n_tors_active = int(len(torsion_groups) * args.nmr_activation_fraction) if torsion_groups else 0
+        
+        #==================================== Debug prints ==============================
+        print(f"Active distance groups: {n_dist_active}/{len(distance_groups)}")
+        print(f"Active torsion groups: {n_tors_active}/{len(torsion_groups)}")
+        #================================================================================
+
+        nmr_energy = NMRGuidanceEnergy(
+            distance_groups=distance_groups or [],
+            torsion_groups=torsion_groups or [],
+            batch=batch,
+            n_distance_active=n_dist_active,
+            n_torsion_active=n_tors_active,
+            device=device
+        )
+
+        #======================================= Debug prints ==============================
+        print(f"Atom index map size: {len(nmr_energy.atom_index_map)}")
+        print(f"Sample mappings:")
+        for i, (key, val) in enumerate(list(nmr_energy.atom_index_map.items())[:5]):
+            print(f"  ({key[0]}, '{key[1]}') -> atom {val}")
+        #===================================================================================
+
+
+        print(f"NMR guidance enabled: {len(distance_groups)} distance groups, {len(torsion_groups)} torsion groups")
+    
+    # Create sampler with NMR guidance
+    sampler = NMRGuidedSampler(
         num_timesteps=args.num_steps,
         t_start=1e-4,
         tau=args.tau,
         log_timesteps=True,
         w_cutoff=0.99,
+        nmr_energy=nmr_energy,
+        guidance_scale=args.nmr_guidance_scale,
+        guidance_start_t=args.nmr_start_t,
+        guidance_end_t=args.nmr_end_t,
+        guidance_schedule=args.nmr_schedule
     )
-    return tokenizer, featurizer, processor, flow, sampler
+    
+    #=================================== Debug prints ==============================
+    print(f"\nSampler Configuration:")
+    print(f"  Guidance scale (λ): {args.nmr_guidance_scale}")
+    print(f"  Time window: [{args.nmr_start_t}, {args.nmr_end_t}]")
+    print(f"  Schedule: {args.nmr_schedule}")
+    print(f"  Tau (stochasticity): {args.tau}")
+    print(f"{'='*60}\n")
+    #===============================================================================
+    return sampler
 
+def initialize_others(args, device):
+    """Modified to use NMR-guided sampler"""
+    # prepare data tokenizer, featurizer, and processor
+    tokenizer = BoltzTokenizer()
+    featurizer = BoltzFeaturizer()
+    processor = ProteinDataProcessor(
+        device=device,
+        scale=16.0,
+        ref_scale=5.0,
+        multiplicity=1,
+        backend=args.backend,
+    )
+    
+    # define flow process
+    flow = LinearPath()
+    
+    # Note: sampler will be initialized per-structure in generate_structure()
+    # because we need the batch to build atom index maps
+    return tokenizer, featurizer, processor, flow, None
+
+#def save_trajectory(trajectory, output_path, processor, batch, args):
+#    """
+#    Save flow matching trajectory.
+#    
+#    Args:
+#        trajectory: List of coordinate tensors [timesteps, batch, n_atoms, 3]
+#        output_path: Base path for saving
+#        processor: Protein processor
+#        batch: Batch dict
+#        args: Command line arguments
+#    """
+#    #import numpy as np
+#    
+#    # Stack trajectory into single tensor
+#    trajectory_tensor = torch.stack(trajectory)  # [T, batch, N_atoms, 3]
+#    
+#    # Post-process coordinates (scale back to Angstroms)
+#    processed_trajectory = []
+#    for t_idx in range(len(trajectory)):
+#        coords = trajectory[t_idx].to(args.backend if args.backend == "torch" else "cpu")
+#        # Apply same post-processing as final structure
+#        coords_dict = {"denoised_coords": coords}
+#        coords_processed = processor.postprocess(coords_dict, batch)
+#        processed_trajectory.append(coords_processed["denoised_coords"].cpu().numpy())
+#    
+#    # Save as NPZ (compact format)
+#    np.savez_compressed(
+#        f"{output_path}_trajectory.npz",
+#        coords=np.array(processed_trajectory),  # [T, N_atoms, 3]
+#        timesteps=np.arange(len(trajectory)),
+#        num_steps=args.num_steps,
+#        stride=args.trajectory_stride if hasattr(args, 'trajectory_stride') else 1
+#    )
+#    
+#    print(f"Saved trajectory with {len(trajectory)} frames to {output_path}_trajectory.npz")
+
+def save_trajectory(trajectory, output_path, processor, batch, args, device):
+    """
+    Save flow matching trajectory.
+    
+    Args:
+        trajectory: List of coordinate tensors [timesteps, batch, n_atoms, 3] on CPU
+        output_path: Base path for saving
+        processor: Protein processor
+        batch: Batch dict (may be on CUDA)
+        args: Command line arguments
+        device: Device where batch originally lives
+    """
+    import numpy as np
+    
+    print(f"Processing trajectory with {len(trajectory)} frames...")
+    
+    # === FIX: Move batch to CPU for trajectory processing ===
+    batch_cpu = {}
+    for key, value in batch.items():
+        if isinstance(value, torch.Tensor):
+            batch_cpu[key] = value.cpu()
+        else:
+            batch_cpu[key] = value
+
+    # Post-process coordinates (scale back to Angstroms)
+    processed_trajectory = []
+    
+    for t_idx in range(len(trajectory)):
+        # === FIX: trajectory is already on CPU from sample_with_trajectory() ===
+        # Just ensure it's on CPU (no need to check backend)
+        coords = trajectory[t_idx]
+        if isinstance(coords, torch.Tensor) and coords.device.type != 'cpu':
+            coords = coords.cpu()
+        
+        # Apply same post-processing as final structure
+        coords_dict = {"denoised_coords": coords}
+        coords_processed = processor.postprocess(coords_dict, batch_cpu)
+        processed_trajectory.append(coords_processed["denoised_coords"].cpu().numpy())
+    
+    # Save as NPZ (compact format)
+    output_file = f"{output_path}_trajectory.npz"
+    np.savez_compressed(
+        output_file,
+        coords=np.array(processed_trajectory),  # [T, N_atoms, 3]
+        timesteps=np.arange(len(trajectory)),
+        num_steps=args.num_steps,
+        stride=getattr(args, 'trajectory_stride', 1)
+    )
+    
+    # Print summary
+    file_size_mb = os.path.getsize(output_file) / (1024 * 1024)
+    print(f"✓ Saved trajectory: {output_file}")
+    print(f"  - Frames: {len(trajectory)}")
+    print(f"  - Shape: {np.array(processed_trajectory).shape}")
+    print(f"  - Size: {file_size_mb:.2f} MB")
 
 def generate_structure(
-    args, batch, sampler, flow, processor,
+    args, batch, sampler_template, flow, processor,
     model, plddt_latent_module, plddt_out_module, device
 ):
+    """Modified to initialize NMR-guided sampler per structure and optionally save trajectory"""
+    
+    # Initialize sampler with NMR guidance for this specific structure
+    sampler = initialize_nmr_guided_sampler(args, device, batch)
+    
     # run inference for target protein
     coord_samples = []
+    trajectory_samples = [] if args.save_trajectory else None
     pad_mask = batch["atom_pad_mask"]
     if args.plddt and plddt_latent_module is not None and plddt_out_module is not None:
         compute_plddt = True
@@ -218,13 +439,24 @@ def generate_structure(
         compute_plddt = False
         plddt_samples = None
     plddts = None
-    for _ in range(args.nsample_per_protein):
+    
+    #for _ in range(args.nsample_per_protein):
+    for sample_idx in range(args.nsample_per_protein):
         if args.backend == "torch":
             noise = torch.randn_like(batch["coords"]).to(device)
         elif args.backend == "mlx":
             noise = mx.random.normal(batch["coords"].shape)
-        out_dict = sampler.sample(model, flow, noise, batch)
-
+        
+        # Choose sampling method based on trajectory flag
+        if args.save_trajectory:
+            stride = args.trajectory_stride if hasattr(args, 'trajectory_stride') else 1
+            out_dict, trajectory = sampler.sample_with_trajectory(
+                model, flow, noise, batch, stride=stride
+            )
+            trajectory_samples.append(trajectory)
+        else:
+            out_dict = sampler.sample(model, flow, noise, batch)
+        
         if compute_plddt:
             if args.backend == "torch":
                 t = torch.ones(batch['coords'].shape[0], device=device)
@@ -244,15 +476,14 @@ def generate_structure(
                     out_feat["latent"],
                     batch,
                 )
-            # scale pLDDT to [0, 100]
             plddt_samples.append(plddt_out_dict["plddt"] * 100.0)
-
+        
         out_dict = processor.postprocess(out_dict, batch)
         if args.backend == "torch":
             coord_samples.append(out_dict["denoised_coords"].detach())
         else:
             coord_samples.append(out_dict["denoised_coords"])
-
+    
     if args.backend == "torch":
         sampled_coord = torch.cat(coord_samples, dim=0)
         pad_mask = pad_mask.detach().repeat_interleave(
@@ -267,8 +498,11 @@ def generate_structure(
         )
         if compute_plddt:
             plddts = mx.concatenate(plddt_samples, axis=0)
-
-    return sampled_coord, pad_mask, plddts
+    
+    if args.save_trajectory:
+        return sampled_coord, pad_mask, plddts, trajectory_samples
+    else:
+        return sampled_coord, pad_mask, plddts
 
 
 def predict_structures_from_fastas(args):
@@ -316,10 +550,18 @@ def predict_structures_from_fastas(args):
             esm_model, esm_dict, af2_to_esm,
         )
 
-        sampled_coord, pad_mask, plddts = generate_structure(
-            args, batch, sampler, flow, processor,
-            model, plddt_latent_module, plddt_out_module, device
-        )
+        # Generate structures (with or without trajectory)
+        if args.save_trajectory:
+            sampled_coord, pad_mask, plddts, trajectory_samples = generate_structure(
+                args, batch, sampler, flow, processor,
+                model, plddt_latent_module, plddt_out_module, device
+            )
+        
+        else:
+            sampled_coord, pad_mask, plddts = generate_structure(
+                args, batch, sampler, flow, processor,
+                model, plddt_latent_module, plddt_out_module, device
+            )
 
         for i in range(args.nsample_per_protein):
             sampled_coord_i = sampled_coord[i]
@@ -335,3 +577,14 @@ def predict_structures_from_fastas(args):
                 output_format=args.output_format,
                 plddts=plddts[i] if plddts is not None else None
             )
+
+            # Save trajectory if requested
+            if args.save_trajectory:
+                save_trajectory(
+                    trajectory_samples[i],
+                    prediction_dir / outname,
+                    processor,
+                    batch,
+                    args,
+                    device
+                )
