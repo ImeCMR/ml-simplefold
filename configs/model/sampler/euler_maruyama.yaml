@@ -1,4 +1,4 @@
-_target_: model.torch.sampler.EMSampler
+_target_: model.torch.sampler.NMRGuidedSampler
 num_timesteps: 500
 t_start: 1e-4
 tau: 0.3

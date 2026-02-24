@@ -294,7 +294,8 @@ def initialize_nmr_guided_sampler(args, device, batch):
         guidance_scale=args.nmr_guidance_scale,
         guidance_start_t=args.nmr_start_t,
         guidance_end_t=args.nmr_end_t,
-        guidance_schedule=args.nmr_schedule
+        guidance_schedule=args.nmr_schedule,
+        reselect_every=args.nmr_reselect_every
     )
     
     #=================================== Debug prints ==============================
@@ -303,6 +304,7 @@ def initialize_nmr_guided_sampler(args, device, batch):
     print(f"  Time window: [{args.nmr_start_t}, {args.nmr_end_t}]")
     print(f"  Schedule: {args.nmr_schedule}")
     print(f"  Tau (stochasticity): {args.tau}")
+    print(f"  Reselect every: {args.nmr_reselect_every} steps")
     print(f"{'='*60}\n")
     #===============================================================================
     return sampler

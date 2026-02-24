@@ -6,6 +6,7 @@ import torch
 import numpy as np
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
+from boltz_data_pipeline import const
 
 
 @dataclass
@@ -21,12 +22,14 @@ class DistanceRestraint:
     @property
     def r3(self):
         """Target distance in nm"""
-        return self.distance / 10.0
+        #return self.distance / 10.0
+        return (self.distance - 0.5) / 10.0
     
     @property
     def r4(self):
         """Upper tolerance in nm"""
-        return self.r3 + 0.2
+        #return self.r3 + 0.2
+        return (self.distance + 0.5) / 10.0
 
 
 @dataclass
@@ -169,6 +172,128 @@ class NMRGuidanceEnergy:
         
         # Build atom index maps from SimpleFold batch
         self._build_index_maps()
+
+    #=========================== New MELD features =========================
+    def select_active_groups_meld(
+        self,
+        coords: torch.Tensor,
+        restraint_type: str = 'distance'
+    ) -> List[int]:
+        """
+        MELD selection: Choose top N% most satisfied restraint groups.
+        
+        For each group:
+        1. Compute minimum violation across all ambiguous assignments (OR logic)
+        2. Rank groups by this minimum violation
+        3. Activate only the best N groups
+        
+        Returns:
+            List of group indices to activate
+        """
+        if restraint_type == 'distance':
+            groups = self.distance_groups
+            n_active = self.n_distance_active
+        else:
+            groups = self.torsion_groups
+            n_active = self.n_torsion_active
+        
+        if not groups:
+            return []
+        
+        #=========================== Debug prints ============================
+        print(f"\n  🎯 MELD Selection ({restraint_type}):")
+        print(f"    Total groups: {len(groups)}")
+        print(f"    Selecting: {n_active}")
+        #=====================================================================
+
+        # Compute satisfaction score for each group
+        group_scores = []
+        
+        for group_idx, group in enumerate(groups):
+            min_violation = float('inf')
+            
+            for restraint in group:
+                # Compute violation for this assignment
+                if restraint_type == 'distance':
+                    violation = self._compute_distance_violation(coords, restraint)
+                else:
+                    violation = self._compute_torsion_violation(coords, restraint)
+                
+                # Keep minimum (OR logic within group)
+                min_violation = min(min_violation, violation)
+            
+            # Lower violation = better satisfaction = higher priority
+            group_scores.append((group_idx, min_violation))
+        
+        # Sort by violation (ascending = most satisfied first)
+        group_scores.sort(key=lambda x: x[1])
+
+        #========================================== Debug prints ============================
+        print(f"    Best 3 groups: {[(idx, f'{viol:.4f}') for idx, viol in group_scores[:3]]}")
+        print(f"    Worst 3 groups: {[(idx, f'{viol:.4f}') for idx, viol in group_scores[-3:]]}")
+        #======================================================================================
+        
+        # Return top N most satisfied groups
+        active_groups = [idx for idx, _ in group_scores[:n_active]]
+        
+        return active_groups
+
+    def _compute_distance_violation(
+        self, 
+        coords: torch.Tensor, 
+        restraint: DistanceRestraint
+    ) -> float:
+        """Compute violation for a single distance restraint"""
+        idx_i = self._get_atom_index(restraint.res_i, restraint.atom_i)
+        idx_j = self._get_atom_index(restraint.res_j, restraint.atom_j)
+        
+        if idx_i is None or idx_j is None:
+            return float('inf')
+        
+        pos_i = coords[0, idx_i, :]  # Take first batch element
+        pos_j = coords[0, idx_j, :]
+        dist = torch.norm(pos_j - pos_i).item()
+        dist_nm = dist / 10.0
+        
+        # Flat-bottom violation
+        violation = max(0, dist_nm - restraint.r4)
+        
+        return violation
+    
+    def _compute_torsion_violation(
+        self,
+        coords: torch.Tensor,
+        restraint: TorsionRestraint
+    ) -> float:
+        """Compute violation for a single torsion restraint"""
+        idx1 = self._get_atom_index(restraint.res1, restraint.atom1)
+        idx2 = self._get_atom_index(restraint.res2, restraint.atom2)
+        idx3 = self._get_atom_index(restraint.res3, restraint.atom3)
+        idx4 = self._get_atom_index(restraint.res4, restraint.atom4)
+        
+        if None in [idx1, idx2, idx3, idx4]:
+            return float('inf')
+        
+        # Compute dihedral
+        phi = self._compute_dihedral(
+            coords[0, idx1, :],
+            coords[0, idx2, :],
+            coords[0, idx3, :],
+            coords[0, idx4, :]
+        )
+        phi_deg = torch.rad2deg(phi).item()
+        
+        # Check if within bounds
+        if restraint.phi_min <= phi_deg <= restraint.phi_max:
+            return 0.0
+        
+        # Compute angular distance to nearest bound
+        dist_to_min = abs(phi_deg - restraint.phi_min)
+        dist_to_max = abs(phi_deg - restraint.phi_max)
+        
+        return min(dist_to_min, dist_to_max)
+    
+    #=======================================================================
         
 #    def _build_index_maps(self):
 #        """
@@ -354,6 +479,14 @@ class NMRGuidanceEnergy:
         """
         self.atom_index_map = {}
         
+
+        #=============================== Debug prints ==============================
+        print(f"\n{'='*60}")
+        print("Building Atom Index Map")
+        print(f"{'='*60}")
+        #==========================================================================
+
+
         # Get atom data from batch
         # SimpleFold stores raw atom names in the 'atom_data' if available
         # Otherwise, reconstruct from token information
@@ -361,6 +494,11 @@ class NMRGuidanceEnergy:
         # Method 1: If you have access to the original structure object
         # (passed during NMRGuidanceEnergy initialization)
         if hasattr(self, 'structure') and self.structure is not None:
+
+            #================================ Debug prints ==============================
+            print("Using Method 1: Direct structure object")
+            print(f"Number of atoms in structure: {len(self.structure.atoms)}")
+            #===========================================================================
             for atom_idx, atom in enumerate(self.structure.atoms):
                 res_idx = int(self.batch["ref_space_uid"][0, atom_idx].item())
                 
@@ -371,9 +509,22 @@ class NMRGuidanceEnergy:
                 if atom_name:
                     self.atom_index_map[(res_idx, atom_name)] = atom_idx
         else:
+
+            #=============================== Debug prints ==============================
+            print("Using Method 2: Token-based reconstruction")
+            #==============================================================================
+
             # Method 2: Use token-based reconstruction
             token_data = self.batch.get("res_type")  # [batch, n_tokens, n_classes]
             ref_space_uid = self.batch["ref_space_uid"]  # [batch, n_atoms]
+
+            #==================================== Debug prints ============================
+            print(f"ref_space_uid shape: {ref_space_uid.shape}")
+            if token_data is not None:
+                print(f"token_data shape: {token_data.shape}")
+            else:
+                print("WARNING: token_data is None!")
+            #====================================================================
             
             if len(ref_space_uid.shape) == 2:
                 ref_space_uid = ref_space_uid[0]
@@ -381,24 +532,42 @@ class NMRGuidanceEnergy:
             # Get residue types
             if token_data is not None and len(token_data.shape) == 3:
                 token_indices = torch.argmax(token_data[0], dim=-1)  # [n_tokens]
-                
-                # Map token index to residue type
-                from boltz_data_pipeline import const
+
+                #===================================================== Debug prints ============================
+                print(f"Token indices shape: {token_indices.shape}")
+                print(f"Total atoms to process: {len(ref_space_uid)}")
+                #===========================================================
                 
                 # Build atom map using SimpleFold's const.py reference
                 atom_counter = {}
+
+                #===================================== Debug prints ============================
+                skipped_atoms = 0
+                #==============================================================
                 for atom_idx in range(len(ref_space_uid)):
                     res_idx = int(ref_space_uid[atom_idx].item())
                     
                     # Get residue type from token
                     token_idx = int(token_indices[res_idx].item())
                     if token_idx >= len(const.tokens):
+
+                        #============================== Debug prints ==============================
+                        skipped_atoms += 1
+                        if skipped_atoms <= 5:
+                            print(f"  WARNING: Skipping atom {atom_idx}, invalid token_idx={token_idx}")
+                        #==========================================================
                         continue
                         
                     res_type = const.tokens[token_idx]
                     
                     # Get expected atom order for this residue type
                     if res_type not in const.ref_atoms:
+
+                        #============================== Debug prints ==============================
+                        skipped_atoms += 1
+                        if skipped_atoms <= 5:
+                            print(f"  WARNING: Unknown residue type '{res_type}' at res {res_idx}")
+                        #==============================================
                         continue
                         
                     expected_atoms = const.ref_atoms[res_type]
@@ -412,17 +581,52 @@ class NMRGuidanceEnergy:
                         atom_name = expected_atoms[atom_pos]
                         self.atom_index_map[(res_idx, atom_name)] = atom_idx
                         atom_counter[res_idx] += 1
+        #========================================= Debug prints ============================
+                print(f"\nMethod 2 Summary:")
+                print(f"  Total atoms processed: {len(ref_space_uid)}")
+                print(f"  Successfully mapped: {len(self.atom_index_map)}")
+                print(f"  Skipped atoms: {skipped_atoms}")
+                print(f"  Unique residues: {len(atom_counter)}")
+            else:
+                print("ERROR: Cannot build atom map - invalid token_data")
+                if token_data is None:
+                    print("  token_data is None")
+                else:
+                    print(f"  token_data has wrong shape: {token_data.shape}")
+        #====================================================================================
         
-        print(f"Built atom index map with {len(self.atom_index_map)} entries\n")
+        #========================= Debug prints ============================
+        print(f"\n{'='*60}")
+        print(f"Built atom index map with {len(self.atom_index_map)} entries")
+        print(f"{'='*60}\n")
         
         # Verify with backbone atoms
         print("Checking backbone atoms (first 3 residues):")
+        backbone_found = 0
         for res in range(min(3, 10)):
             for atom in ['N', 'CA', 'C', 'O']:
                 idx = self.atom_index_map.get((res, atom))
                 if idx is not None:
                     print(f"  Residue {res:3d}, Atom '{atom:4s}' -> {idx}")
-#==================================================================================
+
+        if backbone_found == 0:
+            print("  ⚠️  WARNING: No backbone atoms found! Check residue indexing.")
+        else:
+            print(f"  ✓ Found {backbone_found} backbone atoms")
+        
+        # **PRINT 14: Check first restraint atoms (if available)**
+        if hasattr(self, 'distance_groups') and self.distance_groups:
+            print("\nVerifying first distance restraint atoms:")
+            first_restraint = self.distance_groups[0][0]
+            idx_i = self.atom_index_map.get((first_restraint.res_i, first_restraint.atom_i))
+            idx_j = self.atom_index_map.get((first_restraint.res_j, first_restraint.atom_j))
+            print(f"  Restraint: res{first_restraint.res_i}:{first_restraint.atom_i} <-> res{first_restraint.res_j}:{first_restraint.atom_j}")
+            print(f"  Mapped to: {idx_i} <-> {idx_j}")
+            if idx_i is None or idx_j is None:
+                print(f"  ⚠️  ERROR: Restraint atoms not found in map!")
+        
+        print(f"{'='*60}\n")
+        #==================================================================================
 
 
     def _get_atom_index(self, res_idx: int, atom_name: str) -> Optional[int]:
@@ -435,16 +639,13 @@ class NMRGuidanceEnergy:
         active_groups: Optional[List[int]] = None
     ) -> torch.Tensor:
         """
-        Compute NOE distance restraint energy.
-        
-        Uses flat-bottom harmonic potential:
-        E = 0                     if d <= r3
-        E = k/2 * (d - r4)^2      if d > r4
+        Compute NOE distance restraint energy with MELD OR logic.
+        Only minimum violation within each group contributes.
         
         Args:
             coords: [batch, n_atoms, 3] atom coordinates in Angstroms
             active_groups: Which restraint groups to use
-            
+        
         Returns:
             energy: [batch] total energy in kJ/mol
         """
@@ -452,61 +653,98 @@ class NMRGuidanceEnergy:
             active_groups = list(range(self.n_distance_active))
         
         batch_size = coords.shape[0]
-        # Initialize with zeros that will track gradients from coords
         total_energy = torch.zeros(batch_size, device=coords.device, dtype=coords.dtype)
-        
-        # Track if we added any energy
         has_contribution = False
 
+        #==================================== Debug prints ============================
+        if len(active_groups) > 0:
+            print(f"\n  📏 Distance Energy Computation:")
+            print(f"    Active groups: {len(active_groups)}")
+            print(f"    Coords shape: {coords.shape}")
+        #=============================================================================
+        
         for group_idx in active_groups:
             if group_idx >= len(self.distance_groups):
                 continue
             
             group = self.distance_groups[group_idx]
-            #group_energy = torch.zeros(batch_size, device=self.device)
+            group_violations = []
             
-            for restraint in group:
+            #==================================== Debug prints ============================
+            if group_idx < 3:  # Only print first 3 groups
+                print(f"\n    Group {group_idx}: {len(group)} restraints")
+            #========================================================================
 
+            # Compute violation for EACH assignment in group
+            for restraint in group:
+                
                 #=========================== Debug prints ============================
-                if group_idx == 0:  # Only print first group
-                    print(f"\nLooking for: res {restraint.res_i} atom '{restraint.atom_i}' <-> res {restraint.res_j} atom '{restraint.atom_j}'")
+                #if group_idx == 0:  # Only print first group
+                #    print(f"\nLooking for: res {restraint.res_i} atom '{restraint.atom_i}' <-> res {restraint.res_j} atom '{restraint.atom_j}'")
                 #=====================================================================
                 
-
                 idx_i = self._get_atom_index(restraint.res_i, restraint.atom_i)
                 idx_j = self._get_atom_index(restraint.res_j, restraint.atom_j)
+                
+                #=========================== Debug prints ============================
+                #if group_idx == 0:
+                #    print(f"  Found indices: {idx_i}, {idx_j}")
+                #======================================================================
 
                 #=========================== Debug prints ============================
-                if group_idx == 0:
-                    print(f"  Found indices: {idx_i}, {idx_j}")
-                #======================================================================
+                if group_idx == 0 and len(group_violations) < 2:  # First 2 restraints
+                    print(f"      Restraint: res{restraint.res_i}:{restraint.atom_i} <-> res{restraint.res_j}:{restraint.atom_j}")
+                    print(f"        Mapped to indices: {idx_i} <-> {idx_j}")
+            
+                #=====================================================================
                 
                 if idx_i is None or idx_j is None:
+
+                    #=========================== Debug prints ============================
+                    if group_idx == 0 and len(group_violations) < 2:
+                        print(f"        ⚠️  Atom mapping failed!")
+                    #=====================================================================
                     continue
                 
                 # Compute distance in Angstroms
                 pos_i = coords[:, idx_i, :]
                 pos_j = coords[:, idx_j, :]
                 dist = torch.norm(pos_j - pos_i, dim=-1)
-                
-                # Convert to nm for comparison with r3, r4
                 dist_nm = dist / 10.0
                 
-                # Flat-bottom harmonic: only penalize if d > r4
+                #=========================== Debug prints ============================
+                if group_idx == 0 and len(group_violations) == 0:
+                    print(f"        Distance: {dist.item():.2f} Å ({dist_nm.item():.3f} nm)")
+                    print(f"        Target r4: {restraint.r4:.3f} nm")
+                #======================================================================
+
+                # Flat-bottom violation
                 violation = torch.relu(dist_nm - restraint.r4)
-                energy = 0.5 * restraint.k * (violation ** 2)
-                #group_energy += energy
-
-                # Use assignment instead of +=
-                total_energy = total_energy + energy
-
-                has_contribution = True
+                group_violations.append(violation)
             
-            #total_energy += group_energy
+            if not group_violations:
+                continue
+            
+            # === MELD OR LOGIC: Use MINIMUM violation ===
+            min_violation = torch.min(torch.stack(group_violations), dim=0)[0]
+            energy = 0.5 * restraint.k * (min_violation ** 2)
+
+            #===================================== Debug prints ============================
+            if group_idx < 3:
+                print(f"      Min violation: {min_violation.item():.4f} nm")
+                print(f"      Energy contribution: {energy.item():.2f} kJ/mol")
+            #===============================================================================
+
+            total_energy = total_energy + energy
+            has_contribution = True
+        
+        #==================================== Debug prints ============================
+        print(f"    Total distance energy: {total_energy.item():.2f} kJ/mol")
+        print(f"    Contributions: {has_contribution}")
+        #=============================================================================
 
         # If no restraints contributed, create a dummy gradient connection
         if not has_contribution:
-            # Add a negligible term that depends on coords to maintain gradient flow
             total_energy = total_energy + 0.0 * coords[:, 0, 0]
         
         return total_energy
@@ -519,12 +757,12 @@ class NMRGuidanceEnergy:
         """
         Compute torsion angle restraint energy.
         
-        E = k * (phi - phi_mean)^2 / (2 * phi_std^2)
+        E = k * (delta ** 2) / (2 * phi_std ** 2)
         
         Args:
             coords: [batch, n_atoms, 3] atom coordinates
             active_groups: Which restraint groups to use
-            
+        
         Returns:
             energy: [batch] total energy in kJ/mol
         """
@@ -532,19 +770,25 @@ class NMRGuidanceEnergy:
             active_groups = list(range(self.n_torsion_active))
         
         batch_size = coords.shape[0]
-        #total_energy = torch.zeros(batch_size, device=self.device)
-        # Initialize with zeros that will track gradients
         total_energy = torch.zeros(batch_size, device=coords.device, dtype=coords.dtype)
-        
-        # Track if we added any energy
         has_contribution = False
 
+        #==================================== Debug prints ============================
+        if len(active_groups) > 0:
+            print(f"\n  📐 Torsion Energy Computation:")
+            print(f"    Active groups: {len(active_groups)}")
+        #==============================================================================
+        
         for group_idx in active_groups:
             if group_idx >= len(self.torsion_groups):
                 continue
             
             group = self.torsion_groups[group_idx]
-            #group_energy = torch.zeros(batch_size, device=self.device)
+
+            #==================================== Debug prints ============================
+            if group_idx < 2:  # First 2 groups
+                print(f"    Group {group_idx}: {len(group)} restraints")
+            #==============================================================================
             
             for restraint in group:
                 idx1 = self._get_atom_index(restraint.res1, restraint.atom1)
@@ -565,23 +809,27 @@ class NMRGuidanceEnergy:
                 
                 # Convert to degrees
                 phi_deg = torch.rad2deg(phi)
+
+                #======================================== Debug prints ============================
+                if group_idx == 0 and has_contribution == False:
+                    print(f"      Angle: {phi_deg.item():.2f}°")
+                    print(f"      Target: [{restraint.phi_min:.2f}, {restraint.phi_max:.2f}]°")
+                #==================================================================================
                 
                 # Circular distance
                 delta = phi_deg - restraint.phi_mean
-                delta = torch.atan2(torch.sin(torch.deg2rad(delta)), 
+                delta = torch.atan2(torch.sin(torch.deg2rad(delta)),
                                    torch.cos(torch.deg2rad(delta)))
                 delta = torch.rad2deg(delta)
                 
                 # Energy
                 energy = restraint.k * (delta ** 2) / (2 * restraint.phi_std ** 2)
-                #group_energy += energy
-            
-            #total_energy += group_energy
-            
-                # Use assignment instead of +=
                 total_energy = total_energy + energy
-
                 has_contribution = True
+        
+        #==================================== Debug prints ============================
+        print(f"    Total torsion energy: {total_energy.item():.2f} kJ/mol")
+        #==============================================================================
 
         # If no restraints contributed, create a dummy gradient connection
         if not has_contribution:

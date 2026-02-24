@@ -63,6 +63,10 @@ def main():
                        choices=['linear', 'cosine', 'constant'],
                        help="Schedule for ramping guidance weight over time. "
                             "'cosine': smooth ramp (recommended), 'linear': linear ramp, 'constant': fixed weight")
+    # === NEW: MELD DYNAMIC RESELECTION ===
+    parser.add_argument("--nmr_reselect_every", type=int, default=1,
+                        help="Re-select active restraints every N steps (MELD dynamic selection). "
+                        "Default: 1 steps")
     parser.add_argument("--save_trajectory", action="store_true",
                     help="Save flow matching trajectory at each timestep")
     parser.add_argument("--trajectory_stride", type=int, default=1,
@@ -86,6 +90,7 @@ def main():
             print(f"  TALOS file: {args.talos_file}")
         print(f"  Guidance scale: {args.nmr_guidance_scale}")
         print(f"  Activation fraction: {args.nmr_activation_fraction}")
+        print(f"  Reselection frequency: every {args.nmr_reselect_every} steps")
         print(f"  Time window: [{args.nmr_start_t}, {args.nmr_end_t}]")
         print(f"  Schedule: {args.nmr_schedule}")
         print("="*30 + "\n")
